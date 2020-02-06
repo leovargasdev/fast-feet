@@ -1,3 +1,3 @@
-# docker start gobarber_postgres
+docker start database
 cd backend/
 yarn dev
