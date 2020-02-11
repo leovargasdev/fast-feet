@@ -1,5 +1,4 @@
 export default {
-  // chave MD5: fastfeetbootcamp
-  secret: '93007edcc5c2fbfdf57a7396c9ca6c5d',
+  secret: process.env.APP_SECRET,
   expiresIn: '7d',
 };
