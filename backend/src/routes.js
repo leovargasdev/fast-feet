@@ -33,7 +33,9 @@ routes.put('/delivery/:id', DeliveryController.update);
 
 routes.get('/deliveryman/:deliveryman_id/deliveries', DeliveryController.index);
 
-routes.post('/delivery/:id/problems', DeliveryProblemController.store);
+routes.post('/delivery/:delivery_id/problems', DeliveryProblemController.store);
+
+routes.get('/delivery/:delivery_id/problems', DeliveryProblemController.index);
 
 routes.post('/files', upload.single('file'), FileController.store);
 

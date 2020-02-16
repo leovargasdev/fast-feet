@@ -6,7 +6,6 @@ import DeliveryProblem from '../models/DeliveryProblem';
 class DeliveryProblemController {
   async store(req, res) {
     const schema = Yup.object().shape({
-      delivery_id: Yup.number().required(),
       description: Yup.string().required(),
     });
 
@@ -14,14 +13,34 @@ class DeliveryProblemController {
     if (!(await schema.isValid(req.body)))
       return res.status(400).json({ error: 'Validation fails.' });
 
+    const { delivery_id } = req.params;
+
     // Validando entraga
-    const isDelivery = await Delivery.findByPk(req.body.delivery_id);
+    const isDelivery = await Delivery.findByPk(delivery_id);
     if (!isDelivery)
       return res.status(400).json({ error: 'Delivery is not available.' });
 
-    const { description } = await DeliveryProblem.create(req.body);
+    const { description } = await DeliveryProblem.create({
+      delivery_id,
+      ...req.body,
+    });
 
     return res.json({ description, product_delivery: isDelivery.product });
+  }
+
+  async index(req, res) {
+    const { delivery_id } = req.params;
+    const deliveryProblem = await DeliveryProblem.findAll({
+      where: { delivery_id },
+      attributes: ['id', 'description'],
+      include: {
+        model: Delivery,
+        as: 'delivery',
+        attributes: ['product', 'start_date'],
+      },
+    });
+
+    return res.json(deliveryProblem);
   }
 }
 
