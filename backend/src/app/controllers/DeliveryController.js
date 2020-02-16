@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
-import { parseISO, isBefore } from 'date-fns';
-
+import { parseISO, isBefore, startOfDay, endOfDay } from 'date-fns';
+import { Op } from 'sequelize';
 import Delivery from '../models/Delivery';
 import Deliveryman from '../models/Deliveryman';
 import Recipient from '../models/Recipient';
@@ -43,6 +43,11 @@ class DeliveryController {
   }
 
   async update(req, res) {
+    const { id } = req.params;
+    const delivery = await Delivery.findByPk(id);
+    if (!delivery)
+      return res.status(400).json({ error: 'Delivery does not exists.' });
+
     const schema = Yup.object().shape({
       product: Yup.string(),
       recipient_id: Yup.number(),
@@ -57,21 +62,49 @@ class DeliveryController {
     if (!(await schema.isValid(req.body)))
       return res.status(400).json({ error: 'Validation fails.' });
 
-    const { recipient_id, deliveryman_id, signature_id, start_date } = req.body;
+    const {
+      recipient_id,
+      deliveryman_id,
+      signature_id,
+      start_date: sd,
+      end_date,
+    } = req.body;
+    // Validações referente à data de ínicio da entrega
+    if (sd) {
+      const start_date = parseISO(sd);
 
-    if (start_date) {
-      const hoursStart = parseISO(start_date).getHours();
+      const hoursStart = start_date.getHours();
       // Testa se não é uma data do passado e se o horário está entre às 08:00 e às 18:00h
-      if (
-        isBefore(parseISO(start_date), new Date()) ||
-        hoursStart < 8 ||
-        hoursStart > 18
-      )
+      if (isBefore(start_date, new Date()) || hoursStart < 8 || hoursStart > 18)
         return res
           .status(400)
           .json({ error: 'Start date for delivery is not permited!' });
-    }
 
+      // Busca por todas as entregas começadas na data de retirada.
+      const deliveriesNow = await Delivery.count({
+        where: {
+          start_date: {
+            [Op.between]: [startOfDay(start_date), endOfDay(start_date)],
+          },
+        },
+      });
+      // O entregador só pode retirer 5 encomendas por vez na mesma data
+      if (deliveriesNow === 5)
+        return res.status(400).json({
+          error: 'The deliveryman can only make 5 withdrawals per day',
+        });
+    }
+    // A entrega só pode ser finalizada se o entregador cadastrou a foto da assinatura
+    if (end_date) {
+      if (!delivery.start_date)
+        return res.status(400).json({
+          error: 'Delivery can only be completed if the start date is valid',
+        });
+      if (!signature_id)
+        return res.status(400).json({
+          error: 'Delivery can only be completed with the signature photo',
+        });
+    }
     // Validando entregador
     const isDeliveryman = await Deliveryman.findByPk(deliveryman_id);
     if (!isDeliveryman && deliveryman_id)
@@ -89,14 +122,15 @@ class DeliveryController {
         .status(400)
         .json({ error: 'Photo signature does not exists.' });
 
-    // const delivery = await Delivery.create(req.body);
+    await delivery.update(req.body);
 
-    return res.json({ ok: true });
+    return res.json(delivery);
   }
 
   async index(req, res) {
+    const { deliveryman_id } = req.params;
     const deliveries = await Delivery.findAll({
-      where: { canceled_at: null },
+      where: { deliveryman_id, canceled_at: null, end_date: null },
       attributes: ['id', 'product'],
       include: [
         { model: Recipient, as: 'recipient', attributes: ['name', 'cep'] },
