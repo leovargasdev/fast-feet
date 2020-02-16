@@ -7,9 +7,9 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      deliveryman_id: {
+      delivery_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'deliverymen', key: 'id' },
+        references: { model: 'deliveries', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: false,
