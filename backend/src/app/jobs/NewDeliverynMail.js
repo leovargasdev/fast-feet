@@ -2,7 +2,7 @@ import Mail from '../../lib/Mail';
 
 class NewDeliverynMail {
   // Chave única ao chamar o job
-  get Key() {
+  get key() {
     return 'NewDeliverynMail';
   }
 

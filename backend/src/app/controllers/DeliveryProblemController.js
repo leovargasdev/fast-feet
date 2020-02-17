@@ -1,7 +1,10 @@
 import * as Yup from 'yup';
 
+import Queue from '../../lib/Queue';
 import Delivery from '../models/Delivery';
+import Deliveryman from '../models/Deliveryman';
 import DeliveryProblem from '../models/DeliveryProblem';
+import CancelDeliveryMail from '../jobs/CancelDeliveryMail';
 
 class DeliveryProblemController {
   async store(req, res) {
@@ -41,6 +44,27 @@ class DeliveryProblemController {
     });
 
     return res.json(deliveryProblem);
+  }
+
+  async delete(req, res) {
+    const { delivery_id } = req.params;
+    // Validando entregador
+    const delivery = await Delivery.findByPk(delivery_id);
+    if (!delivery)
+      return res.status(400).json({ error: 'Deliveryman is not available.' });
+
+    const deliveryman = await Deliveryman.findByPk(delivery.deliveryman_id);
+
+    delivery.canceled_at = new Date();
+
+    await delivery.save();
+
+    await Queue.add(CancelDeliveryMail.key, {
+      delivery,
+      deliveryman,
+    });
+
+    return res.json(delivery);
   }
 }
 
