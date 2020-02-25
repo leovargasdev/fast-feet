@@ -10,7 +10,7 @@ import DeliverymanController from './app/controllers/DeliverymanController';
 import DeliveryController from './app/controllers/DeliveryController';
 import DeliveryProblemController from './app/controllers/DeliveryProblemController';
 import DeliveriesProblemController from './app/controllers/DeliveriesProblemController';
-import CancelDeliveryController from './app/controllers/CancelDeliveryController';
+// import CancelDeliveryController from './app/controllers/CancelDeliveryController';
 
 import authMiddleware from './app/middlewares/auth';
 
