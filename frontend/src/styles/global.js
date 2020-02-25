@@ -35,4 +35,37 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+
+    span {
+      color: #fb6f91;
+      align-self: flex-start;
+      margin: 0 0 10px;
+      font-weight: bold;
+    }
+
+    button {
+      margin: 5px 0 0;
+      height: 44px;
+      font-weight: bold;
+      color: #fff;
+      border: 0;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    a {
+      color: #fff;
+      margin-top: 15px;
+      font-size: 16px;
+      opacity: 0.8;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
  `;
