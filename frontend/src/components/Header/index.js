@@ -23,13 +23,13 @@ export default function Header() {
           <NavLink to="/deliveries" activeStyle={cssActiveLink}>
             Encomendas
           </NavLink>
-          <NavLink to="/asda" activeStyle={cssActiveLink}>
+          <NavLink to="/deliverymen" activeStyle={cssActiveLink}>
             Entregadores
           </NavLink>
-          <NavLink to="/bb" activeStyle={cssActiveLink}>
+          <NavLink to="/recipients" activeStyle={cssActiveLink}>
             Destinatários
           </NavLink>
-          <NavLink to="/aa" activeStyle={cssActiveLink}>
+          <NavLink to="/delivery-problems" activeStyle={cssActiveLink}>
             Problemas
           </NavLink>
         </nav>
