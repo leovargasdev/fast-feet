@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
 
 import Deliveryman from '../models/Deliveryman';
 import File from '../models/File';
@@ -57,13 +58,20 @@ class DeliverymanController {
   }
 
   async index(req, res) {
+    const { name } = req.query;
+
     // O include do campo url só funciona se tiver o campo id do File
     const deliverymen = await Deliveryman.findAll({
-      attributes: ['name', 'email'],
+      where: {
+        name: {
+          [Op.iLike]: `%${name}%`,
+        },
+      },
+      attributes: ['name', 'email', 'id'],
       include: {
         model: File,
         as: 'avatar',
-        attributes: ['id', 'url'],
+        attributes: ['id', 'url', 'path'],
       },
     });
 

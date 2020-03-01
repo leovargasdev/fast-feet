@@ -12,6 +12,8 @@ export const Item = styled.li`
   padding: 20px;
   border-radius: 4px;
   margin: 4px;
+  /* alinha os itens verticalmente */
+  align-items: center;
 
   /* não aplica no primeiro item */
   & + li {

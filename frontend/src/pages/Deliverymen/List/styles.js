@@ -1,13 +1,5 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { lighten } from 'polished';
-
-const colorsStatus = {
-  PENDENTE: '#C1BC35',
-  RETIRADA: '#4D85EE',
-  ENTREGUE: '#2CA42B',
-  CANCELADA: '#DE3B3B',
-};
 
 export const Container = styled.div`
   width: 100%;
@@ -15,30 +7,14 @@ export const Container = styled.div`
   flex-direction: column;
 
   li {
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
 `;
 
-export const Status = styled.div`
-  width: auto;
-  margin: 0;
-  span {
-    padding: 7px 10px;
-    background: ${props => lighten(0.3, colorsStatus[props.color])};
-    border-radius: 12px;
-    color: ${props => colorsStatus[props.color]};
-    font-weight: bold;
-
-    &::before {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      background: ${props => colorsStatus[props.color]};
-      content: '';
-      border-radius: 50%;
-      margin-right: 5px;
-    }
-  }
+export const Avatar = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 `;
 
 export const ActionsContainer = styled.div`
@@ -55,8 +31,8 @@ export const ActionsContainer = styled.div`
   }
 
   button {
-    font-size: 24px;
     color: #c6c6c6;
+    font-size: 24px;
     background: none;
     margin-right: 20px;
     border: 0;
@@ -75,7 +51,7 @@ export const Actions = styled.div`
   padding: 15px 5px;
 
   display: ${({ visible }) => (visible ? 'block' : 'none')};
-  left: calc(40%);
+  left: calc(42%);
   top: calc(100% + 18px);
   box-shadow: 0px 0px 2px #00000026;
 

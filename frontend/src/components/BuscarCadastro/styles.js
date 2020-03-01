@@ -12,7 +12,6 @@ export const Container = styled.div`
     padding: 8px 20px;
     background: #7d40e7;
     border-radius: 4px;
-    margin-right: 50px;
 
     color: #fff;
     font-size: 14px;
