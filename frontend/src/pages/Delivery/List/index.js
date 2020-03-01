@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import Title from '~/components/Title';
+import BuscarCadastro from '~/components/BuscarCadastro';
 import { Item, List } from '~/components/ListItens/styles';
 import { Container } from './styles';
 import api from '~/services/api';
@@ -21,6 +22,8 @@ export default function DeliveryList() {
   return (
     <Container>
       <Title content="Gerenciando Encomendas" />
+
+      <BuscarCadastro />
 
       <List>
         <Item>
