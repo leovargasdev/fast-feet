@@ -5,10 +5,11 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: row;
+  margin-left: -22px;
+
   svg {
     position: relative;
     left: 38px;
-    bottom: 4px;
     color: #999;
   }
 `;
@@ -23,7 +24,7 @@ export const Search = styled.input`
   height: 46px;
   padding: 0px 8px 0px 46px !important;
   color: #333;
-  margin: 0 0 10px;
+  margin: 0 auto;
 
   &::placeholder {
     color: #999;

@@ -13,6 +13,6 @@ export default function InputSearch({ placeholder }) {
   );
 }
 
-InputSearch.PropsTypes = {
-  placeholder: PropsTypes.string,
+InputSearch.propTypes = {
+  placeholder: PropsTypes.string.isRequired,
 };

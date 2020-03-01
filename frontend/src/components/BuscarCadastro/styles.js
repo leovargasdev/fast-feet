@@ -1,19 +1,18 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  width: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* justify-content: center; */
 
   a {
     display: flex;
-    align-self: right;
-    /* align-items: center; */
-    padding: 10px 20px;
+    padding: 8px 20px;
     background: #7d40e7;
     border-radius: 4px;
+    margin-right: 50px;
 
     color: #fff;
     font-size: 14px;

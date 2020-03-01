@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const List = styled.ul`
   display: flex;
   flex-direction: column;
-  margin: 10px 0;
+  margin-bottom: 10px;
   width: 100%;
 `;
 export const Item = styled.li`
