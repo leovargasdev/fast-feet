@@ -128,15 +128,15 @@ class DeliveryController {
   }
 
   async index(req, res) {
-    const product = req.query.product || '';
-    // const { deliveryman_id } = req.params;
+    const { product } = req.query;
+
     const deliveries = await Delivery.findAll({
       where: {
         product: {
           [Op.iLike]: `%${product}%`,
         },
       },
-      attributes: ['id'],
+      attributes: ['id', 'status', 'start_date', 'end_date', 'canceled_at'],
       sort: ['id'],
       include: [
         {

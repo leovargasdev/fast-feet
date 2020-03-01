@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Title from '~/components/Title';
 import BuscarCadastro from '~/components/BuscarCadastro';
 import { Item, List } from '~/components/ListItens/styles';
-import { Container } from './styles';
+import { Container, Status } from './styles';
 import api from '~/services/api';
 
 export default function DeliveryList() {
@@ -46,7 +46,9 @@ export default function DeliveryList() {
             <span>{del.deliverymen.name}</span>
             <span>{del.recipient.city}</span>
             <span>{del.recipient.state}</span>
-            <span>PENDENTE</span>
+            <Status color={del.status}>
+              <span>{del.status}</span>
+            </Status>
             <span>...</span>
           </Item>
         ))}
