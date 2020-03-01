@@ -13,6 +13,7 @@ export const Item = styled.li`
   border-radius: 4px;
   margin: 4px;
 
+  /* não aplica no primeiro item */
   & + li {
     background: #ffffff 0% 0% no-repeat padding-box;
   }
