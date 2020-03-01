@@ -8,22 +8,26 @@ import api from '~/services/api';
 
 export default function DeliveryList() {
   const [deliveries, setDeliveries] = useState([]);
+  const [searchProduct, setSearchProduct] = useState('');
 
   useEffect(() => {
     async function loadDeliveries() {
-      const response = await api.get('/deliveries');
+      const response = await api.get(`/deliveries?product=${searchProduct}`);
 
       setDeliveries(response.data);
     }
 
     loadDeliveries();
-  }, []);
+  }, [searchProduct]);
 
   return (
     <Container>
       <Title content="Gerenciando Encomendas" />
 
-      <BuscarCadastro />
+      <BuscarCadastro
+        placeholder="Buscar por encomendas"
+        onChange={e => setSearchProduct(e.target.value)}
+      />
 
       <List>
         <Item>

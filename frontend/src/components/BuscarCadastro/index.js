@@ -4,11 +4,11 @@ import { MdAdd } from 'react-icons/md';
 
 import InputSearch from '~/components/InputSearch';
 import { Container } from './styles';
-
-export default function BuscarCadastro() {
+// rest {  placeholder, onChange }
+export default function BuscarCadastro({ ...rest }) {
   return (
     <Container>
-      <InputSearch placeholder="Buscar por encomendas" />
+      <InputSearch {...rest} />
       <Link to="/">
         <MdAdd size={18} color="#FFF" />
         cadastrar
