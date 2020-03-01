@@ -128,16 +128,21 @@ class DeliveryController {
   }
 
   async index(req, res) {
-    const { deliveryman_id } = req.params;
+    // const { deliveryman_id } = req.params;
     const deliveries = await Delivery.findAll({
-      where: { deliveryman_id, canceled_at: null, end_date: null },
-      attributes: ['id', 'product'],
+      // where: { deliveryman_id, canceled_at: null, end_date: null },
+      attributes: ['id'],
+      sort: ['id'],
       include: [
-        { model: Recipient, as: 'recipient', attributes: ['name', 'cep'] },
+        {
+          model: Recipient,
+          as: 'recipient',
+          attributes: ['city', 'state', 'name'],
+        },
         {
           model: Deliveryman,
           as: 'deliverymen',
-          attributes: ['name', 'email'],
+          attributes: ['name'],
           include: {
             model: File,
             as: 'avatar',

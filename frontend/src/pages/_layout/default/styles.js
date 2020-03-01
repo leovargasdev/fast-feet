@@ -9,4 +9,5 @@ export const Content = styled.div`
   width: 100%;
   max-height: 100%;
   display: flex;
+  flex-direction: column !important;
 `;
