@@ -40,7 +40,7 @@ export default function DeliverymenList() {
         </Item>
         {deliverymen.map(del => (
           <Item key={del.id}>
-            <span>{del.id}</span>
+            <span>#{del.id}</span>
             <Avatar src={del.avatar.url} />
             <span>{del.name}</span>
             <span>{del.email}</span>

@@ -23,6 +23,7 @@ routes.post('/sessions', SessionController.store);
 routes.use(authMiddleware);
 
 routes.post('/recipients', RecipientController.store);
+routes.get('/recipients', RecipientController.index);
 
 routes.post('/deliveryman', DeliverymanController.store);
 routes.put('/deliveryman/:id', DeliverymanController.update);

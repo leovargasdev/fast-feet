@@ -7,7 +7,7 @@ export const Container = styled.div`
   flex-direction: column;
 
   li {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: 1fr 1fr 3fr 1fr;
   }
 `;
 
