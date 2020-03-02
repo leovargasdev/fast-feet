@@ -5,7 +5,7 @@ import Title from '~/components/Title';
 import BuscarCadastro from '~/components/BuscarCadastro';
 import { Item, List } from '~/components/ListItens/styles';
 
-import { Container, Avatar, ActionsContainer, Actions, Action } from './styles';
+import { Container, ActionsContainer, Actions, Action } from './styles';
 import api from '~/services/api';
 
 export default function RecipientList() {

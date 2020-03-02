@@ -7,7 +7,7 @@ export const Container = styled.div`
   flex-direction: column;
 
   li {
-    grid-template-columns: 1fr 1fr 3fr 1fr;
+    grid-template-columns: 1fr 4fr 1fr;
   }
 `;
 
@@ -39,13 +39,13 @@ export const ActionsContainer = styled.div`
 
 export const Actions = styled.div`
   position: absolute;
-  width: 120px;
+  width: 200px;
   background: #fff;
   border-radius: 4px;
   padding: 15px 5px;
 
   display: ${({ visible }) => (visible ? 'block' : 'none')};
-  left: calc(58%);
+  left: calc(30%);
   top: calc(100% + 18px);
   box-shadow: 0px 0px 2px #00000026;
 
