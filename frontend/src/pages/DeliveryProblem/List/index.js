@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { MdDelete, MdEdit } from 'react-icons/md';
 
 import Title from '~/components/Title';
+import ActionsDrop from '~/components/Form/ActionsDrop';
 import { Item, List } from '~/components/ListItens/styles';
-
-import { Container, ActionsContainer, Actions, Action } from './styles';
+import { Container } from './styles';
 import api from '~/services/api';
 
 export default function DeliveryProblemList() {
@@ -27,35 +26,26 @@ export default function DeliveryProblemList() {
         <Item>
           <strong>Encomenda</strong>
           <strong>Problema</strong>
-          <ActionsContainer>Ações</ActionsContainer>
+          <strong style={{ textAlign: 'right' }}>Ações</strong>
         </Item>
         {deliveryProblems.map(delProblem => (
           <Item key={delProblem.id}>
             <span>#{delProblem.id}</span>
             <span>{delProblem.description}</span>
-            <ActionsContainer>
-              <button
-                type="button"
-                onClick={() =>
-                  setActionsDisplay({
-                    ...actionsDisplay,
-                    [delProblem.id]: !actionsDisplay[delProblem.id],
-                  })
-                }
-              >
-                ...
-              </button>
-              <Actions visible={actionsDisplay[delProblem.id]}>
-                <Action>
-                  <MdEdit size={16} color="#4D85EE" />
-                  <p>Visualizar</p>
-                </Action>
-                <Action>
-                  <MdDelete size={16} color="#DE3B3B" />
-                  <p>Cancelar Encomenda</p>
-                </Action>
-              </Actions>
-            </ActionsContainer>
+            <ActionsDrop
+              onClick={() =>
+                setActionsDisplay({
+                  ...actionsDisplay,
+                  [delProblem.id]: !actionsDisplay[delProblem.id],
+                })
+              }
+              visible={!!actionsDisplay[delProblem.id]}
+              actions={{
+                view: `/link`,
+                del: `/link`,
+              }}
+              positionLeft={53}
+            />
           </Item>
         ))}
       </List>

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { MdDelete, MdEdit } from 'react-icons/md';
 
 import Title from '~/components/Title';
 import BuscarCadastro from '~/components/BuscarCadastro';
 import { Item, List } from '~/components/ListItens/styles';
+import ActionsDrop from '~/components/Form/ActionsDrop';
 
-import { Container, Avatar, ActionsContainer, Actions, Action } from './styles';
+import { Container, Avatar } from './styles';
 import api from '~/services/api';
 
 export default function DeliverymenList() {
@@ -36,7 +36,7 @@ export default function DeliverymenList() {
           <strong>Foto</strong>
           <strong>Nome</strong>
           <strong>Email</strong>
-          <ActionsContainer>Ações</ActionsContainer>
+          <strong style={{ textAlign: 'right' }}>Ações</strong>
         </Item>
         {deliverymen.map(del => (
           <Item key={del.id}>
@@ -44,29 +44,20 @@ export default function DeliverymenList() {
             <Avatar src={del.avatar.url} />
             <span>{del.name}</span>
             <span>{del.email}</span>
-            <ActionsContainer>
-              <button
-                type="button"
-                onClick={() =>
-                  setActionsDisplay({
-                    ...actionsDisplay,
-                    [del.id]: !actionsDisplay[del.id],
-                  })
-                }
-              >
-                ...
-              </button>
-              <Actions visible={actionsDisplay[del.id]}>
-                <Action>
-                  <MdEdit size={16} color="#4D85EE" />
-                  <p>Editar</p>
-                </Action>
-                <Action>
-                  <MdDelete size={16} color="#DE3B3B" />
-                  <p>Excluir</p>
-                </Action>
-              </Actions>
-            </ActionsContainer>
+            <ActionsDrop
+              onClick={() =>
+                setActionsDisplay({
+                  ...actionsDisplay,
+                  [del.id]: !actionsDisplay[del.id],
+                })
+              }
+              visible={!!actionsDisplay[del.id]}
+              actions={{
+                del: `/link`,
+                edit: `/link`,
+              }}
+              positionLeft={65}
+            />
           </Item>
         ))}
       </List>

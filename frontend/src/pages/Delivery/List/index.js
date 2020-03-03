@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { MdDelete, MdEdit, MdVisibility } from 'react-icons/md';
 
 import Title from '~/components/Title';
 import BuscarCadastro from '~/components/BuscarCadastro';
 import { Item, List } from '~/components/ListItens/styles';
-import { Container, Status, ActionsContainer, Actions, Action } from './styles';
+import { Container, Status } from './styles';
+import ActionsDrop from '~/components/Form/ActionsDrop';
 import api from '~/services/api';
 
 export default function DeliveryList() {
@@ -38,7 +38,7 @@ export default function DeliveryList() {
           <strong>Cidade</strong>
           <strong>Estado</strong>
           <strong>Status</strong>
-          <ActionsContainer>Ações</ActionsContainer>
+          <strong style={{ textAlign: 'right' }}>Ações</strong>
         </Item>
         {deliveries.map(del => (
           <Item key={del.id}>
@@ -50,33 +50,21 @@ export default function DeliveryList() {
             <Status color={del.status}>
               <span>{del.status}</span>
             </Status>
-            <ActionsContainer>
-              <button
-                type="button"
-                onClick={() =>
-                  setActionsDisplay({
-                    ...actionsDisplay,
-                    [del.id]: !actionsDisplay[del.id],
-                  })
-                }
-              >
-                ...
-              </button>
-              <Actions visible={actionsDisplay[del.id]}>
-                <Action>
-                  <MdVisibility size={16} color="#8E5BE8" />
-                  <p>Visualizar</p>
-                </Action>
-                <Action>
-                  <MdEdit size={16} color="#4D85EE" />
-                  <p>Editar</p>
-                </Action>
-                <Action>
-                  <MdDelete size={16} color="#DE3B3B" />
-                  <p>Excluir</p>
-                </Action>
-              </Actions>
-            </ActionsContainer>
+            <ActionsDrop
+              onClick={() =>
+                setActionsDisplay({
+                  ...actionsDisplay,
+                  [del.id]: !actionsDisplay[del.id],
+                })
+              }
+              visible={!!actionsDisplay[del.id]}
+              actions={{
+                del: `http://localhost:3000/deliveries`,
+                edit: `http://localhost:3000/deliveries`,
+                view: `/deliverymen`,
+              }}
+              positionLeft={42}
+            />
           </Item>
         ))}
       </List>
