@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Form } from '@rocketseat/unform';
+import { Form } from '@unform/web';
 import * as Yup from 'yup';
 
 import { signInRequest } from '~/store/modules/auth/actions';
-import InputLabel from '~/components/InputLabel';
+import Input from '~/components/Form/Input';
 import logo from '~/assets/logo.png';
 import { BtnLogin } from './styles';
 
@@ -29,14 +29,14 @@ export default function SignIn() {
     <>
       <img src={logo} alt="Fast Feet" />
       <Form schema={schema} onSubmit={handleSubmit}>
-        <InputLabel
+        <Input
           label="Seu E-mail"
           name="email"
           type="email"
           placeholder="exemplo@email.com"
         />
 
-        <InputLabel
+        <Input
           label="Sua Senha"
           name="password"
           type="password"

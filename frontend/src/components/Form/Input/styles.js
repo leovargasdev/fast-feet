@@ -11,7 +11,7 @@ export const Container = styled.div`
     height: 44px;
     padding: 0 15px;
     color: #333;
-    margin: 0 0 10px;
+    margin: 0 0 5px;
 
     &::placeholder {
       color: #999;
