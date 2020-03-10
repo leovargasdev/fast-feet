@@ -39,14 +39,10 @@ export default createGlobalStyle`
   form {
     display: flex;
     flex-direction: column;
-    margin-top: 30px;
-
-    span {
-      color: #fb6f91;
-      align-self: flex-start;
-      margin: 0 0 10px;
-      font-weight: bold;
-    }
+    margin-top: 8px;
+    background: #fff;
+    padding: 30px 26px;
+    border-radius: 4px;
 
     button {
       margin: 5px 0 0;
@@ -59,7 +55,6 @@ export default createGlobalStyle`
     }
     a {
       color: #fff;
-      margin-top: 15px;
       font-size: 16px;
       opacity: 0.8;
 

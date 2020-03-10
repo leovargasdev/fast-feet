@@ -16,9 +16,9 @@ export const Content = styled.div`
   box-shadow: 0px 0px 10px #00000033;
   border-radius: 4px;
   opacity: 1;
-  padding: 20px;
 
   img {
+    margin-top: 30px;
     width: 181px;
     height: 33px;
   }

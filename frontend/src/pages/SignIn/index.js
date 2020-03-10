@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Form } from '@unform/web';
@@ -9,35 +9,47 @@ import Input from '~/components/Form/Input';
 import logo from '~/assets/logo.png';
 import { BtnLogin } from './styles';
 
-const schema = Yup.object().shape({
-  email: Yup.string()
-    .email('Insira um e-mail válido')
-    .required('O e-mail é obrigatório'),
-  password: Yup.string().required('A senha é obrigatória'),
-});
-
 export default function SignIn() {
+  const formRef = useRef(null);
   const dispatch = useDispatch();
   const loading = useSelector(state => state.auth.loading);
-
-  function handleSubmit({ email, password }) {
-    // console.tron.log(email, password);
-    dispatch(signInRequest(email, password));
+  // data: {email, password}
+  async function handleSubmit(data) {
+    try {
+      const schema = Yup.object().shape({
+        email: Yup.string()
+          .email('Insira um e-mail válido')
+          .required('O e-mail é obrigatório'),
+        password: Yup.string().required('A senha é obrigatória'),
+      });
+      await schema.validate(data, {
+        abortEarly: false,
+      });
+      dispatch(signInRequest(data));
+    } catch (err) {
+      const validationErrors = {};
+      if (err instanceof Yup.ValidationError) {
+        err.inner.forEach(error => {
+          validationErrors[error.path] = error.message;
+        });
+        formRef.current.setErrors(validationErrors);
+      }
+    }
   }
 
   return (
     <>
       <img src={logo} alt="Fast Feet" />
-      <Form schema={schema} onSubmit={handleSubmit}>
+      <Form ref={formRef} onSubmit={handleSubmit}>
         <Input
-          label="Seu E-mail"
+          label="SEU E-MAIL"
           name="email"
-          type="email"
+          type="text"
           placeholder="exemplo@email.com"
         />
 
         <Input
-          label="Sua Senha"
+          label="SUA SENHA"
           name="password"
           type="password"
           placeholder="***********"

@@ -24,6 +24,7 @@ routes.use(authMiddleware);
 
 routes.post('/recipients', RecipientController.store);
 routes.get('/recipients', RecipientController.index);
+routes.get('/recipients-select', RecipientController.show);
 
 routes.post('/deliveryman', DeliverymanController.store);
 routes.put('/deliveryman/:id', DeliverymanController.update);

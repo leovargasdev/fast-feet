@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
 
-  input {
+  select {
     background: #ffffff;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -32,7 +32,7 @@ export const Container = styled.div`
   span {
     color: #fb6f91;
     align-self: flex-start;
-    margin: 0 0 10px;
+    margin: 10px 0 10px;
     font-weight: bold;
   }
 `;

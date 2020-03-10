@@ -28,6 +28,7 @@ export default function DeliveryList() {
       <BuscarCadastro
         placeholder="Buscar por encomendas"
         onChange={e => setSearchProduct(e.target.value)}
+        linkBtn="/delivery/new"
       />
 
       <List>

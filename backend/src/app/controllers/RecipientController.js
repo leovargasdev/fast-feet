@@ -33,6 +33,16 @@ class RecipientController {
     });
     return res.json(recipients);
   }
+
+  async show(req, res) {
+    const recipients = await Recipient.findAll({
+      attributes: ['name', 'id'],
+    });
+    const data = recipients.map(recipient => {
+      return { value: recipient.id, label: recipient.name };
+    });
+    return res.json(data);
+  }
 }
 
 export default new RecipientController();
