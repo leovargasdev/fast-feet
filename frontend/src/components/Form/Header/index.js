@@ -15,10 +15,10 @@ export default function Header({ content }) {
           <MdKeyboardArrowLeft size={14} color="#FFF" />
           VOLTAR
         </Link>
-        <Link to="/Link">
+        <button type="submit">
           <MdCheck size={14} color="#FFF" />
           SALVAR
-        </Link>
+        </button>
       </Btns>
     </Container>
   );

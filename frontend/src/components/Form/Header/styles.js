@@ -12,7 +12,8 @@ export const Btns = styled.div`
   display: flex;
   flex-direction: row;
 
-  a {
+  a,
+  button {
     display: flex;
     padding: 10px 20px;
     background: ${props => (props.disabled ? '#CCCCCC' : '#7d40e7')};
