@@ -5,7 +5,7 @@ export function deliveryRequest({ recipient_id, deliveryman_id, product }) {
   };
 }
 
-export function deliverySuccess(dta) {
+export function deliverySuccess() {
   return {
     type: '@delivery/ADD_DELIVERY_SUCCESS',
     payload: {},

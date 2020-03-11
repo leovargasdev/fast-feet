@@ -1,8 +1,9 @@
 import React, { useRef, useEffect } from 'react';
-import ReactSelect, { OptionTypeBase } from 'react-select';
+import ReactSelect from 'react-select';
 import { useField } from '@unform/core';
 
-import {Container} from './styles.js';
+import { Container } from './styles';
+
 export default function Select({ name, label, ...rest }) {
   const selectRef = useRef(null);
   const { fieldName, defaultValue, registerField, error } = useField(name);
@@ -12,21 +13,6 @@ export default function Select({ name, label, ...rest }) {
       name: fieldName,
       ref: selectRef.current,
       path: 'state.value',
-      getValue: (ref: any) => {
-        if (rest.isMulti) {
-          if (!ref.state.value) {
-            return [];
-          }
-
-          return ref.state.value.map((option: OptionTypeBase) => option.value);
-        } else {
-          if (!ref.state.value) {
-            return '';
-          }
-
-          return ref.state.value.value;
-        }
-      },
     });
   }, [fieldName, registerField, rest.isMulti]);
 
@@ -42,4 +28,4 @@ export default function Select({ name, label, ...rest }) {
       {error && <span>** {error} **</span>}
     </Container>
   );
-};
+}

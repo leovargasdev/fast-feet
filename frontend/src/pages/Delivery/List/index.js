@@ -45,7 +45,7 @@ export default function DeliveryList() {
           <Item key={del.id}>
             <span>{del.id}</span>
             <span>{del.recipient.name}</span>
-            <span>{del.deliverymen.name}</span>
+            <span>{del.deliveryman.name}</span>
             <span>{del.recipient.city}</span>
             <span>{del.recipient.state}</span>
             <Status color={del.status}>
@@ -61,7 +61,7 @@ export default function DeliveryList() {
               visible={!!actionsDisplay[del.id]}
               actions={{
                 del: `http://localhost:3000/deliveries`,
-                edit: `http://localhost:3000/deliveries`,
+                edit: `/delivery/${del.id}/edit`,
                 view: `/deliverymen`,
               }}
               positionLeft={42}

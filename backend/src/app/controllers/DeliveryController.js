@@ -146,7 +146,7 @@ class DeliveryController {
         },
         {
           model: Deliveryman,
-          as: 'deliverymen',
+          as: 'deliveryman',
           attributes: ['name'],
           include: {
             model: File,
@@ -163,6 +163,26 @@ class DeliveryController {
     const { delivery_id: id } = req.params;
     await Delivery.destroy({ where: { id } });
     return res.json({ message: 'Delivery successfully removed' });
+  }
+
+  async show(req, res) {
+    const { id } = req.params;
+    const delivery = await Delivery.findByPk(id, {
+      include: [
+        {
+          model: Recipient,
+          as: 'recipient',
+          attributes: ['name', 'id'],
+        },
+        {
+          model: Deliveryman,
+          as: 'deliveryman',
+          attributes: ['name', 'id'],
+        },
+      ],
+    });
+
+    return res.json(delivery);
   }
 }
 

@@ -16,6 +16,12 @@ export default function Routes() {
 
       <Route path="/deliveries" isPrivate component={DeliveryList} />
       <Route path="/delivery/new" isPrivate component={DeliveryForm} />
+      <Route
+        path="/delivery/:id/edit"
+        exact
+        isPrivate
+        component={DeliveryForm}
+      />
 
       <Route path="/deliverymen" isPrivate component={DeliverymenList} />
       <Route path="/recipients" isPrivate component={RecipientList} />
