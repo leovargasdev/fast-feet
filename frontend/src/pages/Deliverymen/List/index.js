@@ -28,6 +28,7 @@ export default function DeliverymenList() {
       <BuscarCadastro
         placeholder="Buscar por entregador"
         onChange={e => setSearchDeliveryman(e.target.value)}
+        linkBtn="/deliveryman/new"
       />
 
       <List>

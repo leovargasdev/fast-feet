@@ -50,5 +50,6 @@ routes.delete(
 routes.get('/delivery/problems', DeliveriesProblemController.index);
 
 routes.post('/files', upload.single('file'), FileController.store);
+routes.get('/file/:id', FileController.index);
 
 export default routes;

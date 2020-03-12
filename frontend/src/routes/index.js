@@ -6,6 +6,7 @@ import SignIn from '~/pages/SignIn';
 import DeliveryList from '~/pages/Delivery/List';
 import DeliveryForm from '~/pages/Delivery/Form';
 import DeliverymenList from '~/pages/Deliverymen/List';
+import DeliverymenForm from '~/pages/Deliverymen/Form';
 import RecipientList from '~/pages/Recipient/List';
 import DeliveryProblemList from '~/pages/DeliveryProblem/List';
 
@@ -24,6 +25,8 @@ export default function Routes() {
       />
 
       <Route path="/deliverymen" isPrivate component={DeliverymenList} />
+      <Route path="/deliveryman/new" isPrivate component={DeliverymenForm} />
+
       <Route path="/recipients" isPrivate component={RecipientList} />
       <Route
         path="/delivery-problems"

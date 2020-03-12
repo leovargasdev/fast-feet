@@ -11,7 +11,7 @@ export const Container = styled.div`
     height: 44px;
     padding: 0 15px;
     color: #333;
-    margin: 0 0 5px;
+    margin: 0 0 15px;
 
     &::placeholder {
       color: #999;
@@ -25,7 +25,7 @@ export const Container = styled.div`
 
     text-align: left;
     letter-spacing: 0;
-    margin-bottom: 7px;
+    margin-bottom: 4px;
     padding-left: 1px;
   }
 
