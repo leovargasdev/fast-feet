@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-self: center;
+  align-items: center;
   margin-bottom: 30px;
 
   label {
@@ -23,13 +23,8 @@ export const Container = styled.div`
 
     input {
       display: none;
+      margin-bottom: 5px;
     }
-  }
-  span {
-    color: #fb6f91;
-    align-self: flex-start;
-    margin: 0 0 10px;
-    font-weight: bold;
   }
 `;
 

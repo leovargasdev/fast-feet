@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import {darken} from 'polished';
 
 export const Container = styled.div`
   width: 100%;
@@ -12,22 +14,34 @@ export const Btns = styled.div`
   display: flex;
   flex-direction: row;
 
-  a,
-  button {
+  a, button{
     display: flex;
-    padding: 10px 20px;
-    background: ${props => (props.disabled ? '#CCCCCC' : '#7d40e7')};
-    border-radius: 4px;
+    align-items: center;
+    padding: 8px 14px;
+    display: flex;
+    margin-left: 15px;
+  }
+  svg{
+    margin-right: 4px;
+  }
 
-    color: #fff;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
-    text-transform: uppercase;
-    margin-left: 8px;
+`;
+export const BtnSubmit = styled.button`
+  background: #7D40E7;
+  color: #FFf;
+  border: 0;
 
-    svg {
-      margin-right: 3px;
-    }
+  &:hover{
+    background: ${darken(0.2, '#7D40E7')};
+  }
+`;
+export const BtnBack = styled(Link)`
+  background: #FFF;
+  color: #7D40E7;
+  border: 1px solid #7D40E7;
+
+  &:hover{
+    color: #FFF;
+    background: #7D40E7;
   }
 `;

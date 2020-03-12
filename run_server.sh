@@ -1,4 +1,4 @@
 docker start database
-docker start redisbarber
+docker start databaseRedis
 cd backend/
 yarn dev

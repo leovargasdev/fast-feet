@@ -1,18 +1,16 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef } from 'react';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-// import PropTypes from 'prop-types';
 
+import { ContainerForm } from '~/components/Form/Container/styles';
 import Header from '~/components/Form/Header';
 import Input from '~/components/Form/Input';
-import api from '~/services/api';
 import AvatarInput from './AvatarInput';
 import { deliverymanRequest } from '~/store/modules/deliveryman/actions';
-import { Container } from './styles';
+import { Container, ContainerAvatar } from './styles';
 
 export default function DeliverymenForm() {
-  // const { id } = match.params;
   const formRef = useRef(null);
   const dispatch = useDispatch();
 
@@ -29,7 +27,6 @@ export default function DeliverymenForm() {
       await schema.validate(data, {
         abortEarly: false,
       });
-      console.log(data);
       dispatch(deliverymanRequest(data));
     } catch (err) {
       const validationErrors = {};
@@ -45,16 +42,19 @@ export default function DeliverymenForm() {
   return (
     <Container>
       <Form ref={formRef} onSubmit={handleSubmit}>
-        <Header content="Cadastro de entregadores" />
+        <Header content="Cadastro de entregadores" voltarLink="/deliverymen"/>
+        <ContainerForm>
+          <ContainerAvatar>
+            <AvatarInput name="avatar_id" />
+          </ContainerAvatar>
 
-        <AvatarInput name="avatar_id" />
-
-        <Input
-          name="name"
-          label="Nome"
-          placeholder="Digite o nome do entregador"
-        />
-        <Input name="email" label="E-mail" placeholder="example@teste.com" />
+          <Input
+            name="name"
+            label="Nome"
+            placeholder="Digite o nome do entregador"
+          />
+          <Input name="email" label="E-mail" placeholder="example@teste.com" />
+        </ContainerForm>
       </Form>
     </Container>
   );

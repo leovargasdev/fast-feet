@@ -1,24 +1,23 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { MdCheck, MdKeyboardArrowLeft } from 'react-icons/md';
 
 import Title from '~/components/Title';
-import { Container, Btns } from './styles';
+import { Container, Btns, BtnSubmit, BtnBack } from './styles';
 
-export default function Header({ content }) {
+function Header({ content, voltarLink='/' }) {
   return (
     <Container>
       <Title content={content} />
       <Btns>
-        <Link to="/link" disabled>
-          <MdKeyboardArrowLeft size={14} color="#FFF" />
+        <BtnBack to={voltarLink}>
+          <MdKeyboardArrowLeft size={22} />
           VOLTAR
-        </Link>
-        <button type="submit">
-          <MdCheck size={14} color="#FFF" />
+        </BtnBack>
+        <BtnSubmit type="submit">
+          <MdCheck size={22} />
           SALVAR
-        </button>
+        </BtnSubmit>
       </Btns>
     </Container>
   );
@@ -27,3 +26,5 @@ export default function Header({ content }) {
 Header.propTypes = {
   content: PropTypes.string.isRequired,
 };
+
+export default memo(Header);

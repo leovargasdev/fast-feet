@@ -11,7 +11,7 @@ export const Container = styled.div`
     height: 44px;
     padding: 0 15px;
     color: #333;
-    margin: 0 0 5px;
+    margin-bottom: 5px;
 
     &::placeholder {
       color: #999;
@@ -27,12 +27,5 @@ export const Container = styled.div`
     letter-spacing: 0;
     margin-bottom: 7px;
     padding-left: 1px;
-  }
-
-  span {
-    color: #fb6f91;
-    align-self: flex-start;
-    margin: 10px 0 10px;
-    font-weight: bold;
   }
 `;

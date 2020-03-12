@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { ContainerForm } from '~/components/Form/Container/styles';
 import Header from '~/components/Form/Header';
 import Input from '~/components/Form/Input';
 import Select from '~/components/Form/Select';
@@ -82,16 +83,18 @@ export default function DeliveryForm({ match }) {
   return (
     <Container>
       <Form ref={formRef} onSubmit={handleSubmit}>
-        <Header content="Cadastro de encomendas" />
-        <GroupInputs>
-          <Select name="recipient_id" options={recipients} label="Entragador" />
-          <Select
-            name="deliveryman_id"
-            options={deliverymen}
-            label="Entragador"
-          />
-        </GroupInputs>
-        <Input name="product" label="Nome do Produto" />
+        <Header content="Cadastro de encomendas" voltarLink="/deliveries"/>
+        <ContainerForm>
+          <GroupInputs>
+            <Select name="recipient_id" options={recipients} label="Entragador" />
+            <Select
+              name="deliveryman_id"
+              options={deliverymen}
+              label="Entragador"
+            />
+          </GroupInputs>
+          <Input name="product" label="Nome do Produto" />
+        </ContainerForm>
       </Form>
     </Container>
   );
