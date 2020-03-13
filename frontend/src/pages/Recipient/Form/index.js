@@ -2,20 +2,20 @@ import React, { useRef, useEffect, useState } from 'react';
 import { Form } from '@unform/web';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
 
 import { ContainerForm } from '~/components/Form/Container/styles';
 import Header from '~/components/Form/Header';
 import Input from '~/components/Form/Input';
 import InputMask from '~/components/Form/InputMask';
-import { recipientRequest } from '~/store/modules/recipient/actions';
+import api from '~/services/api';
+import history from '~/services/history';
 
 import { Container, Group1, Group2 } from './styles';
 
-export default function RecipientForm() {
+export default function RecipientForm({ match }) {
+  const { id } = match.params;
   const formRef = useRef(null);
   const [cep, setCep] = useState('');
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (cep && cep[8] !== '_') {
@@ -37,6 +37,15 @@ export default function RecipientForm() {
     }
   }, [cep]);
 
+  useEffect(() => {
+    async function loadRecipient() {
+      const response = await api.get(`/recipient/${id}`);
+      formRef.current.setData({ ...response.data });
+      setCep(response.data.cep);
+    }
+    if (id) loadRecipient();
+  }, [id]);
+
   async function handleSubmit(data) {
     try {
       formRef.current.setErrors({});
@@ -50,7 +59,14 @@ export default function RecipientForm() {
       await schema.validate(data, {
         abortEarly: false,
       });
-      dispatch(recipientRequest(data));
+      if (id) {
+        await api.put(`/recipient/${id}`, { ...data });
+        toast.success('Destinatário atualizado com sucesso!"');
+      } else {
+        await api.post('/recipients', { ...data });
+        toast.success('Destinatário criado com sucesso!"');
+      }
+      history.push('/recipients');
     } catch (err) {
       const validationErrors = {};
       if (err instanceof Yup.ValidationError) {

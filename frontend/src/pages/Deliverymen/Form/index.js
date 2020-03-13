@@ -1,21 +1,19 @@
-import React, { useRef, useEffect } from 'react';
-import { Form } from '@unform/web';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
+import { Form } from '@unform/web';
 import { PropTypes } from 'prop-types';
+import React, { useRef, useEffect } from 'react';
 
 import { ContainerForm } from '~/components/Form/Container/styles';
 import Header from '~/components/Form/Header';
 import Input from '~/components/Form/Input';
 import AvatarInput from './AvatarInput';
-import { deliverymanRequest } from '~/store/modules/deliveryman/actions';
-import { Container, ContainerAvatar } from './styles';
 import api from '~/services/api';
+
+import { Container, ContainerAvatar } from './styles';
 
 export default function DeliverymenForm({ match }) {
   const { id } = match.params;
   const formRef = useRef(null);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     async function loadDEliveryman() {
@@ -44,7 +42,7 @@ export default function DeliverymenForm({ match }) {
       await schema.validate(data, {
         abortEarly: false,
       });
-      dispatch(deliverymanRequest(data));
+      // dispatch(deliverymanRequest(data));
     } catch (err) {
       const validationErrors = {};
       if (err instanceof Yup.ValidationError) {

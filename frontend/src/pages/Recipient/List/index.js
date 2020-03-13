@@ -51,7 +51,7 @@ export default function RecipientList() {
               visible={!!actionsDisplay[recipient.id]}
               actions={{
                 del: `/link`,
-                edit: `/link`,
+                edit: `/recipient/${recipient.id}/edit`,
               }}
             />
           </Item>

@@ -35,6 +35,8 @@ export default function Routes() {
 
       <Route path="/recipients" isPrivate component={RecipientList} />
       <Route path="/recipient/new" isPrivate component={RecipientForm} />
+      <Route path="/recipient/:id/edit" isPrivate component={RecipientForm} />
+
       <Route
         path="/delivery-problems"
         isPrivate
