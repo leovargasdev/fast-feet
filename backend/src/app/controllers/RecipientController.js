@@ -38,19 +38,23 @@ class RecipientController {
       });
       return res.json(recipient);
     }
-    const { name } = req.query;
+    const { name, page } = req.query;
     const recipients = await Recipient.findAll({
       where: {
         name: {
           [Op.iLike]: `%${name}%`,
         },
       },
+      order: ['id'],
+      limit: 10,
+      offset: (page - 1) * 2,
     });
     return res.json(recipients);
   }
 
   async show(req, res) {
     const recipients = await Recipient.findAll({
+      order: ['name'],
       attributes: ['name', 'id'],
     });
     const data = recipients.map(recipient => {
@@ -81,6 +85,12 @@ class RecipientController {
     await recipient.update(req.body);
 
     return res.json(recipient);
+  }
+
+  async delete(req, res) {
+    const { id } = req.params;
+    await Recipient.destroy({ where: { id } });
+    return res.json({ message: 'Recipient successfully removed' });
   }
 }
 
