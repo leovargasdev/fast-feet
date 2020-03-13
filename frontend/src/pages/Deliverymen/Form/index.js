@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
+import { PropTypes } from 'prop-types';
 
 import { ContainerForm } from '~/components/Form/Container/styles';
 import Header from '~/components/Form/Header';
@@ -23,11 +24,8 @@ export default function DeliverymenForm({ match }) {
       formRef.current.setData({
         name,
         email,
+        avatar,
       });
-      // formRef.current.setFieldValue('avatar_id', {
-      //   id: avatar.id,
-      //   url: avatar.url,
-      // });
     }
 
     if (id) loadDEliveryman();
@@ -64,7 +62,7 @@ export default function DeliverymenForm({ match }) {
         <Header content="Cadastro de entregadores" voltarLink="/deliverymen" />
         <ContainerForm>
           <ContainerAvatar>
-            <AvatarInput name="avatar_id" />
+            <AvatarInput name="avatar" />
           </ContainerAvatar>
 
           <Input
@@ -78,3 +76,11 @@ export default function DeliverymenForm({ match }) {
     </Container>
   );
 }
+
+DeliverymenForm.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }),
+};

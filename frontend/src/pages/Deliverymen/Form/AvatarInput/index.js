@@ -1,11 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useField } from '@unform/core';
 import { MdInsertPhoto } from 'react-icons/md';
+import { PropTypes } from 'prop-types';
+
 import api from '~/services/api';
 import { Container, InputPhoto } from './styles';
 
-export default function AvatarInput() {
-  const { defaultValue, registerField, error = '' } = useField('avatar_id');
+export default function AvatarInput({ name }) {
+  const { fieldName, defaultValue = '', registerField, error = '' } = useField(
+    name
+  );
 
   const [file, setFile] = useState(defaultValue && defaultValue.id);
   const [preview, setPreview] = useState(defaultValue && defaultValue.url);
@@ -15,12 +19,11 @@ export default function AvatarInput() {
   useEffect(() => {
     if (ref.current) {
       registerField({
-        name: 'avatar_id',
+        name: fieldName,
         ref: ref.current,
         path: 'dataset.file',
       });
     }
-    console.log(defaultValue);
   }, [defaultValue, registerField]);
 
   async function handleChange(e) {
@@ -58,3 +61,7 @@ export default function AvatarInput() {
     </Container>
   );
 }
+
+AvatarInput.propTypes = {
+  name: PropTypes.string.isRequired,
+};
