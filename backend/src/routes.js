@@ -30,11 +30,12 @@ routes.put('/recipient/:id', RecipientController.update);
 routes.delete('/recipient/:id', RecipientController.delete);
 
 // deliveryman: singular, deliverymen: plural
-routes.post('/deliveryman', DeliverymanController.store);
+routes.post('/deliverymen', DeliverymanController.store);
 routes.put('/deliveryman/:id', DeliverymanController.update);
 routes.get('/deliverymen', DeliverymanController.index);
 routes.get('/deliveryman/:id', DeliverymanController.index);
-routes.delete('/deliveryman/:deliveryman_id', DeliverymanController.delete);
+routes.get('/deliverymen-select', DeliverymanController.show); // --> OK
+routes.delete('/deliveryman/:id', DeliverymanController.delete);
 
 routes.post('/delivery', DeliveryController.store);
 routes.delete('/delivery/:delivery_id', DeliveryController.delete);

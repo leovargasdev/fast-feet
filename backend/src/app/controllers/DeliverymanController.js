@@ -58,7 +58,7 @@ class DeliverymanController {
   }
 
   async index(req, res) {
-    const { name } = req.query;
+    const { name, page } = req.query;
     const { id } = req.params;
     if (id) {
       const deliveryman = await Deliveryman.findByPk(id, {
@@ -71,13 +71,15 @@ class DeliverymanController {
       });
       return res.json(deliveryman);
     }
-    // O include do campo url só funciona se tiver o campo id do File
     const deliverymen = await Deliveryman.findAll({
       where: {
         name: {
           [Op.iLike]: `%${name}%`,
         },
       },
+      order: ['id'],
+      limit: 10,
+      offset: (page - 1) * 2,
       attributes: ['name', 'email', 'id'],
       include: {
         model: File,
@@ -89,9 +91,23 @@ class DeliverymanController {
     return res.json(deliverymen);
   }
 
+  async show(req, res) {
+    const deliverymen = await Deliveryman.findAll({
+      order: ['name'],
+      attributes: ['name', 'id'],
+    });
+    const data = deliverymen.map(d => {
+      return {
+        value: d.id,
+        label: d.name,
+      };
+    });
+    return res.json(data);
+  }
+
   async delete(req, res) {
-    const { deliveryman_id } = req.params;
-    await Deliveryman.destroy({ where: { id: deliveryman_id } });
+    const { id } = req.params;
+    await Deliveryman.destroy({ where: { id } });
     return res.json({ message: 'Deliveryman successfully removed' });
   }
 }
