@@ -27,6 +27,7 @@ export default function RecipientList() {
       <BuscarCadastro
         placeholder="Buscar por destinatário"
         onChange={e => setSearchRecipient(e.target.value)}
+        linkBtn="/recipient/new"
       />
       <List>
         <Item>
@@ -52,7 +53,6 @@ export default function RecipientList() {
                 del: `/link`,
                 edit: `/link`,
               }}
-              positionLeft={59}
             />
           </Item>
         ))}
