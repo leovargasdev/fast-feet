@@ -18,7 +18,7 @@ export const Container = styled.div`
     font-size: 24px;
     color: #c6c6c6;
     background: none;
-    margin-right: 10px;
+    margin-right: 44px;
     border: 0;
 
     &:hover {
@@ -30,11 +30,11 @@ export const Container = styled.div`
 export const Actions = styled.div`
   position: absolute;
   width: auto;
-  background: #fff;
+  background: #7d40e7;
   border-radius: 4px;
   padding: 15px 18px;
   display: ${({ visible }) => (visible ? 'block' : 'none')};
-  left: calc(${props => props.left});
+  right: 0;
   top: calc(100% + 18px);
   z-index: 1;
   box-shadow: 0px 0px 2px #00000026;
@@ -48,7 +48,7 @@ export const Actions = styled.div`
     height: 0;
     border-left: 20px solid transparent;
     border-right: 20px solid transparent;
-    border-bottom: 20px solid;
+    border-bottom: 20px solid #7d40e7;
   }
 `;
 

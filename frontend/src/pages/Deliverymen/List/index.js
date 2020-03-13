@@ -54,10 +54,9 @@ export default function DeliverymenList() {
               }
               visible={!!actionsDisplay[del.id]}
               actions={{
-                del: `/link`,
+                del: `/deliveryman/${del.id}/edit`,
                 edit: `/deliveryman/${del.id}/edit`,
               }}
-              positionLeft={65}
             />
           </Item>
         ))}

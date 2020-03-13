@@ -3,18 +3,13 @@ import { MdDelete, MdEdit, MdVisibility } from 'react-icons/md';
 import PropTypes from 'prop-types';
 import { Container, Actions, Action } from './styles';
 
-export default function ActionDrop({
-  onClick,
-  visible,
-  actions,
-  positionLeft,
-}) {
+export default function ActionDrop({ onClick, visible, actions }) {
   return (
     <Container>
       <button type="button" onClick={onClick}>
         ...
       </button>
-      <Actions visible={visible} left={`${positionLeft}%`}>
+      <Actions visible={visible}>
         {actions.view && (
           <Action to={actions.view}>
             <MdVisibility size={16} color="#8E5BE8" />
@@ -41,6 +36,5 @@ export default function ActionDrop({
 ActionDrop.propTypes = {
   onClick: PropTypes.func.isRequired,
   visible: PropTypes.bool.isRequired,
-  actions: PropTypes.objectOf.isRequired,
-  positionLeft: PropTypes.number.isRequired,
+  actions: PropTypes.object.isRequired,
 };
