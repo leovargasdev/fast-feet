@@ -83,10 +83,14 @@ export default function DeliveryForm({ match }) {
   return (
     <Container>
       <Form ref={formRef} onSubmit={handleSubmit}>
-        <Header content="Cadastro de encomendas" voltarLink="/deliveries"/>
+        <Header content="Cadastro de encomendas" voltarLink="/deliveries" />
         <ContainerForm>
           <GroupInputs>
-            <Select name="recipient_id" options={recipients} label="Entragador" />
+            <Select
+              name="recipient_id"
+              options={recipients}
+              label="Entragador"
+            />
             <Select
               name="deliveryman_id"
               options={deliverymen}

@@ -59,7 +59,18 @@ class DeliverymanController {
 
   async index(req, res) {
     const { name } = req.query;
-
+    const { id } = req.params;
+    if (id) {
+      const deliveryman = await Deliveryman.findByPk(id, {
+        attributes: ['name', 'email'],
+        include: {
+          model: File,
+          as: 'avatar',
+          attributes: ['url', 'path', 'id'],
+        },
+      });
+      return res.json(deliveryman);
+    }
     // O include do campo url só funciona se tiver o campo id do File
     const deliverymen = await Deliveryman.findAll({
       where: {

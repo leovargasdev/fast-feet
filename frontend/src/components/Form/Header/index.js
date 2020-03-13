@@ -1,11 +1,11 @@
-import React, {memo} from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { MdCheck, MdKeyboardArrowLeft } from 'react-icons/md';
 
 import Title from '~/components/Title';
 import { Container, Btns, BtnSubmit, BtnBack } from './styles';
 
-function Header({ content, voltarLink='/' }) {
+function Header({ content, voltarLink = '/' }) {
   return (
     <Container>
       <Title content={content} />
@@ -25,6 +25,7 @@ function Header({ content, voltarLink='/' }) {
 
 Header.propTypes = {
   content: PropTypes.string.isRequired,
+  voltarLink: PropTypes.string.isRequired,
 };
 
 export default memo(Header);

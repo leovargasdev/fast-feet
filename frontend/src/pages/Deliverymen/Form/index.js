@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
@@ -9,10 +9,29 @@ import Input from '~/components/Form/Input';
 import AvatarInput from './AvatarInput';
 import { deliverymanRequest } from '~/store/modules/deliveryman/actions';
 import { Container, ContainerAvatar } from './styles';
+import api from '~/services/api';
 
-export default function DeliverymenForm() {
+export default function DeliverymenForm({ match }) {
+  const { id } = match.params;
   const formRef = useRef(null);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function loadDEliveryman() {
+      const response = await api.get(`/deliveryman/${id}`);
+      const { name, email, avatar } = response.data;
+      formRef.current.setData({
+        name,
+        email,
+      });
+      // formRef.current.setFieldValue('avatar_id', {
+      //   id: avatar.id,
+      //   url: avatar.url,
+      // });
+    }
+
+    if (id) loadDEliveryman();
+  }, [id]);
 
   async function handleSubmit(data) {
     try {
@@ -42,7 +61,7 @@ export default function DeliverymenForm() {
   return (
     <Container>
       <Form ref={formRef} onSubmit={handleSubmit}>
-        <Header content="Cadastro de entregadores" voltarLink="/deliverymen"/>
+        <Header content="Cadastro de entregadores" voltarLink="/deliverymen" />
         <ContainerForm>
           <ContainerAvatar>
             <AvatarInput name="avatar_id" />
