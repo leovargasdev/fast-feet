@@ -16,15 +16,15 @@ class DeliveryProblemController {
     if (!(await schema.isValid(req.body)))
       return res.status(400).json({ error: 'Validation fails.' });
 
-    const { delivery_id } = req.params;
+    const { id } = req.params;
 
     // Validando entraga
-    const isDelivery = await Delivery.findByPk(delivery_id);
+    const isDelivery = await Delivery.findByPk(id);
     if (!isDelivery)
       return res.status(400).json({ error: 'Delivery is not available.' });
 
     const { description } = await DeliveryProblem.create({
-      delivery_id,
+      delivery_id: id,
       ...req.body,
     });
 
@@ -33,8 +33,20 @@ class DeliveryProblemController {
 
   async index(req, res) {
     const { delivery_id } = req.params;
-    const deliveryProblem = await DeliveryProblem.findAll({
-      where: { delivery_id },
+    if (delivery_id) {
+      const deliveryProblem = await DeliveryProblem.findAll({
+        where: { delivery_id },
+        attributes: ['id', 'description'],
+        include: {
+          model: Delivery,
+          as: 'delivery',
+          attributes: ['product', 'start_date'],
+        },
+      });
+      return res.json(deliveryProblem);
+    }
+
+    const deliveriesProblems = await DeliveryProblem.findAll({
       attributes: ['id', 'description'],
       include: {
         model: Delivery,
@@ -43,13 +55,13 @@ class DeliveryProblemController {
       },
     });
 
-    return res.json(deliveryProblem);
+    return res.json(deliveriesProblems);
   }
 
-  async delete(req, res) {
-    const { delivery_id } = req.params;
+  async update(req, res) {
+    const { id } = req.params;
     // Validando entregador
-    const delivery = await Delivery.findByPk(delivery_id);
+    const delivery = await Delivery.findByPk(id);
     if (!delivery)
       return res.status(400).json({ error: 'Deliveryman is not available.' });
 

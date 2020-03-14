@@ -9,7 +9,7 @@ import FileController from './app/controllers/FileController';
 import DeliverymanController from './app/controllers/DeliverymanController';
 import DeliveryController from './app/controllers/DeliveryController';
 import DeliveryProblemController from './app/controllers/DeliveryProblemController';
-import DeliveriesProblemController from './app/controllers/DeliveriesProblemController';
+// import DeliveriesProblemController from './app/controllers/DeliveriesProblemController';
 // import CancelDeliveryController from './app/controllers/CancelDeliveryController';
 
 import authMiddleware from './app/middlewares/auth';
@@ -42,19 +42,14 @@ routes.get('/deliveries', DeliveryController.index);
 routes.get('/delivery/:id', DeliveryController.index);
 routes.get('/delivery/:id/view', DeliveryController.show);
 routes.put('/delivery/:id', DeliveryController.update);
-routes.delete('/delivery/:id', DeliveryController.delete); // --> OK
+routes.delete('/delivery/:id', DeliveryController.delete);
 
 // routes.get('/deliveryman/:deliveryman_id/deliveries', DeliveryController.index);
 
-routes.post('/delivery/:delivery_id/problems', DeliveryProblemController.store);
-
+routes.post('/delivery/:id/problems', DeliveryProblemController.store);
 routes.get('/delivery/:delivery_id/problems', DeliveryProblemController.index);
-routes.delete(
-  '/problem/:delivery_id/cancel-delivery',
-  DeliveryProblemController.delete
-);
-
-routes.get('/delivery/problems', DeliveriesProblemController.index);
+routes.get('/delivery-problems', DeliveryProblemController.index);
+routes.put('/problem/:id/cancel-delivery', DeliveryProblemController.update);
 
 routes.post('/files', upload.single('file'), FileController.store);
 routes.get('/file/:id', FileController.index);
