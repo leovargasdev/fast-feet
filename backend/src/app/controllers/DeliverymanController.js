@@ -79,7 +79,7 @@ class DeliverymanController {
       },
       order: ['id'],
       limit: 10,
-      offset: (page - 1) * 2,
+      offset: (page - 1) * 10,
       attributes: ['name', 'email', 'id'],
       include: {
         model: File,

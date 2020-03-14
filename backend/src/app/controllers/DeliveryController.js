@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { parseISO, isBefore, startOfDay, endOfDay } from 'date-fns';
+import { parseISO, isBefore, startOfDay, endOfDay, format } from 'date-fns';
 import { Op } from 'sequelize';
 import Delivery from '../models/Delivery';
 import Deliveryman from '../models/Deliveryman';
@@ -128,8 +128,15 @@ class DeliveryController {
   }
 
   async index(req, res) {
-    const { product } = req.query;
+    const { id } = req.params;
+    if (id) {
+      const delivery = await Delivery.findByPk(id, {
+        attributes: ['id', 'deliveryman_id', 'recipient_id'],
+      });
+      return res.json(delivery);
+    }
 
+    const { product, page } = req.query;
     const deliveries = await Delivery.findAll({
       where: {
         product: {
@@ -138,11 +145,13 @@ class DeliveryController {
       },
       attributes: ['id', 'status', 'start_date', 'end_date', 'canceled_at'],
       sort: ['id'],
+      limit: 10,
+      offset: (page - 1) * 10,
       include: [
         {
           model: Recipient,
           as: 'recipient',
-          attributes: ['city', 'state', 'name'],
+          attributes: ['city', 'state'],
         },
         {
           model: Deliveryman,
@@ -151,7 +160,7 @@ class DeliveryController {
           include: {
             model: File,
             as: 'avatar',
-            attributes: ['id', 'url'],
+            attributes: ['id', 'url', 'path'],
           },
         },
       ],
@@ -160,7 +169,7 @@ class DeliveryController {
   }
 
   async delete(req, res) {
-    const { delivery_id: id } = req.params;
+    const { id } = req.params;
     await Delivery.destroy({ where: { id } });
     return res.json({ message: 'Delivery successfully removed' });
   }
@@ -168,21 +177,33 @@ class DeliveryController {
   async show(req, res) {
     const { id } = req.params;
     const delivery = await Delivery.findByPk(id, {
+      attributes: ['start_date', 'end_date'],
       include: [
         {
           model: Recipient,
           as: 'recipient',
-          attributes: ['name', 'id'],
+          attributes: [
+            'street',
+            'number',
+            'city',
+            'state',
+            'cep',
+            'complement',
+          ],
         },
         {
-          model: Deliveryman,
-          as: 'deliveryman',
-          attributes: ['name', 'id'],
+          model: File,
+          as: 'signature',
+          attributes: ['id', 'url', 'path'],
         },
       ],
     });
-
-    return res.json(delivery);
+    return res.json({
+      start_date: format(delivery.start_date, 'dd/mm/yyyy'),
+      end_date: format(delivery.end_date, 'dd/mm/yyyy'),
+      recipient: delivery.recipient,
+      img_signature: delivery.signature.url,
+    });
   }
 }
 

@@ -22,7 +22,7 @@ routes.post('/sessions', SessionController.store);
 // Todas rotas a partir daqui devem ser autenticadas com o token do LOGIN
 routes.use(authMiddleware);
 
-routes.post('/recipients', RecipientController.store);
+routes.post('/recipient', RecipientController.store);
 routes.get('/recipients', RecipientController.index);
 routes.get('/recipient/:id', RecipientController.index);
 routes.get('/recipients-select', RecipientController.show);
@@ -30,18 +30,19 @@ routes.put('/recipient/:id', RecipientController.update);
 routes.delete('/recipient/:id', RecipientController.delete);
 
 // deliveryman: singular, deliverymen: plural
-routes.post('/deliverymen', DeliverymanController.store);
+routes.post('/deliveryman', DeliverymanController.store);
 routes.put('/deliveryman/:id', DeliverymanController.update);
 routes.get('/deliverymen', DeliverymanController.index);
 routes.get('/deliveryman/:id', DeliverymanController.index);
-routes.get('/deliverymen-select', DeliverymanController.show); // --> OK
+routes.get('/deliverymen-select', DeliverymanController.show);
 routes.delete('/deliveryman/:id', DeliverymanController.delete);
 
 routes.post('/delivery', DeliveryController.store);
-routes.delete('/delivery/:delivery_id', DeliveryController.delete);
+routes.get('/deliveries', DeliveryController.index);
+routes.get('/delivery/:id', DeliveryController.index);
+routes.get('/delivery/:id/view', DeliveryController.show);
 routes.put('/delivery/:id', DeliveryController.update);
-routes.get('/delivery/:id', DeliveryController.show);
-routes.get('/deliveries/', DeliveryController.index);
+routes.delete('/delivery/:id', DeliveryController.delete); // --> OK
 
 // routes.get('/deliveryman/:deliveryman_id/deliveries', DeliveryController.index);
 

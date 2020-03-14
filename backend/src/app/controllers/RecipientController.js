@@ -47,7 +47,7 @@ class RecipientController {
       },
       order: ['id'],
       limit: 10,
-      offset: (page - 1) * 2,
+      offset: (page - 1) * 10,
     });
     return res.json(recipients);
   }
