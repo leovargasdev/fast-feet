@@ -9,7 +9,7 @@ export const List = styled.ul`
 export const Item = styled.li`
   display: grid;
   grid-gap: 10px;
-  padding: 20px;
+  padding: 12px 20px;
   border-radius: 4px;
   margin: 4px;
   /* alinha os itens verticalmente */

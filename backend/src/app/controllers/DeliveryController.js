@@ -151,7 +151,7 @@ class DeliveryController {
         {
           model: Recipient,
           as: 'recipient',
-          attributes: ['city', 'state'],
+          attributes: ['city', 'state', 'name'],
         },
         {
           model: Deliveryman,

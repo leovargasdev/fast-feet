@@ -18,7 +18,7 @@ export const Container = styled.div`
     font-size: 24px;
     color: #c6c6c6;
     background: none;
-    margin-right: 44px;
+    /* margin-right: 44px; */
     border: 0;
 
     &:hover {
@@ -34,7 +34,7 @@ export const Actions = styled.div`
   border-radius: 4px;
   padding: 15px 18px;
   display: ${({ visible }) => (visible ? 'block' : 'none')};
-  right: 0;
+  left: 50%;
   top: calc(100% + 18px);
   z-index: 1;
   box-shadow: 0px 0px 2px #00000026;
