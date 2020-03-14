@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { ContainerForm } from '~/components/Form/Container/styles';
@@ -10,12 +9,10 @@ import Input from '~/components/Form/Input';
 import Select from '~/components/Form/Select';
 import { Container, GroupInputs } from './styles';
 import api from '~/services/api';
-import { deliveryRequest } from '~/store/modules/delivery/actions';
 
 export default function DeliveryForm({ match }) {
   const { id } = match.params;
   const formRef = useRef(null);
-  const dispatch = useDispatch();
 
   const [recipients, setRecipients] = useState([]);
   const [deliverymen, setDeliverymen] = useState([]);
@@ -68,7 +65,7 @@ export default function DeliveryForm({ match }) {
       await schema.validate(data, {
         abortEarly: false,
       });
-      dispatch(deliveryRequest(data));
+      // dispatch(deliveryRequest(data));
     } catch (err) {
       const validationErrors = {};
       if (err instanceof Yup.ValidationError) {

@@ -1,11 +1,11 @@
 import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 
 import { signInRequest } from '~/store/modules/auth/actions';
 import Input from '~/components/Form/Input';
+import { ContainerForm } from '~/components/Form/Container/styles';
 import logo from '~/assets/logo.png';
 import { BtnLogin } from './styles';
 
@@ -41,24 +41,26 @@ export default function SignIn() {
     <>
       <img src={logo} alt="Fast Feet" />
       <Form ref={formRef} onSubmit={handleSubmit}>
-        <Input
-          label="SEU E-MAIL"
-          name="email"
-          type="text"
-          placeholder="exemplo@email.com"
-        />
+        <ContainerForm>
+          <Input
+            label="SEU E-MAIL"
+            name="email"
+            type="text"
+            value="admin@fastfeet.com"
+            placeholder="exemplo@email.com"
+          />
 
-        <Input
-          label="SUA SENHA"
-          name="password"
-          type="password"
-          placeholder="***********"
-        />
+          <Input
+            label="SUA SENHA"
+            name="password"
+            type="password"
+            placeholder="***********"
+          />
 
-        <BtnLogin type="submit">
-          {loading ? 'Carregando...' : 'Entrar no Sistema'}
-        </BtnLogin>
-        <Link to="/register">Criar conta</Link>
+          <BtnLogin type="submit">
+            {loading ? 'Carregando...' : 'Entrar no Sistema'}
+          </BtnLogin>
+        </ContainerForm>
       </Form>
     </>
   );
