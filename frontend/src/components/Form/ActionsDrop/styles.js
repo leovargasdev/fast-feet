@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   display: flex;
@@ -18,7 +17,6 @@ export const Container = styled.div`
     font-size: 24px;
     color: #c6c6c6;
     background: none;
-    /* margin-right: 44px; */
     border: 0;
 
     &:hover {
@@ -52,16 +50,19 @@ export const Actions = styled.div`
   }
 `;
 
-export const Action = styled(Link)`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+export const Action = styled.div`
+  a,
+  button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
 
   svg {
     margin-right: 4px;
   }
 
-  & + a {
+  & + div {
     margin-top: 9px;
     padding-top: 9px;
     border-top: 1px solid #00000026;
