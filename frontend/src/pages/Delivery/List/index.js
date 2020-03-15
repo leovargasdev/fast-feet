@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import Title from '~/components/Title';
 import BuscarCadastro from '~/components/BuscarCadastro';
+import Paginate from '~/components/Paginate';
 import { Item, List } from '~/components/ListItens/styles';
 import { Container, Status, Deliveryman } from './styles';
 import ActionsDrop from '~/components/Form/ActionsDrop';
@@ -78,6 +79,8 @@ export default function DeliveryList() {
           </Item>
         ))}
       </List>
+      <Paginate page={page} setPage={setPage} />
+      <h1>{page}</h1>
     </Container>
   );
 }
