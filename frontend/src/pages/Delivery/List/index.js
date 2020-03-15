@@ -19,7 +19,6 @@ export default function DeliveryList() {
         `/deliveries?product=${searchProduct}&page=${page}`
       );
       setDeliveries(response.data);
-      console.log(deliveries);
     }
 
     loadDeliveries();
