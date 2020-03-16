@@ -131,7 +131,19 @@ class DeliveryController {
     const { id } = req.params;
     if (id) {
       const delivery = await Delivery.findByPk(id, {
-        attributes: ['id', 'deliveryman_id', 'recipient_id'],
+        attributes: ['id', 'product'],
+        include: [
+          {
+            model: Recipient,
+            as: 'recipient',
+            attributes: ['id', 'name'],
+          },
+          {
+            model: Deliveryman,
+            as: 'deliveryman',
+            attributes: ['name', 'id'],
+          },
+        ],
       });
       return res.json(delivery);
     }

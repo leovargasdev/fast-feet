@@ -23,7 +23,7 @@ export default function RecipientList() {
     }
 
     loadDeliveries();
-  }, [searchRecipient, reloadList]);
+  }, [searchRecipient, reloadList, page]);
 
   return (
     <Container>

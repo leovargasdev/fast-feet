@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import { Form } from '@unform/web';
 import { PropTypes } from 'prop-types';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import {toast} from 'react-toastify';
 
 import { ContainerForm } from '~/components/Form/Container/styles';
@@ -19,20 +19,23 @@ const schema = Yup.object().shape({
     .email('Insira um email válido!')
     .required('O email do entragador é obrigatório!'),
 });
-
+// PROBLEMAS AO PEGAR A IMAGEM DO AVATAR
+// PQPQPQPQPQ
 export default function DeliverymanForm({ match }) {
   const { id } = match.params;
   const formRef = useRef(null);
+  const [avatar, setAvatar] = useState('');
 
   useEffect(() => {
     async function loadDeliveryman() {
       const response = await api.get(`/deliveryman/${id}`);
-      const { name, email, avatar } = response.data;
+      const { name, email, avatar: aux } = response.data;
       formRef.current.setData({
         name,
         email,
-        avatar,
+        avatar_id: aux,
       });
+      setAvatar(aux);
     }
 
     if (id) loadDeliveryman();
@@ -72,7 +75,7 @@ export default function DeliverymanForm({ match }) {
         <Header content="Cadastro de entregadores" voltarLink="/deliverymen" />
         <ContainerForm>
           <ContainerAvatar>
-            <AvatarInput name="avatar_id" />
+            <AvatarInput name="avatar_id" defaultValue={avatar}/>
           </ContainerAvatar>
 
           <Input

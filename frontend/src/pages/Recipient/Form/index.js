@@ -70,6 +70,7 @@ export default function RecipientForm({ match }) {
         toast.success('Destinatário criado com sucesso!');
       }
       history.push('/recipients');
+
     } catch (err) {
       const validationErrors = {};
       if (err instanceof Yup.ValidationError) {

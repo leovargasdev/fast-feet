@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 
 import { ContainerForm } from '~/components/Form/Container/styles';
 import Header from '~/components/Form/Header';
@@ -9,6 +10,13 @@ import Input from '~/components/Form/Input';
 import Select from '~/components/Form/Select';
 import { Container, GroupInputs } from './styles';
 import api from '~/services/api';
+import history from '~/services/history';
+
+const schema = Yup.object().shape({
+  recipient_id: Yup.number().required('O destinatário é obrigatório!'),
+  deliveryman_id: Yup.number().required('O entragador é obrigatório!'),
+  product: Yup.string().required('O nome do produto é obrigatório!'),
+});
 
 export default function DeliveryForm({ match }) {
   const { id } = match.params;
@@ -26,6 +34,7 @@ export default function DeliveryForm({ match }) {
       formRef.current.setData({
         product,
       });
+
       formRef.current.setFieldValue('recipient_id', {
         value: recipient.id,
         label: recipient.name,
@@ -37,35 +46,38 @@ export default function DeliveryForm({ match }) {
     }
 
     async function loadDeliverymen() {
-      const response = await api.get('/deliverymen?name');
-      setDeliverymen(
-        response.data.map(deliveryman => {
-          return { value: deliveryman.id, label: deliveryman.name };
-        })
-      );
+      const response = await api.get('/deliverymen-select');
+      setDeliverymen(response.data);
     }
 
     async function loadRecipients() {
       const response = await api.get('/recipients-select');
       setRecipients(response.data);
     }
+
     loadRecipients();
     loadDeliverymen();
     if (id) loadDelivery();
-  }, [deliverymen, id]);
+
+  }, [id]);
 
   async function handleSubmit(data) {
     try {
       formRef.current.setErrors({});
-      const schema = Yup.object().shape({
-        recipient_id: Yup.string().required('O destinatário é obrigatório!'),
-        deliveryman_id: Yup.number().required('O entragador é obrigatório!'),
-        product: Yup.string().required('O nome do produto é obrigatório!'),
-      });
+
       await schema.validate(data, {
         abortEarly: false,
       });
-      // dispatch(deliveryRequest(data));
+
+      if (id) {
+        await api.put(`/delivery/${id}`, { ...data });
+        toast.info('Encomenda atualizada com sucesso!');
+      } else {
+        await api.post('/delivery', { ...data });
+        toast.success('Encomenda criada com sucesso!');
+      }
+      history.push('/deliveries');
+
     } catch (err) {
       const validationErrors = {};
       if (err instanceof Yup.ValidationError) {
