@@ -70,9 +70,9 @@ export default function DeliveryList() {
               }
               visible={!!actionsDisplay[delivery.id]}
               actions={{
-                del: `http://localhost:3000/deliveries`,
+                del: `/delivery/${delivery.id}`,
                 edit: `/delivery/${delivery.id}/edit`,
-                view: `/deliverymen`,
+                view: delivery.id,
               }}
               positionLeft={42}
             />

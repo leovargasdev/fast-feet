@@ -5,6 +5,13 @@ import { Link } from 'react-router-dom';
 import { Container, Actions, Action } from './styles';
 
 export default function ActionDrop({ onClick, visible, actions }) {
+  function handleModalView() {
+    console.log('view', actions.view);
+  }
+  function handleModalDelete() {
+    console.log('delete', actions.del);
+  }
+
   return (
     <Container>
       <button type="button" onClick={onClick}>
@@ -13,10 +20,10 @@ export default function ActionDrop({ onClick, visible, actions }) {
       <Actions visible={visible}>
         {actions.view && (
           <Action>
-            <Link to={actions.view}>
+            <button type="button" onClick={handleModalView}>
               <MdVisibility size={16} color="#8E5BE8" />
               <p>Visualizar</p>
-            </Link>
+            </button>
           </Action>
         )}
         {actions.edit && (
@@ -29,7 +36,7 @@ export default function ActionDrop({ onClick, visible, actions }) {
         )}
         {actions.del && (
           <Action>
-            <button type="button">
+            <button type="button" onClick={handleModalDelete}>
               <MdDelete size={16} color="#DE3B3B" />
               <p>Excluir</p>
             </button>
