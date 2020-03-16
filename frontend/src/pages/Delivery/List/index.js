@@ -83,7 +83,6 @@ export default function DeliveryList() {
         ))}
       </List>
       <Paginate page={page} setPage={setPage} />
-      <h1>{page}</h1>
     </Container>
   );
 }

@@ -4,6 +4,8 @@ import Title from '~/components/Title';
 import BuscarCadastro from '~/components/BuscarCadastro';
 import { Item, List } from '~/components/ListItens/styles';
 import ActionsDrop from '~/components/Form/ActionsDrop';
+import Paginate from '~/components/Paginate';
+
 import { Container } from './styles';
 import api from '~/services/api';
 
@@ -11,15 +13,17 @@ export default function RecipientList() {
   const [actionsDisplay, setActionsDisplay] = useState({});
   const [recipients, setRecipients] = useState([]);
   const [searchRecipient, setSearchRecipient] = useState('');
+  const [page, setPage] = useState(1);
+  const [reloadList, setReloadList] = useState(false);
 
   useEffect(() => {
     async function loadDeliveries() {
-      const response = await api.get(`/recipients?name=${searchRecipient}`);
+      const response = await api.get(`/recipients?name=${searchRecipient}&page=${page}`);
       setRecipients(response.data);
     }
 
     loadDeliveries();
-  }, [searchRecipient]);
+  }, [searchRecipient, reloadList]);
 
   return (
     <Container>
@@ -42,6 +46,7 @@ export default function RecipientList() {
             <span>{recipient.name}</span>
             <span>{recipient.adress}</span>
             <ActionsDrop
+              setReloadList={setReloadList}
               onClick={() =>
                 setActionsDisplay({
                   ...actionsDisplay,
@@ -50,13 +55,14 @@ export default function RecipientList() {
               }
               visible={!!actionsDisplay[recipient.id]}
               actions={{
-                del: `/link`,
+                del: { url: `/recipient/${recipient.id}`, type: 'Destinatário' },
                 edit: `/recipient/${recipient.id}/edit`,
               }}
             />
           </Item>
         ))}
       </List>
+      <Paginate page={page} setPage={setPage} />
     </Container>
   );
 }

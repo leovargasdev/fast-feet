@@ -12,6 +12,14 @@ import history from '~/services/history';
 
 import { Container, Group1, Group2 } from './styles';
 
+const schema = Yup.object().shape({
+  name: Yup.string().required('O nome do destinatário é obrigatório!'),
+  cep: Yup.string().required('O CEP é obrigatório!'),
+  street: Yup.string().required('O logradouro é obrigatório!'),
+  state: Yup.string().required('O UF é obrigatório!'),
+  city: Yup.string().required('A cidade é obrigatória!'),
+});
+
 export default function RecipientForm({ match }) {
   const { id } = match.params;
   const formRef = useRef(null);
@@ -49,22 +57,17 @@ export default function RecipientForm({ match }) {
   async function handleSubmit(data) {
     try {
       formRef.current.setErrors({});
-      const schema = Yup.object().shape({
-        name: Yup.string().required('O nome do destinatário é obrigatório!'),
-        cep: Yup.string().required('O CEP é obrigatório!'),
-        street: Yup.string().required('O logradouro é obrigatório!'),
-        state: Yup.string().required('O UF é obrigatório!'),
-        city: Yup.string().required('A cidade é obrigatória!'),
-      });
+
       await schema.validate(data, {
         abortEarly: false,
       });
+
       if (id) {
         await api.put(`/recipient/${id}`, { ...data });
-        toast.success('Destinatário atualizado com sucesso!"');
+        toast.success('Destinatário atualizado com sucesso!');
       } else {
-        await api.post('/recipients', { ...data });
-        toast.success('Destinatário criado com sucesso!"');
+        await api.post('/recipient', { ...data });
+        toast.success('Destinatário criado com sucesso!');
       }
       history.push('/recipients');
     } catch (err) {
