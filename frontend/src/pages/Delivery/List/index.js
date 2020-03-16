@@ -77,7 +77,6 @@ export default function DeliveryList() {
                 edit: `/delivery/${delivery.id}/edit`,
                 view: delivery.id,
               }}
-              positionLeft={42}
             />
           </Item>
         ))}

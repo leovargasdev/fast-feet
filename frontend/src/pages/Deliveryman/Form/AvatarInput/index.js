@@ -24,7 +24,7 @@ export default function AvatarInput({ name }) {
         path: 'dataset.file',
       });
     }
-  }, [defaultValue, registerField]);
+  }, [defaultValue, fieldName, registerField]);
 
   async function handleChange(e) {
     const data = new FormData();

@@ -4,23 +4,26 @@ import Title from '~/components/Title';
 import BuscarCadastro from '~/components/BuscarCadastro';
 import { Item, List } from '~/components/ListItens/styles';
 import ActionsDrop from '~/components/Form/ActionsDrop';
+import Paginate from '~/components/Paginate';
 
 import { Container, Avatar } from './styles';
 import api from '~/services/api';
 
-export default function DeliverymenList() {
+export default function DeliverymanList() {
   const [actionsDisplay, setActionsDisplay] = useState({});
   const [deliverymen, setDeliverymen] = useState([]);
   const [searchDeliveryman, setSearchDeliveryman] = useState('');
+  const [page, setPage] = useState(1);
+  const [reloadList, setReloadList] = useState(false);
 
   useEffect(() => {
     async function loadDeliveries() {
-      const response = await api.get(`/deliverymen?name=${searchDeliveryman}`);
+      const response = await api.get(`/deliverymen?name=${searchDeliveryman}&page=${page}`);
       setDeliverymen(response.data);
     }
 
     loadDeliveries();
-  }, [searchDeliveryman]);
+  }, [searchDeliveryman, page, reloadList]);
 
   return (
     <Container>
@@ -39,28 +42,30 @@ export default function DeliverymenList() {
           <strong>Email</strong>
           <strong style={{ textAlign: 'right' }}>Ações</strong>
         </Item>
-        {deliverymen.map(del => (
-          <Item key={del.id}>
-            <span>#{del.id}</span>
-            <Avatar src={del.avatar.url} />
-            <span>{del.name}</span>
-            <span>{del.email}</span>
+        {deliverymen.map(deliveryman => (
+          <Item key={deliveryman.id}>
+            <span>#{deliveryman.id}</span>
+            <Avatar src={deliveryman.avatar.url} />
+            <span>{deliveryman.name}</span>
+            <span>{deliveryman.email}</span>
             <ActionsDrop
+              setReloadList={setReloadList}
               onClick={() =>
                 setActionsDisplay({
                   ...actionsDisplay,
-                  [del.id]: !actionsDisplay[del.id],
+                  [deliveryman.id]: !actionsDisplay[deliveryman.id],
                 })
               }
-              visible={!!actionsDisplay[del.id]}
+              visible={!!actionsDisplay[deliveryman.id]}
               actions={{
-                del: `/deliveryman/${del.id}/edit`,
-                edit: `/deliveryman/${del.id}/edit`,
+                del: { url: `/deliveryman/${deliveryman.id}`, type: 'Entregador' },
+                edit: `/deliveryman/${deliveryman.id}/edit`,
               }}
             />
           </Item>
         ))}
       </List>
+      <Paginate page={page} setPage={setPage} />
     </Container>
   );
 }
