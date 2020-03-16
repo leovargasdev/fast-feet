@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MdDelete, MdEdit, MdVisibility } from 'react-icons/md';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { Container, Actions, Action } from './styles';
+import ModalDelete from '~/components/ModalDelete';
+import api from '~/services/api';
 
-export default function ActionDrop({ onClick, visible, actions }) {
+export default function ActionDrop({
+  setReloadList,
+  onClick,
+  visible,
+  actions,
+}) {
+  const [modalIsOpen, setIsOpen] = useState(false);
+
   function handleModalView() {
     console.log('view', actions.view);
   }
-  function handleModalDelete() {
-    console.log('delete', actions.del);
+  async function handleModalDelete() {
+    const { url, type } = actions.del;
+    await api.delete(url);
+    setReloadList(true);
+    setIsOpen(false);
+    toast.info(`${type} excluida!`);
   }
 
   return (
@@ -36,18 +50,24 @@ export default function ActionDrop({ onClick, visible, actions }) {
         )}
         {actions.del && (
           <Action>
-            <button type="button" onClick={handleModalDelete}>
+            <button type="button" onClick={() => setIsOpen(true)}>
               <MdDelete size={16} color="#DE3B3B" />
               <p>Excluir</p>
             </button>
           </Action>
         )}
       </Actions>
+      <ModalDelete
+        isOpen={modalIsOpen}
+        setIsOpen={setIsOpen}
+        handleDelete={handleModalDelete}
+      />
     </Container>
   );
 }
 
 ActionDrop.propTypes = {
+  setReloadList: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
   visible: PropTypes.bool.isRequired,
   actions: PropTypes.object.isRequired,

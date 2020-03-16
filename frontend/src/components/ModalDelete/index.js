@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
+import PropTypes from 'prop-types';
 
 import { ContentModal, BtnYes, BtnNo } from './styles';
 
@@ -14,14 +15,32 @@ const customStyles = {
   },
 };
 
-export default function ModalDelete({ ...rest }) {
+export default function ModalDelete({ setIsOpen, handleDelete, ...rest }) {
+  function closeModal() {
+    setIsOpen(false);
+  }
+
   return (
-    <Modal {...rest} style={customStyles} contentLabel="Remover Encomenda">
+    <Modal
+      {...rest}
+      style={customStyles}
+      onRequestClose={closeModal}
+      contentLabel="Remover Encomenda"
+    >
       <ContentModal>
         <h2>Você realmente deseja remover esta Encomenda??</h2>
-        <BtnYes type="button">Sim</BtnYes>
-        <BtnNo type="button">Não</BtnNo>
+        <BtnYes type="button" onClick={handleDelete}>
+          Sim
+        </BtnYes>
+        <BtnNo type="button" onClick={closeModal}>
+          Não
+        </BtnNo>
       </ContentModal>
     </Modal>
   );
 }
+
+ModalDelete.propTypes = {
+  setIsOpen: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired,
+};

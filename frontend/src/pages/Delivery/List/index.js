@@ -13,6 +13,7 @@ export default function DeliveryList() {
   const [deliveries, setDeliveries] = useState([]);
   const [searchProduct, setSearchProduct] = useState('');
   const [page, setPage] = useState(1);
+  const [reloadList, setReloadList] = useState(false);
 
   useEffect(() => {
     async function loadDeliveries() {
@@ -20,10 +21,11 @@ export default function DeliveryList() {
         `/deliveries?product=${searchProduct}&page=${page}`
       );
       setDeliveries(response.data);
+      setActionsDisplay({});
     }
 
     loadDeliveries();
-  }, [searchProduct, page]);
+  }, [searchProduct, page, reloadList]);
 
   return (
     <Container>
@@ -62,6 +64,7 @@ export default function DeliveryList() {
               <span>{delivery.status}</span>
             </Status>
             <ActionsDrop
+              setReloadList={setReloadList}
               onClick={() =>
                 setActionsDisplay({
                   ...actionsDisplay,
@@ -70,7 +73,7 @@ export default function DeliveryList() {
               }
               visible={!!actionsDisplay[delivery.id]}
               actions={{
-                del: `/delivery/${delivery.id}`,
+                del: { url: `/delivery/${delivery.id}`, type: 'Encomenda' },
                 edit: `/delivery/${delivery.id}/edit`,
                 view: delivery.id,
               }}
