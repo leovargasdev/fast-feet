@@ -98,7 +98,7 @@ export default function DeliveryForm({ match }) {
             <Select
               name="recipient_id"
               options={recipients}
-              label="Entragador"
+              label="Destinatário"
             />
             <Select
               name="deliveryman_id"

@@ -49,6 +49,7 @@ routes.delete('/delivery/:id', DeliveryController.delete);
 routes.post('/delivery/:id/problems', DeliveryProblemController.store);
 routes.get('/delivery/:delivery_id/problems', DeliveryProblemController.index);
 routes.get('/delivery-problems', DeliveryProblemController.index);
+routes.get('/problem/:id/view', DeliveryProblemController.show);
 routes.put('/problem/:id/cancel-delivery', DeliveryProblemController.update);
 
 routes.post('/files', upload.single('file'), FileController.store);

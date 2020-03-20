@@ -14,11 +14,9 @@ export default function ActionDrop({
   visible,
   actions,
 }) {
+  const [infoModalView, setInfoModalView] = useState({});
   const [modalIsOpen, setIsOpen] = useState({ view: false, del: false });
 
-  function handleModalView() {
-    console.log('view', actions.view);
-  }
   async function handleModalDelete() {
     const { url, type } = actions.del;
     await api.delete(url);
@@ -26,8 +24,11 @@ export default function ActionDrop({
     setIsOpen(false);
     toast.info(`${type} excluida!`);
   }
+
   async function handleModalView() {
-    console.log('olar');
+    setIsOpen({ ...modalIsOpen, view: true });
+    const response = await api.get(actions.view);
+    setInfoModalView(response.data);
   }
 
   return (
@@ -40,7 +41,7 @@ export default function ActionDrop({
           <Action>
             <button
               type="button"
-              onClick={() => setIsOpen({ ...modalIsOpen, view: true })}
+              onClick={handleModalView}
             >
               <MdVisibility size={16} color="#8E5BE8" />
               <p>Visualizar</p>
@@ -72,7 +73,7 @@ export default function ActionDrop({
         setIsOpen={setIsOpen}
         handleDelete={handleModalDelete}
       />
-      <ModalView isOpen={modalIsOpen} setIsOpen={setIsOpen} />
+      <ModalView isOpen={modalIsOpen} setIsOpen={setIsOpen} info={infoModalView}/>
     </Container>
   );
 }
