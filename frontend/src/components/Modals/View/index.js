@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 
@@ -45,7 +45,7 @@ export default function ModalView({ setIsOpen, isOpen, info }) {
           <GroupInfo>
             <h3>Assinatura do destinatário</h3>
             <Signature>
-              <img src={Assinatura} />
+              <img src={Assinatura} alt="Foto da assinatura do destinatário"/>
             </Signature>
           </GroupInfo>
         </>
@@ -64,5 +64,5 @@ export default function ModalView({ setIsOpen, isOpen, info }) {
 ModalView.propTypes = {
   setIsOpen: PropTypes.func.isRequired,
   isOpen: PropTypes.object.isRequired,
-  delivery: PropTypes.object.isRequired,
+  info: PropTypes.object.isRequired,
 };

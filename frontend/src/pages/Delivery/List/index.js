@@ -75,7 +75,7 @@ export default function DeliveryList() {
               actions={{
                 del: { url: `/delivery/${delivery.id}`, type: 'Encomenda' },
                 edit: `/delivery/${delivery.id}/edit`,
-                view: `/delivery/${delivery.id}/view`,
+                view: { url: `/delivery/${delivery.id}/view`, type: 'delivery' },
               }}
             />
           </Item>

@@ -216,8 +216,7 @@ class DeliveryController {
     return res.json({
       start_date, end_date,
       recipient: delivery.recipient,
-      img_signature,
-      type: 'delivery'
+      img_signature
     });
   }
 }

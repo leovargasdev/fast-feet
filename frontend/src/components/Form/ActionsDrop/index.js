@@ -26,9 +26,10 @@ export default function ActionDrop({
   }
 
   async function handleModalView() {
+    const {url, type} = actions.view;
     setIsOpen({ ...modalIsOpen, view: true });
-    const response = await api.get(actions.view);
-    setInfoModalView(response.data);
+    const {data} = await api.get(url);
+    setInfoModalView({type, ...data});
   }
 
   return (
@@ -79,7 +80,7 @@ export default function ActionDrop({
 }
 
 ActionDrop.propTypes = {
-  setReloadList: PropTypes.func.isRequired,
+  setReloadList: PropTypes.func,
   onClick: PropTypes.func.isRequired,
   visible: PropTypes.bool.isRequired,
   actions: PropTypes.object.isRequired,

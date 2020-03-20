@@ -77,9 +77,11 @@ class DeliveryProblemController {
   async show(req, res) {
     const { id } = req.params;
 
-    const {description} = await DeliveryProblem.findByPk(id);
+    const problemDelivey = await DeliveryProblem.findByPk(id, {
+      attributes: ['id', 'description' ]
+    });
 
-    return res.json({description, type: 'deliveryProblem'});
+    return res.json(problemDelivey);
   }
 }
 
