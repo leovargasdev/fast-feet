@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Container, Actions, Action } from './styles';
-import ModalDelete from '~/components/ModalDelete';
+import ModalDelete from '~/components/Modals/Delete';
+import ModalView from '~/components/Modals/View';
 import api from '~/services/api';
 
 export default function ActionDrop({
@@ -13,7 +14,7 @@ export default function ActionDrop({
   visible,
   actions,
 }) {
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState({ view: false, del: false });
 
   function handleModalView() {
     console.log('view', actions.view);
@@ -25,6 +26,9 @@ export default function ActionDrop({
     setIsOpen(false);
     toast.info(`${type} excluida!`);
   }
+  async function handleModalView() {
+    console.log('olar');
+  }
 
   return (
     <Container>
@@ -34,7 +38,10 @@ export default function ActionDrop({
       <Actions visible={visible}>
         {actions.view && (
           <Action>
-            <button type="button" onClick={handleModalView}>
+            <button
+              type="button"
+              onClick={() => setIsOpen({ ...modalIsOpen, view: true })}
+            >
               <MdVisibility size={16} color="#8E5BE8" />
               <p>Visualizar</p>
             </button>
@@ -50,7 +57,10 @@ export default function ActionDrop({
         )}
         {actions.del && (
           <Action>
-            <button type="button" onClick={() => setIsOpen(true)}>
+            <button
+              type="button"
+              onClick={() => setIsOpen({ ...modalIsOpen, del: true })}
+            >
               <MdDelete size={16} color="#DE3B3B" />
               <p>Excluir</p>
             </button>
@@ -62,6 +72,7 @@ export default function ActionDrop({
         setIsOpen={setIsOpen}
         handleDelete={handleModalDelete}
       />
+      <ModalView isOpen={modalIsOpen} setIsOpen={setIsOpen} />
     </Container>
   );
 }
