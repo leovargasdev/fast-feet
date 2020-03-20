@@ -36,3 +36,24 @@ export const Signature = styled.div`
     height: auto;
   }
 `;
+
+export const ContentProblem = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+
+  p, strong {
+    color: #444;
+    font-size: 16px;
+  }
+
+  strong {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  p {
+    line-height: 25px;
+    font-weight: 300;
+  }
+`;

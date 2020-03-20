@@ -73,6 +73,14 @@ class DeliveryProblemController {
 
     return res.json(delivery);
   }
+
+  async show(req, res) {
+    const { id } = req.params;
+
+    const {description} = await DeliveryProblem.findByPk(id);
+
+    return res.json({description, type: 'deliveryProblem'});
+  }
 }
 
 export default new DeliveryProblemController();

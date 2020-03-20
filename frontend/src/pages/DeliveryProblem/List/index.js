@@ -41,7 +41,7 @@ export default function DeliveryProblemList() {
               }
               visible={!!actionsDisplay[delProblem.id]}
               actions={{
-                view: `/link`,
+                view: `/problem/${delProblem.id}/view`,
                 del: `/link`,
               }}
             />

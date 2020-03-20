@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 
-import { Container, GroupInfo, Signature } from './styles';
+import { Container, GroupInfo, Signature, ContentProblem } from './styles';
 import Assinatura from '~/assets/assinatura.png';
 const customStyles = {
   content: {
@@ -51,9 +51,10 @@ export default function ModalView({ setIsOpen, isOpen, info }) {
         </>
         )}
         {info.type === 'deliveryProblem' && (
-        <>
-          <h1>opa</h1>
-        </>
+        <ContentProblem>
+          <strong> VISUALIZAR PROBLEMA </strong>
+          <p> {info.description} </p>
+        </ContentProblem>
         )}
       </Container>
     </Modal>
