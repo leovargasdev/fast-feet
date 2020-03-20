@@ -9,3 +9,10 @@ export const Container = styled.div`
     grid-template-columns: 1fr 4fr 1fr;
   }
 `;
+
+export const ProblemDescription = styled.span`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+`;

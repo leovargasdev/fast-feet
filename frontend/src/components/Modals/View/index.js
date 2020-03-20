@@ -39,8 +39,8 @@ export default function ModalView({ setIsOpen, isOpen, info }) {
           </GroupInfo>
           <GroupInfo>
             <h3>Datas</h3>
-            <p><strong>Retirada:</strong>{info.start_date}</p>
-            <p><strong>Entrega:</strong>{info.end_date}</p>
+            <p><strong>Retirada:</strong> {info.start_date}</p>
+            <p><strong>Entrega:</strong> {info.end_date}</p>
             </GroupInfo>
           <GroupInfo>
             <h3>Assinatura do destinatário</h3>

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Title from '~/components/Title';
 import ActionsDrop from '~/components/Form/ActionsDrop';
 import { Item, List } from '~/components/ListItens/styles';
-import { Container } from './styles';
+import { Container, ProblemDescription } from './styles';
 import api from '~/services/api';
 
 export default function DeliveryProblemList() {
@@ -31,7 +31,7 @@ export default function DeliveryProblemList() {
         {deliveryProblems.map(delProblem => (
           <Item key={delProblem.id}>
             <span>#{delProblem.id}</span>
-            <span>{delProblem.description}</span>
+            <ProblemDescription>{delProblem.description}</ProblemDescription>
             <ActionsDrop
               onClick={() =>
                 setActionsDisplay({
