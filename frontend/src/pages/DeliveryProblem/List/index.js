@@ -12,7 +12,7 @@ export default function DeliveryProblemList() {
 
   useEffect(() => {
     async function loadDeliveryProblems() {
-      const response = await api.get('/delivery/problems');
+      const response = await api.get('/delivery-problems');
       setDeliveryProblems(response.data);
     }
 
@@ -44,7 +44,6 @@ export default function DeliveryProblemList() {
                 view: `/link`,
                 del: `/link`,
               }}
-              positionLeft={53}
             />
           </Item>
         ))}

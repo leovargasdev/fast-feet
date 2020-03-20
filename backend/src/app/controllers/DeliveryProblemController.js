@@ -48,11 +48,6 @@ class DeliveryProblemController {
 
     const deliveriesProblems = await DeliveryProblem.findAll({
       attributes: ['id', 'description'],
-      include: {
-        model: Delivery,
-        as: 'delivery',
-        attributes: ['product', 'start_date'],
-      },
     });
 
     return res.json(deliveriesProblems);
