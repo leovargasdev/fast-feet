@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Image} from 'react-native';
 import {useDispatch} from 'react-redux';
-import logo from '~/assets/logo.svg';
+import logo from '~/assets/logo.png';
 
 import {signInSuccess} from '~/store/modules/auth/actions';
 import {Container, Content, Form, FormInput, SubmitButton} from './styles';
