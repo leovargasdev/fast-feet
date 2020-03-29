@@ -4,13 +4,12 @@ import multer from 'multer';
 import multerConfig from './config/multer';
 
 import SessionController from './app/controllers/SessionController';
+import SessionDeliverymanController from './app/controllers/SessionDeliverymanController';
 import RecipientController from './app/controllers/RecipientController';
 import FileController from './app/controllers/FileController';
 import DeliverymanController from './app/controllers/DeliverymanController';
 import DeliveryController from './app/controllers/DeliveryController';
 import DeliveryProblemController from './app/controllers/DeliveryProblemController';
-// import DeliveriesProblemController from './app/controllers/DeliveriesProblemController';
-// import CancelDeliveryController from './app/controllers/CancelDeliveryController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -18,6 +17,7 @@ const routes = new Router();
 const upload = multer(multerConfig);
 
 routes.post('/sessions', SessionController.store);
+routes.post('/sessions-mobile', SessionDeliverymanController.store);
 
 // Todas rotas a partir daqui devem ser autenticadas com o token do LOGIN
 routes.use(authMiddleware);
