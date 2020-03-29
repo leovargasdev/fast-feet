@@ -1,11 +1,12 @@
 import React from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import {signOut} from '~/store/modules/auth/actions';
 import {Container, Content, Avatar, Label, Info, BtnLogout} from './styles';
 
 export default function Profile() {
   const dispatch = useDispatch();
+  const deliveryman = useSelector(state => state.user.profile);
 
   function handleLogout() {
     dispatch(signOut());
@@ -16,18 +17,20 @@ export default function Profile() {
       <Content>
         <Avatar
           source={{
-            uri: `https://api.adorable.io/avatars/50/fastfeet.png`,
+            uri: deliveryman.avatar
+              ? deliveryman.avatar.url
+              : `https://api.adorable.io/avatars/140/${deliveryman.id}.png`,
           }}
         />
 
         <Label>Nome completo</Label>
-        <Info>Gaspar Antunes</Info>
+        <Info>{deliveryman.name}</Info>
 
         <Label>Email</Label>
-        <Info>example@rocketseat.com.br</Info>
-
+        <Info>{deliveryman.email}</Info>
+        {/* TRATAR DATAAAAAA */}
         <Label>Data de cadastro</Label>
-        <Info>10/01/2020</Info>
+        <Info>{deliveryman.createdAt}</Info>
 
         <BtnLogout onPress={handleLogout}>Sair do Sistema</BtnLogout>
       </Content>

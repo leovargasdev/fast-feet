@@ -54,6 +54,11 @@
 -  [React-Navigation V5](https://reactnavigation.org/)
 -  [React-Native-Vector-Icons](https://oblador.github.io/react-native-vector-icons/)
 
+Permitir que o mobile consiga acessar o localhost da api
+```sh
+$ adb reverse tcp:3333 tcp:3333
+```
+
 ## :rocket: Instalação e execução
 
 EM BREVE VOCÊ TERÁ MAIS INFORMAÇÕES.... :sunglasses:

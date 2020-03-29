@@ -1,6 +1,5 @@
 import * as Yup from 'yup';
 import jwt from 'jsonwebtoken';
-import {format} from 'date-fns';
 
 import Deliveryman from '../models/Deliveryman';
 import File from '../models/File';
@@ -28,8 +27,6 @@ class SessionDeliverymanController {
       });
 
     if (!deliveryman) return res.status(400).json({ error: 'Deliveryman not found' });
-
-    // deliveryman.createdAt = format(deliveryman.createdAt, "dd/MM/yyyy");
 
     return res.json({
       deliveryman,

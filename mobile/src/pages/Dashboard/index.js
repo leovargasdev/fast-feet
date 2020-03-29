@@ -1,5 +1,5 @@
 import React from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -16,6 +16,7 @@ import {
 } from './styles';
 
 export default function Dashboard() {
+  const deliveryman = useSelector(state => state.user.profile);
   const dispatch = useDispatch();
 
   function handleLogout() {
@@ -28,12 +29,14 @@ export default function Dashboard() {
         <Profile>
           <Avatar
             source={{
-              uri: `https://api.adorable.io/avatars/50/fastfeet.png`,
+              uri: deliveryman.avatar
+                ? deliveryman.avatar.url
+                : `https://api.adorable.io/avatars/60/${deliveryman.id}.png`,
             }}
           />
           <Info>
             <Welcome>Bem vindo de volta,</Welcome>
-            <Name>Gaspar Antunes</Name>
+            <Name>{deliveryman.name}</Name>
           </Info>
         </Profile>
         <TouchableOpacity onPress={handleLogout}>

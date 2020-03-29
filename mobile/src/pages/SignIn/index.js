@@ -3,7 +3,7 @@ import {Image} from 'react-native';
 import {useDispatch} from 'react-redux';
 import logo from '~/assets/logo.png';
 
-import {signInSuccess} from '~/store/modules/auth/actions';
+import {signInRequest} from '~/store/modules/auth/actions';
 import {Container, Content, Form, FormInput, SubmitButton} from './styles';
 
 export default function SignIn() {
@@ -12,7 +12,7 @@ export default function SignIn() {
   const [idDeliveryman, setIdDeliveryman] = useState('');
 
   function handleSubmit() {
-    dispatch(signInSuccess());
+    dispatch(signInRequest({id: idDeliveryman}));
   }
 
   return (

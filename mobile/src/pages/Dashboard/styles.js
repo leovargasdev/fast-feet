@@ -7,7 +7,7 @@ export const Container = styled.View`
   background: #fff;
 `;
 export const Header = styled.View`
-  margin: 10px 20px 0;
+  padding: 10px 24px 0;
   display: flex;
   flex-direction: row;
   align-items: center;
