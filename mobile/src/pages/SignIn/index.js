@@ -1,24 +1,23 @@
 import React, {useState} from 'react';
 import {Image} from 'react-native';
-// import {useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import logo from '~/assets/logo.svg';
 
-import Background from '~/components/Background';
-// import {signInRequest} from '~/store/modules/auth/actions';
-import {Container, Form, FormInput, SubmitButton} from './styles';
+import {signInSuccess} from '~/store/modules/auth/actions';
+import {Container, Content, Form, FormInput, SubmitButton} from './styles';
 
 export default function SignIn() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const [idDeliveryman, setIdDeliveryman] = useState('');
 
   function handleSubmit() {
-    // dispatch(signInRequest(idDeliveryman));
+    dispatch(signInSuccess());
   }
 
   return (
-    <Background>
-      <Container>
+    <Container>
+      <Content>
         <Image source={logo} color="#fff" />
         <Form>
           <FormInput
@@ -31,7 +30,7 @@ export default function SignIn() {
           />
           <SubmitButton onPress={handleSubmit}>Entrar no sistema</SubmitButton>
         </Form>
-      </Container>
-    </Background>
+      </Content>
+    </Container>
   );
 }
