@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import {format, parseISO} from 'date-fns';
 
 import {signOut} from '~/store/modules/auth/actions';
 import {Container, Content, Avatar, Label, Info, BtnLogout} from './styles';
@@ -7,6 +8,11 @@ import {Container, Content, Avatar, Label, Info, BtnLogout} from './styles';
 export default function Profile() {
   const dispatch = useDispatch();
   const deliveryman = useSelector(state => state.user.profile);
+
+  const dateFormatted = useMemo(
+    () => format(parseISO(deliveryman.createdAt), 'dd/MM/yyyy'),
+    [deliveryman],
+  );
 
   function handleLogout() {
     dispatch(signOut());
@@ -30,7 +36,7 @@ export default function Profile() {
         <Info>{deliveryman.email}</Info>
         {/* TRATAR DATAAAAAA */}
         <Label>Data de cadastro</Label>
-        <Info>{deliveryman.createdAt}</Info>
+        <Info>{dateFormatted}</Info>
 
         <BtnLogout onPress={handleLogout}>Sair do Sistema</BtnLogout>
       </Content>
