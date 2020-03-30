@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import {TouchableOpacity} from 'react-native';
+
 export const Container = styled.View`
   display: flex;
   flex-direction: column;
@@ -33,15 +35,28 @@ export const Progress = styled.View`
   margin-top: 8px;
 `;
 
+export const GroupProgress = styled.View`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const ProgressInfo = styled.Text`
+  color: #999;
+  font-size: 7px;
+`;
+
 export const Ellipse = styled.View`
   width: 14px;
   height: 14px;
+  margin-bottom: 5px;
   border-radius: 7px;
   border: 1px solid #7d40e7;
   background: ${props => (props.check ? '#7d40e7' : 'transparent')};
 `;
 
 export const LineProgress = styled.View`
+  margin-bottom: 12px;
   flex: 1;
   width: 100%;
   height: ${props => (props.check ? '3px' : '1px')};
@@ -75,7 +90,8 @@ export const Info = styled.Text`
   color: #444;
 `;
 
-// export const BtnDetails = styled(Button)`
-//   background: #000;
-//   color: #ffff;
-// `;
+export const BtnDetails = styled(TouchableOpacity)`
+  background: transparent;
+  color: #000;
+  border: none;
+`;

@@ -1,21 +1,26 @@
 import React, {useMemo} from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {format, parseISO} from 'date-fns';
+import {useNavigation} from '@react-navigation/native';
 
 import {
   Container,
   ContentTitle,
   Title,
   Progress,
+  ProgressInfo,
+  GroupProgress,
+  Ellipse,
+  LineProgress,
   Footer,
   Group,
   Label,
   Info,
-  Ellipse,
-  LineProgress,
+  BtnDetails,
 } from './styles';
 
 export default function Delivery({data}) {
+  const navigation = useNavigation();
   const dateFormatted = useMemo(
     () => format(parseISO(data.createdAt), 'dd/MM/yyyy'),
     [data],
@@ -40,11 +45,21 @@ export default function Delivery({data}) {
         <Title>Encomenda {data.id}</Title>
       </ContentTitle>
       <Progress>
-        <Ellipse check />
+        <GroupProgress style={{marginTop: 10}}>
+          <Ellipse check />
+          <ProgressInfo>Aguardando</ProgressInfo>
+          <ProgressInfo>Retirada</ProgressInfo>
+        </GroupProgress>
         <LineProgress check={progress[0]} />
-        <Ellipse check={progress[0]} />
+        <GroupProgress>
+          <Ellipse check={progress[0]} />
+          <ProgressInfo>Retirada</ProgressInfo>
+        </GroupProgress>
         <LineProgress check={progress[1]} />
-        <Ellipse check={progress[1]} />
+        <GroupProgress>
+          <Ellipse check={progress[1]} />
+          <ProgressInfo>Entregue</ProgressInfo>
+        </GroupProgress>
       </Progress>
       <Footer>
         <Group>
@@ -53,9 +68,11 @@ export default function Delivery({data}) {
         </Group>
         <Group>
           <Label>Cidade</Label>
-          <Info>dasda</Info>
+          <Info>{data.recipient.city}</Info>
         </Group>
-        <Title>Ver Detalhes</Title>
+        <BtnDetails onPress={() => navigation.navigate('Profile')}>
+          <Title>Ver Detalhes</Title>
+        </BtnDetails>
       </Footer>
     </Container>
   );
