@@ -1,13 +1,12 @@
 import styled from 'styled-components/native';
 
-import Button from '~/components/Button';
-
-export const Container = styled.View`
+export const Container = styled.SafeAreaView`
   flex: 1;
   background: #fff;
+  padding: 0 20px;
 `;
 export const Header = styled.View`
-  padding: 10px 24px 0;
+  margin-top: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -43,3 +42,19 @@ export const Name = styled.Text`
   font-size: 22px;
   color: #444;
 `;
+
+export const Content = styled.View`
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+`;
+
+export const Title = styled.Text`
+  font-size: 20px;
+  color: #444;
+  font-weight: bold;
+`;
+
+export const Deliveries = styled.FlatList.attrs({
+  showsVerticalScrollIndicator: false,
+})``;
