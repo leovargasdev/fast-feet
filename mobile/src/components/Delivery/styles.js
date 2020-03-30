@@ -24,13 +24,12 @@ export const Title = styled.Text`
   font-weight: bold;
 `;
 
-export const Status = styled.View`
+export const Progress = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-
-  padding: 15px 12px;
+  padding: 0 20px;
   margin-top: 8px;
 `;
 
@@ -39,13 +38,13 @@ export const Ellipse = styled.View`
   height: 14px;
   border-radius: 7px;
   border: 1px solid #7d40e7;
-  background: ${props => (props.disnable ? 'transparent' : '#7d40e7')};
+  background: ${props => (props.check ? '#7d40e7' : 'transparent')};
 `;
 
 export const LineProgress = styled.View`
   flex: 1;
   width: 100%;
-  height: 1px;
+  height: ${props => (props.check ? '3px' : '1px')};
   background: #7d40e7;
 `;
 

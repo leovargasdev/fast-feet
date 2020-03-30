@@ -29,7 +29,6 @@ export default function Dashboard() {
   useEffect(() => {
     async function loadDeliveries() {
       const response = await api.get('deliveryman-deliveries');
-
       setDeliveries(response.data);
     }
 
@@ -65,8 +64,8 @@ export default function Dashboard() {
 
         <Deliveries
           data={deliveries}
-          keyExtractor={delivery => String(delivery)}
-          renderItem={delivery => <Delivery data={delivery} />}
+          keyExtractor={item => String(item.id)}
+          renderItem={({item}) => <Delivery data={item} />}
         />
       </Content>
     </Container>
