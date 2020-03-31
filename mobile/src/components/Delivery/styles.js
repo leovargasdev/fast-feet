@@ -10,7 +10,7 @@ export const Container = styled.View`
 
   margin-top: 10px;
   border-radius: 4px;
-  border: 1px solid #f8f9fd;
+  border: 1px solid #f1f1f1;
 `;
 
 export const ContentTitle = styled.View`
@@ -59,7 +59,7 @@ export const LineProgress = styled.View`
   margin-bottom: 12px;
   flex: 1;
   width: 100%;
-  height: ${props => (props.check ? '3px' : '1px')};
+  height: ${props => (props.check ? '2px' : '1px')};
   background: #7d40e7;
 `;
 
@@ -69,7 +69,7 @@ export const Footer = styled.View`
   align-items: center;
   justify-content: space-between;
 
-  background: #f8f9fd;
+  background: #f1f1f1;
   padding: 4px 12px 12px;
   margin-top: 8px;
 `;

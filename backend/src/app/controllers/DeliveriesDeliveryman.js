@@ -5,7 +5,7 @@ class DeliveriesDeliveryman {
   async index(req, res) {
     const deliveries = await Delivery.findAll({
       where: { deliveryman_id: req.userId, canceled_at: null },
-      attributes: ['id', 'status', 'createdAt'],
+      attributes: ['id', 'status', 'createdAt', 'end_date', 'start_date'],
       include: {
         model: Recipient,
         as: 'recipient',

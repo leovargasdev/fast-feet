@@ -1,5 +1,5 @@
 import {Alert} from 'react-native';
-import {all, call, takeLatest, put} from 'redux-saga/effects';
+import {all, call, takeLatest, put, delay} from 'redux-saga/effects';
 
 import {signInSuccess, signInFailure} from './actions';
 import api from '~/services/api';
@@ -9,6 +9,8 @@ export function* singIn({payload}) {
     const {id} = payload;
     const response = yield call(api.post, 'sessions-mobile', {id});
     const {deliveryman: user, token} = response.data;
+
+    yield delay(1000);
 
     yield put(signInSuccess(token, user));
   } catch (err) {
