@@ -70,7 +70,12 @@ export default function Delivery({data}) {
           <Label>Cidade</Label>
           <Info>{data.recipient.city}</Info>
         </Group>
-        <BtnDetails onPress={() => navigation.navigate('Profile')}>
+        <BtnDetails
+          onPress={() =>
+            navigation.navigate('Delivery', {
+              screen: 'Details',
+            })
+          }>
           <Title>Ver Detalhes</Title>
         </BtnDetails>
       </Footer>
