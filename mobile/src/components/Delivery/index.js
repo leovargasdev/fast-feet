@@ -1,7 +1,8 @@
 import React, {useMemo} from 'react';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import {format, parseISO} from 'date-fns';
+import PropTypes from 'prop-types';
 import {useNavigation} from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
   Container,
@@ -74,6 +75,7 @@ export default function Delivery({data}) {
           onPress={() =>
             navigation.navigate('Delivery', {
               screen: 'Details',
+              params: {id: data.id},
             })
           }>
           <Title>Ver Detalhes</Title>
@@ -82,3 +84,7 @@ export default function Delivery({data}) {
     </Container>
   );
 }
+
+Delivery.propTypes = {
+  data: PropTypes.objectOf.isRequired,
+};

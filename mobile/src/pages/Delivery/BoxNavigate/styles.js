@@ -14,6 +14,4 @@ export const TopBox = styled.View`
 
 export const Content = styled.View`
   margin-top: 60px;
-  background: #fff;
-  padding: 20px;
 `;
