@@ -104,7 +104,7 @@ export default function Details({route, navigation}) {
           <BtnText>Informar</BtnText>
           <BtnText>Problema</BtnText>
         </BtnFooter>
-        <BtnFooter onPress={() => navigation.navigate('ViewProblems')}>
+        <BtnFooter onPress={() => navigation.navigate('ViewProblems', {id})}>
           <Icon name="info-outline" size={24} color="#E7BA40" />
           <BtnText>Visualizar</BtnText>
           <BtnText>Problemas</BtnText>

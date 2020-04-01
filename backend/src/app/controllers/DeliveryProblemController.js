@@ -36,7 +36,7 @@ class DeliveryProblemController {
     if (delivery_id) {
       const deliveryProblem = await DeliveryProblem.findAll({
         where: { delivery_id },
-        attributes: ['id', 'description'],
+        attributes: ['id', 'description', 'createdAt'],
         include: {
           model: Delivery,
           as: 'delivery',
@@ -78,7 +78,7 @@ class DeliveryProblemController {
     const { id } = req.params;
 
     const problemDelivey = await DeliveryProblem.findByPk(id, {
-      attributes: ['id', 'description' ]
+      attributes: ['id', 'description'],
     });
 
     return res.json(problemDelivey);
