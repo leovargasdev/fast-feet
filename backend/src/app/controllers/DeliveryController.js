@@ -131,12 +131,10 @@ class DeliveryController {
     const { id } = req.params;
     if (id) {
       const delivery = await Delivery.findByPk(id, {
-        attributes: ['id', 'product'],
         include: [
           {
             model: Recipient,
             as: 'recipient',
-            attributes: ['id', 'name'],
           },
           {
             model: Deliveryman,
@@ -210,13 +208,20 @@ class DeliveryController {
         },
       ],
     });
-    const start_date = delivery.start_date ? format(delivery.start_date, 'dd/mm/yyyy') : "Não resgistrada";
-    const end_date = delivery.end_date ? format(delivery.end_date, 'dd/mm/yyyy') : "Não resgistrada";
-    const img_signature = delivery.signature ? delivery.signature.url : 'Sem Foto';
+    const start_date = delivery.start_date
+      ? format(delivery.start_date, 'dd/mm/yyyy')
+      : 'Não resgistrada';
+    const end_date = delivery.end_date
+      ? format(delivery.end_date, 'dd/mm/yyyy')
+      : 'Não resgistrada';
+    const img_signature = delivery.signature
+      ? delivery.signature.url
+      : 'Sem Foto';
     return res.json({
-      start_date, end_date,
+      start_date,
+      end_date,
       recipient: delivery.recipient,
-      img_signature
+      img_signature,
     });
   }
 }

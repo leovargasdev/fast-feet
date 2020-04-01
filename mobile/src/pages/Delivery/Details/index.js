@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
+import React, {useEffect, useState, useMemo} from 'react';
+import {format, parseISO} from 'date-fns';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import BoxNavigate from '~/pages/Delivery/BoxNavigate';
@@ -20,6 +21,22 @@ import api from '~/services/api';
 export default function Details({route, navigation}) {
   const {id} = route.params;
   const [delivery, setDelivery] = useState('');
+
+  const startDateFormatted = useMemo(
+    () =>
+      delivery.start_date
+        ? format(parseISO(delivery.start_date), 'dd/MM/yyyy')
+        : '- - / - - / - -',
+    [delivery],
+  );
+
+  const endDateFormatted = useMemo(
+    () =>
+      delivery.end_date
+        ? format(parseISO(delivery.end_date), 'dd/MM/yyyy')
+        : '- - / - - / - -',
+    [delivery],
+  );
 
   useEffect(() => {
     async function loadDelivery() {
@@ -46,13 +63,13 @@ export default function Details({route, navigation}) {
         </Header>
 
         <Title>DESTINATÁRIO</Title>
-        <Info>Ludwig van Beethoven</Info>
+        <Info>{delivery && delivery.recipient.name}</Info>
 
         <Title>ENDEREÇO DE ENTREGA</Title>
-        <Info>Rua Beethoven, 1729, Diadema - SP, 09960-580</Info>
+        <Info>{delivery && delivery.recipient.city}</Info>
 
         <Title>PRODUTO</Title>
-        <Info>Yamaha SX7</Info>
+        <Info>{delivery.product}</Info>
       </BoxInfo>
       {/* 02 BOX: Situação da entrega */}
       <BoxInfo>
@@ -67,22 +84,22 @@ export default function Details({route, navigation}) {
         </Header>
 
         <Title>STATUS</Title>
-        <Info>Pendente</Info>
+        <Info>{delivery.status}</Info>
         <GroupDates>
           <GroupDatesContent>
             <Title>DATA DE RETIRADA</Title>
-            <Info>14 / 01 / 2020</Info>
+            <Info>{startDateFormatted}</Info>
           </GroupDatesContent>
 
           <GroupDatesContent>
             <Title>DATA DE ENTREGA</Title>
-            <Info> - - / - - / - - </Info>
+            <Info>{endDateFormatted}</Info>
           </GroupDatesContent>
         </GroupDates>
       </BoxInfo>
 
       <BoxBtns>
-        <BtnFooter onPress={() => navigation.navigate('NewProblem')}>
+        <BtnFooter onPress={() => navigation.navigate('NewProblem', {id})}>
           <Icon name="highlight-off" size={24} color="#E74040" />
           <BtnText>Informar</BtnText>
           <BtnText>Problema</BtnText>

@@ -17,7 +17,7 @@ export default function Delivery() {
         headerBackTitleVisible: false,
         headerTitleAlign: 'center',
         headerTintColor: '#FFF',
-        headerTitleStyle: {fontWeight: 'bold'},
+        headerTitleStyle: {fontSize: 18},
         headerTransparent: true,
       }}
       initialRouteName="Dashboard">
