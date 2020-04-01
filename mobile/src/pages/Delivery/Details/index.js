@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {TouchableOpacity, Text} from 'react-native';
 
 import BoxNavigate from '~/pages/Delivery/BoxNavigate';
 import {

@@ -4,7 +4,7 @@ import {TouchableOpacity} from 'react-native';
 export const BoxInfo = styled.View`
   display: flex;
   flex-direction: column;
-
+  width: 80%;
   border-radius: 4px;
   background: #fff;
   padding: 10px 12px;
@@ -51,19 +51,20 @@ export const GroupDatesContent = styled.View`
 export const BoxBtns = styled.View`
   display: flex;
   flex-direction: row;
+  width: 80%;
+
   border-radius: 4px;
   justify-content: space-between;
-
   align-items: center;
   background: #f8f9fd;
 `;
 
 export const BtnFooter = styled(TouchableOpacity)`
-  /* flex: 1; */
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* padding: 10px 20px; */
+  padding: 10px 20px;
 `;
 
 export const BtnText = styled.Text`

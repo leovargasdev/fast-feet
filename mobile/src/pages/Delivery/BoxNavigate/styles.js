@@ -9,9 +9,12 @@ export const TopBox = styled.View`
   width: 100%;
   height: 170px;
   background-color: #7d40e7;
-  align-items: center;
+  position: absolute;
 `;
 
 export const Content = styled.View`
   margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;

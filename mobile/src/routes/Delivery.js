@@ -15,14 +15,12 @@ export default function Delivery() {
       headerMode="screen"
       screenOptions={{
         headerBackTitleVisible: false,
+        headerTitleAlign: 'center',
         headerTintColor: '#FFF',
         headerTitleStyle: {fontWeight: 'bold'},
         headerTransparent: true,
       }}
-      initialRouteName="Dashboard"
-      options={{
-        resetOnBlur: true,
-      }}>
+      initialRouteName="Dashboard">
       <Stack.Screen
         name="Dashboard"
         component={Dashboard}

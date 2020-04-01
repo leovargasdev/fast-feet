@@ -6,9 +6,8 @@ import {Wrapper, TopBox, Content} from './styles';
 export default function BoxNavigate({children}) {
   return (
     <Wrapper>
-      <TopBox>
-        <Content>{children}</Content>
-      </TopBox>
+      <TopBox />
+      <Content>{children}</Content>
     </Wrapper>
   );
 }
