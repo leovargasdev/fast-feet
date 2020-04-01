@@ -13,8 +13,10 @@ export const TopBox = styled.View`
 `;
 
 export const Content = styled.View`
-  margin-top: 60px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  padding: 0 30px;
+  margin-top: 60px;
 `;

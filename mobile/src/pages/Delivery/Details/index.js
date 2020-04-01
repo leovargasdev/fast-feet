@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, {useEffect, useState, useMemo} from 'react';
 import {format, parseISO} from 'date-fns';
+import {Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import BoxNavigate from '~/pages/Delivery/BoxNavigate';
@@ -47,6 +48,14 @@ export default function Details({route, navigation}) {
 
     loadDelivery();
   }, [id]);
+
+  function handleNewProblem() {
+    if (delivery.end_date) {
+      Alert.alert('A encomenda já foi entregue!');
+    } else {
+      navigation.navigate('NewProblem', {id});
+    }
+  }
 
   return (
     <BoxNavigate>
@@ -99,7 +108,7 @@ export default function Details({route, navigation}) {
       </BoxInfo>
 
       <BoxBtns>
-        <BtnFooter onPress={() => navigation.navigate('NewProblem', {id})}>
+        <BtnFooter onPress={handleNewProblem}>
           <Icon name="highlight-off" size={24} color="#E74040" />
           <BtnText>Informar</BtnText>
           <BtnText>Problema</BtnText>

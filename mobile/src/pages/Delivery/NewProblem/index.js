@@ -18,19 +18,17 @@ export default function NewProblem({route, navigation}) {
 
   return (
     <BoxNavigate>
-      <Container>
-        <Problem
-          style={{textAlignVertical: 'top'}}
-          multiline
-          numberOfLines={10}
-          autoCorrect={false}
-          autoCapitalize="none"
-          placeholder="Inclua aqui o problema que ocorreu na entrega."
-          value={description}
-          onChangeText={setDescription}
-        />
-        <BtnSubmit onPress={handleSubmit}>Enviar</BtnSubmit>
-      </Container>
+      <Problem
+        style={{textAlignVertical: 'top'}}
+        multiline
+        numberOfLines={10}
+        autoCorrect={false}
+        autoCapitalize="none"
+        placeholder="Inclua aqui o problema que ocorreu na entrega."
+        value={description}
+        onChangeText={setDescription}
+      />
+      <BtnSubmit onPress={handleSubmit}>Enviar</BtnSubmit>
     </BoxNavigate>
   );
 }

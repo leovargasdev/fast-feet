@@ -8,9 +8,7 @@ export const TitleHeader = styled.Text`
 
 export const Problems = styled.FlatList.attrs({
   showsVerticalScrollIndicator: false,
-})`
-  width: 80%;
-`;
+})``;
 
 export const Problem = styled.View`
   display: flex;
@@ -19,9 +17,10 @@ export const Problem = styled.View`
 
   margin-top: 15px;
   padding: 8px 10px;
-  border-radius: 4px;
-  border: 1px solid #f1f1f1;
   background: #fff;
+  border-width: 1px;
+  border-color: #0000001a;
+  border-radius: 4px;
 `;
 
 export const Descripiton = styled.Text`
@@ -42,7 +41,6 @@ export const Data = styled.Text`
 `;
 
 export const NoProblems = styled.Text`
-  /* margin-top: 50px; */
   font-size: 18px;
   font-weight: bold;
   color: #000;

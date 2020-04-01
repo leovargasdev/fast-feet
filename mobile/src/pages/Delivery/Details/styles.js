@@ -2,19 +2,21 @@ import styled from 'styled-components/native';
 import {TouchableOpacity} from 'react-native';
 
 export const BoxInfo = styled.View`
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  border-radius: 4px;
-  background: #fff;
-  padding: 10px 12px;
-  border: 1px solid #f1f1f1;
+  align-self: stretch;
   margin-bottom: 15px;
+
+  background-color: #fff;
+  border-radius: 4px;
+  border-color: #0000001a;
+  border-width: 1px;
+  padding: 10px 14px;
 `;
+
 export const Header = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 5px;
 `;
 
 export const HeaderTitle = styled.Text`
@@ -51,12 +53,13 @@ export const GroupDatesContent = styled.View`
 export const BoxBtns = styled.View`
   display: flex;
   flex-direction: row;
-  width: 80%;
-
-  border-radius: 4px;
-  justify-content: space-between;
   align-items: center;
-  background: #f8f9fd;
+  justify-content: space-between;
+
+  background-color: #f8f9fd;
+  border-width: 1px;
+  border-color: #0000001a;
+  border-radius: 4px;
 `;
 
 export const BtnFooter = styled(TouchableOpacity)`
