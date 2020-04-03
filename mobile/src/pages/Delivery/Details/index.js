@@ -24,7 +24,8 @@ export default function Details({route, navigation}) {
   const isFocused = useIsFocused();
   const {id} = route.params;
   const [delivery, setDelivery] = useState('');
-  const [disabledButtons, setDisabledButtons] = useState(false);
+  const [confirmBtn, setConfirmBtn] = useState(false);
+  const [newProblemBtn, setNewProblemBtn] = useState(false);
 
   const startDateFormatted = useMemo(
     () =>
@@ -47,14 +48,17 @@ export default function Details({route, navigation}) {
       const response = await api.get(`delivery/${id}`);
 
       setDelivery(response.data);
-      setDisabledButtons(!!delivery.end_date);
+      // achar uma forma de incluir o !!delivery.start_date
+      setConfirmBtn(!!delivery.end_date);
+      setNewProblemBtn(!!delivery.end_date);
     }
 
     if (isFocused) loadDelivery();
-  }, [delivery.end_date, id, isFocused]);
+  }, [delivery.end_date, delivery.start_date, id, isFocused]);
 
   function handleClickFooter(nameRoute) {
-    if (disabledButtons)
+    // Não pode ser rota ViewProblems e não importa qual dos dois está desativado
+    if (!nameRoute.includes('ViewProblems') && (confirmBtn || newProblemBtn))
       Alert.alert('Operação Negada!', 'Esta entrega já foi confirmada!');
     else navigation.navigate(nameRoute, {id});
   }
@@ -116,9 +120,9 @@ export default function Details({route, navigation}) {
             name="highlight-off"
             size={24}
             color="#E74040"
-            style={{opacity: disabledButtons ? 0.3 : 1}}
+            style={{opacity: newProblemBtn ? 0.3 : 1}}
           />
-          <BtnText disabled={disabledButtons}>Informar Problema</BtnText>
+          <BtnText disabled={newProblemBtn}>Informar Problema</BtnText>
         </BtnFooter>
         {/* BTN: LISTAR PROBLEMAS */}
         <BtnFooter onPress={() => handleClickFooter('ViewProblems')}>
@@ -131,9 +135,9 @@ export default function Details({route, navigation}) {
             name="check-circle"
             size={24}
             color="#7D40E7"
-            style={{opacity: disabledButtons ? 0.3 : 1}}
+            style={{opacity: confirmBtn ? 0.3 : 1}}
           />
-          <BtnText disabled={disabledButtons}>Confirmar Entrega</BtnText>
+          <BtnText disabled={confirmBtn}>Confirmar Entrega</BtnText>
         </BtnFooter>
       </BoxBtns>
     </BoxNavigate>
