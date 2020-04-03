@@ -1,9 +1,7 @@
 import styled from 'styled-components/native';
-import Button from '~/components/Button';
 
-export const Preview = styled.Image`
-  border-radius: 6px;
-  height: 80%;
+export const Container = styled.View`
+  flex: 1;
 `;
 
 export const CameraButton = styled.TouchableOpacity`
@@ -15,8 +13,12 @@ export const CameraButton = styled.TouchableOpacity`
   padding: 10px;
 `;
 
-export const BtnSubmit = styled(Button)`
-  align-self: stretch;
-  margin-top: 15px;
-  background: #7d40e7;
+export const LoadingSpinner = styled.ActivityIndicator.attrs({
+  size: 'large',
+  color: '#7d40e7',
+})`
+  position: absolute;
+  top: 70%;
+  align-self: center;
+  padding: 10px;
 `;

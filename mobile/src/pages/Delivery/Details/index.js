@@ -118,7 +118,7 @@ export default function Details({route, navigation}) {
           <BtnText>Visualizar</BtnText>
           <BtnText>Problemas</BtnText>
         </BtnFooter>
-        <BtnFooter onPress={() => navigation.navigate('Confirm')}>
+        <BtnFooter onPress={() => navigation.navigate('Confirm', {id})}>
           <Icon name="check-circle" size={22} color="#7D40E7" />
           <BtnText>Confirmar</BtnText>
           <BtnText>Entrega</BtnText>
