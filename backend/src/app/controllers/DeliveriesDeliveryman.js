@@ -11,6 +11,7 @@ class DeliveriesDeliveryman {
         as: 'recipient',
         attributes: ['city'],
       },
+      sort: ['createdAt'],
     });
 
     return res.json(deliveries);
