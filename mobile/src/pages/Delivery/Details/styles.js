@@ -64,6 +64,7 @@ export const BoxBtns = styled.View`
 
 export const BtnFooter = styled(TouchableOpacity)`
   flex: 1;
+  color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -71,6 +72,7 @@ export const BtnFooter = styled(TouchableOpacity)`
 `;
 
 export const BtnText = styled.Text`
+  text-align: center;
   font-size: 12px;
-  color: #999;
+  color: ${props => (props.disabled ? '#777' : '#444')};
 `;

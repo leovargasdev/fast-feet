@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
-import React, {useEffect, useState, useMemo} from 'react';
-import {format, parseISO} from 'date-fns';
 import {Alert} from 'react-native';
+import {format, parseISO} from 'date-fns';
+import {useIsFocused} from '@react-navigation/native';
+import React, {useEffect, useState, useMemo} from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import BoxNavigate from '~/pages/Delivery/BoxNavigate';
@@ -20,8 +21,10 @@ import {
 import api from '~/services/api';
 
 export default function Details({route, navigation}) {
+  const isFocused = useIsFocused();
   const {id} = route.params;
   const [delivery, setDelivery] = useState('');
+  const [disabledButtons, setDisabledButtons] = useState(false);
 
   const startDateFormatted = useMemo(
     () =>
@@ -44,17 +47,16 @@ export default function Details({route, navigation}) {
       const response = await api.get(`delivery/${id}`);
 
       setDelivery(response.data);
+      setDisabledButtons(!!delivery.end_date);
     }
 
-    loadDelivery();
-  }, [id]);
+    if (isFocused) loadDelivery();
+  }, [delivery.end_date, id, isFocused]);
 
-  function handleNewProblem() {
-    if (delivery.end_date) {
-      Alert.alert('A encomenda já foi entregue!');
-    } else {
-      navigation.navigate('NewProblem', {id});
-    }
+  function handleClickFooter(nameRoute) {
+    if (disabledButtons)
+      Alert.alert('Operação Negada!', 'Esta entrega já foi confirmada!');
+    else navigation.navigate(nameRoute, {id});
   }
 
   return (
@@ -108,20 +110,30 @@ export default function Details({route, navigation}) {
       </BoxInfo>
 
       <BoxBtns>
-        <BtnFooter onPress={handleNewProblem}>
-          <Icon name="highlight-off" size={24} color="#E74040" />
-          <BtnText>Informar</BtnText>
-          <BtnText>Problema</BtnText>
+        {/* BTN: NOVO PROBLEMA */}
+        <BtnFooter onPress={() => handleClickFooter('NewProblem')}>
+          <Icon
+            name="highlight-off"
+            size={24}
+            color="#E74040"
+            style={{opacity: disabledButtons ? 0.3 : 1}}
+          />
+          <BtnText disabled={disabledButtons}>Informar Problema</BtnText>
         </BtnFooter>
-        <BtnFooter onPress={() => navigation.navigate('ViewProblems', {id})}>
+        {/* BTN: LISTAR PROBLEMAS */}
+        <BtnFooter onPress={() => handleClickFooter('ViewProblems')}>
           <Icon name="info-outline" size={24} color="#E7BA40" />
-          <BtnText>Visualizar</BtnText>
-          <BtnText>Problemas</BtnText>
+          <BtnText>Visualizar Problemas</BtnText>
         </BtnFooter>
-        <BtnFooter onPress={() => navigation.navigate('Confirm', {id})}>
-          <Icon name="check-circle" size={22} color="#7D40E7" />
-          <BtnText>Confirmar</BtnText>
-          <BtnText>Entrega</BtnText>
+        {/* BTN: CONFIRMAR ENTREGA */}
+        <BtnFooter onPress={() => handleClickFooter('Confirm')}>
+          <Icon
+            name="check-circle"
+            size={24}
+            color="#7D40E7"
+            style={{opacity: disabledButtons ? 0.3 : 1}}
+          />
+          <BtnText disabled={disabledButtons}>Confirmar Entrega</BtnText>
         </BtnFooter>
       </BoxBtns>
     </BoxNavigate>
