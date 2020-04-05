@@ -16,7 +16,11 @@ import {
   Welcome,
   Name,
   Content,
+  HeaderContent,
   Title,
+  Menu,
+  ItemMenu,
+  ItemMenuText,
   Deliveries,
 } from './styles';
 
@@ -25,15 +29,18 @@ export default function Dashboard() {
   const dispatch = useDispatch();
 
   const [deliveries, setDeliveries] = useState([]);
+  const [deliveriesPending, setDeliveriesPending] = useState(true);
 
   useEffect(() => {
     async function loadDeliveries() {
-      const response = await api.get('deliveryman-deliveries');
+      const response = await api.get(
+        `deliveryman-deliveries?pending=${deliveriesPending}`,
+      );
       setDeliveries(response.data);
     }
 
     loadDeliveries();
-  }, []);
+  }, [deliveriesPending]);
 
   function handleLogout() {
     dispatch(signOut());
@@ -60,7 +67,21 @@ export default function Dashboard() {
         </TouchableOpacity>
       </Header>
       <Content>
-        <Title>Entregas</Title>
+        <HeaderContent>
+          <Title>Entregas</Title>
+          <Menu>
+            <ItemMenu onPress={() => setDeliveriesPending(!deliveriesPending)}>
+              <ItemMenuText selected={deliveriesPending}>
+                Pendentes
+              </ItemMenuText>
+            </ItemMenu>
+            <ItemMenu onPress={() => setDeliveriesPending(!deliveriesPending)}>
+              <ItemMenuText selected={!deliveriesPending}>
+                Entregues
+              </ItemMenuText>
+            </ItemMenu>
+          </Menu>
+        </HeaderContent>
 
         <Deliveries
           data={deliveries}
