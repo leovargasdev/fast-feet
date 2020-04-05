@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import Dashboard from '~/pages/Dashboard';
+import Dashboard from '~/pages/Delivery/Dashboard';
 import Details from '~/pages/Delivery/Details';
 import Confirm from '~/pages/Delivery/Confirm';
 import NewProblem from '~/pages/Delivery/NewProblem';

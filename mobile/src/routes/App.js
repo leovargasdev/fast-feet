@@ -10,7 +10,7 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   return (
     <Tab.Navigator
-      initialRouteName="Dashboard"
+      initialRouteName="Delivery"
       tabBarOptions={{
         keyboardHidesTabBar: true,
         activeTintColor: '#7D40E7',
