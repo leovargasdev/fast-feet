@@ -41,7 +41,11 @@ export const Data = styled.Text`
 `;
 
 export const NoProblems = styled.Text`
-  font-size: 18px;
+  margin-top: 20px;
+  font-size: 16px;
   font-weight: bold;
   color: #000;
+  background: #fff;
+  padding: 10px 14px;
+  border-radius: 4px;
 `;

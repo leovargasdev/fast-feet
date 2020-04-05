@@ -40,29 +40,27 @@ export default function ViewProblems({route}) {
   return (
     <BoxNavigate>
       <TitleHeader>Encomenda {id}</TitleHeader>
-      {/* CORRIGIR ESSE PROBLEMA!!!! */}
-      {problems ? (
-        <Problems
-          data={problems}
-          keyExtractor={item => String(item.id)}
-          renderItem={({item}) => (
-            <Problem>
-              <Descripiton>{item.description}</Descripiton>
-              <ContentData>
-                <Icon
-                  name="event"
-                  size={18}
-                  color="#c1c1c1"
-                  style={{paddingEnd: 3}}
-                />
-                <Data>{item.dateFormatted}</Data>
-              </ContentData>
-            </Problem>
-          )}
-        />
-      ) : (
-        <NoProblems>Encomenda sem Problemas registrados</NoProblems>
-      )}
+      <Problems
+        data={problems}
+        keyExtractor={item => String(item.id)}
+        renderItem={({item}) => (
+          <Problem>
+            <Descripiton>{item.description}</Descripiton>
+            <ContentData>
+              <Icon
+                name="event"
+                size={18}
+                color="#c1c1c1"
+                style={{paddingEnd: 3}}
+              />
+              <Data>{item.dateFormatted}</Data>
+            </ContentData>
+          </Problem>
+        )}
+        ListEmptyComponent={
+          <NoProblems>Encomenda sem problemas registrados</NoProblems>
+        }
+      />
     </BoxNavigate>
   );
 }
