@@ -10,7 +10,6 @@ import { Container, Avatar } from './styles';
 import api from '~/services/api';
 
 export default function DeliverymanList() {
-  const [actionsDisplay, setActionsDisplay] = useState({});
   const [deliverymen, setDeliverymen] = useState([]);
   const [searchDeliveryman, setSearchDeliveryman] = useState('');
   const [page, setPage] = useState(1);
@@ -18,7 +17,9 @@ export default function DeliverymanList() {
 
   useEffect(() => {
     async function loadDeliveries() {
-      const response = await api.get(`/deliverymen?name=${searchDeliveryman}&page=${page}`);
+      const response = await api.get(
+        `/deliverymen?name=${searchDeliveryman}&page=${page}`
+      );
       setDeliverymen(response.data);
     }
 
@@ -50,15 +51,11 @@ export default function DeliverymanList() {
             <span>{deliveryman.email}</span>
             <ActionsDrop
               setReloadList={setReloadList}
-              onClick={() =>
-                setActionsDisplay({
-                  ...actionsDisplay,
-                  [deliveryman.id]: !actionsDisplay[deliveryman.id],
-                })
-              }
-              visible={!!actionsDisplay[deliveryman.id]}
               actions={{
-                del: { url: `/deliveryman/${deliveryman.id}`, type: 'Entregador' },
+                del: {
+                  url: `/deliveryman/${deliveryman.id}`,
+                  type: 'Entregador',
+                },
                 edit: `/deliveryman/${deliveryman.id}/edit`,
               }}
             />

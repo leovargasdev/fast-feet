@@ -7,7 +7,6 @@ import { Container, ProblemDescription } from './styles';
 import api from '~/services/api';
 
 export default function DeliveryProblemList() {
-  const [actionsDisplay, setActionsDisplay] = useState({});
   const [deliveryProblems, setDeliveryProblems] = useState([]);
 
   useEffect(() => {
@@ -33,15 +32,11 @@ export default function DeliveryProblemList() {
             <span>#{delProblem.id}</span>
             <ProblemDescription>{delProblem.description}</ProblemDescription>
             <ActionsDrop
-              onClick={() =>
-                setActionsDisplay({
-                  ...actionsDisplay,
-                  [delProblem.id]: !actionsDisplay[delProblem.id],
-                })
-              }
-              visible={!!actionsDisplay[delProblem.id]}
               actions={{
-                view: { url:`/problem/${delProblem.id}/view`, type: 'deliveryProblem' },
+                view: {
+                  url: `/problem/${delProblem.id}/view`,
+                  type: 'deliveryProblem',
+                },
                 del: `/link`,
               }}
             />

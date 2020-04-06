@@ -9,7 +9,6 @@ import ActionsDrop from '~/components/Form/ActionsDrop';
 import api from '~/services/api';
 
 export default function DeliveryList() {
-  const [actionsDisplay, setActionsDisplay] = useState({});
   const [deliveries, setDeliveries] = useState([]);
   const [searchProduct, setSearchProduct] = useState('');
   const [page, setPage] = useState(1);
@@ -21,7 +20,6 @@ export default function DeliveryList() {
         `/deliveries?product=${searchProduct}&page=${page}`
       );
       setDeliveries(response.data);
-      setActionsDisplay({});
     }
 
     loadDeliveries();
@@ -65,17 +63,13 @@ export default function DeliveryList() {
             </Status>
             <ActionsDrop
               setReloadList={setReloadList}
-              onClick={() =>
-                setActionsDisplay({
-                  ...actionsDisplay,
-                  [delivery.id]: !actionsDisplay[delivery.id],
-                })
-              }
-              visible={!!actionsDisplay[delivery.id]}
               actions={{
                 del: { url: `/delivery/${delivery.id}`, type: 'Encomenda' },
                 edit: `/delivery/${delivery.id}/edit`,
-                view: { url: `/delivery/${delivery.id}/view`, type: 'delivery' },
+                view: {
+                  url: `/delivery/${delivery.id}/view`,
+                  type: 'delivery',
+                },
               }}
             />
           </Item>

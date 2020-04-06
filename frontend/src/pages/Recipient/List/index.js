@@ -10,7 +10,6 @@ import { Container } from './styles';
 import api from '~/services/api';
 
 export default function RecipientList() {
-  const [actionsDisplay, setActionsDisplay] = useState({});
   const [recipients, setRecipients] = useState([]);
   const [searchRecipient, setSearchRecipient] = useState('');
   const [page, setPage] = useState(1);
@@ -18,7 +17,9 @@ export default function RecipientList() {
 
   useEffect(() => {
     async function loadDeliveries() {
-      const response = await api.get(`/recipients?name=${searchRecipient}&page=${page}`);
+      const response = await api.get(
+        `/recipients?name=${searchRecipient}&page=${page}`
+      );
       setRecipients(response.data);
     }
 
@@ -47,15 +48,11 @@ export default function RecipientList() {
             <span>{recipient.adress}</span>
             <ActionsDrop
               setReloadList={setReloadList}
-              onClick={() =>
-                setActionsDisplay({
-                  ...actionsDisplay,
-                  [recipient.id]: !actionsDisplay[recipient.id],
-                })
-              }
-              visible={!!actionsDisplay[recipient.id]}
               actions={{
-                del: { url: `/recipient/${recipient.id}`, type: 'Destinatário' },
+                del: {
+                  url: `/recipient/${recipient.id}`,
+                  type: 'Destinatário',
+                },
                 edit: `/recipient/${recipient.id}/edit`,
               }}
             />

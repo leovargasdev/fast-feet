@@ -10,7 +10,7 @@ import ModalDelete from '~/components/Modals/Delete';
 import ModalView from '~/components/Modals/View';
 import api from '~/services/api';
 
-export default function ActionDrop({ setReloadList, actions }) {
+export default function ActionsDrop({ setReloadList, actions }) {
   const [infoModalView, setInfoModalView] = useState({});
   const [modalIsOpen, setIsOpen] = useState({ view: false, del: false });
 
@@ -83,7 +83,7 @@ export default function ActionDrop({ setReloadList, actions }) {
   );
 }
 
-ActionDrop.propTypes = {
+ActionsDrop.propTypes = {
   setReloadList: PropTypes.func,
   actions: PropTypes.object.isRequired,
 };
