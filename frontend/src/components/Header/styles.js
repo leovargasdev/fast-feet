@@ -41,10 +41,10 @@ export const Content = styled.div`
 export const Profile = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
+
   padding-left: 20px;
-  margin-left: 20px;
   border-left: 1px solid #eee;
-  text-align: right;
 
   strong {
     display: block;

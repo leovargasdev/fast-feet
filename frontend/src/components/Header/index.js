@@ -11,10 +11,6 @@ export default function Header() {
   const profile = useSelector(state => state.user.profile);
   const dispatch = useDispatch();
 
-  function handleSignOut() {
-    dispatch(signOut());
-  }
-
   return (
     <Container>
       <Content>
@@ -36,7 +32,7 @@ export default function Header() {
         <aside>
           <Profile>
             <strong>{profile.name}</strong>
-            <button type="button" onClick={handleSignOut}>
+            <button type="button" onClick={() => dispatch(signOut())}>
               Sair do Sistema
             </button>
           </Profile>
