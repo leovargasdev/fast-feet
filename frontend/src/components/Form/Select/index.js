@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
-import ReactSelect, {OptionTypeBase} from 'react-select';
+import ReactSelect from 'react-select';
 import { useField } from '@unform/core';
+import PropTypes from 'prop-types';
 
 import { Container } from './styles';
 
@@ -13,18 +14,17 @@ export default function Select({ name, label, ...rest }) {
       name: fieldName,
       ref: selectRef.current,
       path: 'state.value',
-      getValue: (ref: any) => {
+      getValue: ref => {
         if (rest.isMulti) {
           if (!ref.state.value) {
             return [];
           }
-          return ref.state.value.map((option: OptionTypeBase) => option.value);
-        } else {
-          if (!ref.state.value) {
-            return '';
-          }
-          return ref.state.value.value;
+          return ref.state.value.map(option => option.value);
         }
+        if (!ref.state.value) {
+          return '';
+        }
+        return ref.state.value.value;
       },
     });
   }, [fieldName, registerField, rest.isMulti]);
@@ -42,3 +42,8 @@ export default function Select({ name, label, ...rest }) {
     </Container>
   );
 }
+
+Select.propTypes = {
+  name: PropTypes.number.isRequired,
+  label: PropTypes.number.isRequired,
+};

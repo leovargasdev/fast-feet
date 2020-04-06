@@ -6,10 +6,8 @@ import { PropTypes } from 'prop-types';
 import api from '~/services/api';
 import { Container, InputPhoto } from './styles';
 
-export default function AvatarInput({ name }) {
-  const { fieldName, defaultValue = '', registerField, error = '' } = useField(
-    name
-  );
+export default function AvatarInput({ name, defaultValue }) {
+  const { fieldName, registerField, error = '' } = useField(name);
 
   const [file, setFile] = useState(defaultValue && defaultValue.id);
   const [preview, setPreview] = useState(defaultValue && defaultValue.url);
@@ -41,8 +39,9 @@ export default function AvatarInput({ name }) {
   return (
     <Container>
       <label htmlFor="avatar">
-        {preview && <img src={preview} alt="Foto do entregador" />}
-        {!preview && (
+        {preview ? (
+          <img src={preview} alt="Foto do entregador" />
+        ) : (
           <InputPhoto>
             <MdInsertPhoto size={44} color="#DDDDDD" />
             <strong>Adicionar Foto</strong>
@@ -64,4 +63,8 @@ export default function AvatarInput({ name }) {
 
 AvatarInput.propTypes = {
   name: PropTypes.string.isRequired,
+  defaultValue: PropTypes.shape({
+    id: PropTypes.number,
+    url: PropTypes.string,
+  }),
 };

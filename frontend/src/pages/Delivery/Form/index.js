@@ -4,13 +4,14 @@ import * as Yup from 'yup';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 
-import { ContainerForm } from '~/components/Form/Container/styles';
-import Header from '~/components/Form/Header';
 import Input from '~/components/Form/Input';
+import Header from '~/components/Form/Header';
 import Select from '~/components/Form/Select';
-import { Container, GroupInputs } from './styles';
+import { ContainerForm } from '~/components/Form/Container/styles';
+
 import api from '~/services/api';
 import history from '~/services/history';
+import { Container, GroupInputs } from './styles';
 
 const schema = Yup.object().shape({
   recipient_id: Yup.number().required('O destinatário é obrigatório!'),
@@ -55,10 +56,9 @@ export default function DeliveryForm({ match }) {
       setRecipients(response.data);
     }
 
+    if (id) loadDelivery();
     loadRecipients();
     loadDeliverymen();
-    if (id) loadDelivery();
-
   }, [id]);
 
   async function handleSubmit(data) {
@@ -77,7 +77,6 @@ export default function DeliveryForm({ match }) {
         toast.success('Encomenda criada com sucesso!');
       }
       history.push('/deliveries');
-
     } catch (err) {
       const validationErrors = {};
       if (err instanceof Yup.ValidationError) {
@@ -100,6 +99,7 @@ export default function DeliveryForm({ match }) {
               options={recipients}
               label="Destinatário"
             />
+
             <Select
               name="deliveryman_id"
               options={deliverymen}
@@ -112,8 +112,8 @@ export default function DeliveryForm({ match }) {
     </Container>
   );
 }
+
 DeliveryForm.propTypes = {
-  // eslint-disable-next-line
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string,

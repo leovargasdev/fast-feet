@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import { Container, GroupInfo, Signature, ContentProblem } from './styles';
 import Assinatura from '~/assets/assinatura.png';
+
 const customStyles = {
   content: {
     top: '50%',
@@ -16,7 +17,6 @@ const customStyles = {
 };
 
 export default function ModalView({ setIsOpen, isOpen, info }) {
-
   function closeModal() {
     setIsOpen({ ...isOpen, view: false });
   }
@@ -30,31 +30,42 @@ export default function ModalView({ setIsOpen, isOpen, info }) {
     >
       <Container>
         {info.type === 'delivery' && (
-        <>
-          <GroupInfo>
-            <h3>Informações da Encomenda</h3>
-            <p>{info.recipient.street}, {info.recipient.number}</p>
-            <p>{info.recipient.city} - {info.recipient.state}</p>
-            <p>{info.recipient.cep}</p>
-          </GroupInfo>
-          <GroupInfo>
-            <h3>Datas</h3>
-            <p><strong>Retirada:</strong> {info.start_date}</p>
-            <p><strong>Entrega:</strong> {info.end_date}</p>
+          <>
+            <GroupInfo>
+              <h3>Informações da Encomenda</h3>
+              <p>
+                {info.recipient.street}, {info.recipient.number}
+              </p>
+              <p>
+                {info.recipient.city} - {info.recipient.state}
+              </p>
+              <p>{info.recipient.cep}</p>
             </GroupInfo>
-          <GroupInfo>
-            <h3>Assinatura do destinatário</h3>
-            <Signature>
-              <img src={Assinatura} alt="Foto da assinatura do destinatário"/>
-            </Signature>
-          </GroupInfo>
-        </>
+            <GroupInfo>
+              <h3>Datas</h3>
+              <p>
+                <strong>Retirada:</strong> {info.start_date}
+              </p>
+              <p>
+                <strong>Entrega:</strong> {info.end_date}
+              </p>
+            </GroupInfo>
+            <GroupInfo>
+              <h3>Assinatura do destinatário</h3>
+              <Signature>
+                <img
+                  src={Assinatura}
+                  alt="Foto da assinatura do destinatário"
+                />
+              </Signature>
+            </GroupInfo>
+          </>
         )}
         {info.type === 'deliveryProblem' && (
-        <ContentProblem>
-          <strong> VISUALIZAR PROBLEMA </strong>
-          <p> {info.description} </p>
-        </ContentProblem>
+          <ContentProblem>
+            <strong> VISUALIZAR PROBLEMA </strong>
+            <p> {info.description} </p>
+          </ContentProblem>
         )}
       </Container>
     </Modal>

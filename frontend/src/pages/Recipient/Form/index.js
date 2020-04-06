@@ -1,15 +1,16 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Form } from '@unform/web';
+import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 
-import { ContainerForm } from '~/components/Form/Container/styles';
-import Header from '~/components/Form/Header';
 import Input from '~/components/Form/Input';
+import Header from '~/components/Form/Header';
 import InputMask from '~/components/Form/InputMask';
+import { ContainerForm } from '~/components/Form/Container/styles';
+
 import api from '~/services/api';
 import history from '~/services/history';
-
 import { Container, Group1, Group2 } from './styles';
 
 const schema = Yup.object().shape({
@@ -18,6 +19,7 @@ const schema = Yup.object().shape({
   street: Yup.string().required('O logradouro é obrigatório!'),
   state: Yup.string().required('O UF é obrigatório!'),
   city: Yup.string().required('A cidade é obrigatória!'),
+  number: Yup.number().required('O número é obrigatório!'),
 });
 
 export default function RecipientForm({ match }) {
@@ -70,7 +72,6 @@ export default function RecipientForm({ match }) {
         toast.success('Destinatário criado com sucesso!');
       }
       history.push('/recipients');
-
     } catch (err) {
       const validationErrors = {};
       if (err instanceof Yup.ValidationError) {
@@ -119,3 +120,11 @@ export default function RecipientForm({ match }) {
     </Container>
   );
 }
+
+RecipientForm.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }),
+};

@@ -1,13 +1,14 @@
 import * as Yup from 'yup';
 import { Form } from '@unform/web';
 import { PropTypes } from 'prop-types';
+import { toast } from 'react-toastify';
 import React, { useRef, useEffect, useState } from 'react';
-import {toast} from 'react-toastify';
 
-import { ContainerForm } from '~/components/Form/Container/styles';
-import Header from '~/components/Form/Header';
-import Input from '~/components/Form/Input';
 import AvatarInput from './AvatarInput';
+import Input from '~/components/Form/Input';
+import Header from '~/components/Form/Header';
+import { ContainerForm } from '~/components/Form/Container/styles';
+
 import api from '~/services/api';
 import history from '~/services/history';
 import { Container, ContainerAvatar } from './styles';
@@ -19,8 +20,7 @@ const schema = Yup.object().shape({
     .email('Insira um email válido!')
     .required('O email do entragador é obrigatório!'),
 });
-// PROBLEMAS AO PEGAR A IMAGEM DO AVATAR
-// PQPQPQPQPQ
+
 export default function DeliverymanForm({ match }) {
   const { id } = match.params;
   const formRef = useRef(null);
@@ -33,12 +33,15 @@ export default function DeliverymanForm({ match }) {
       formRef.current.setData({
         name,
         email,
-        avatar_id: aux,
       });
       setAvatar(aux);
     }
 
     if (id) loadDeliveryman();
+    else
+      setAvatar({
+        url: 'https://api.adorable.io/avatars/200/fastfeet.png',
+      });
   }, [id]);
 
   async function handleSubmit(data) {
@@ -57,7 +60,6 @@ export default function DeliverymanForm({ match }) {
         toast.success('Destinatário criado com sucesso!');
       }
       history.push('/deliverymen');
-
     } catch (err) {
       const validationErrors = {};
       if (err instanceof Yup.ValidationError) {
@@ -75,9 +77,8 @@ export default function DeliverymanForm({ match }) {
         <Header content="Cadastro de entregadores" voltarLink="/deliverymen" />
         <ContainerForm>
           <ContainerAvatar>
-            <AvatarInput name="avatar_id" defaultValue={avatar}/>
+            {avatar && <AvatarInput name="avatar_id" defaultValue={avatar} />}
           </ContainerAvatar>
-
           <Input
             name="name"
             label="Nome"
