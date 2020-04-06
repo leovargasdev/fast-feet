@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { darken } from 'polished';
 
 export const Container = styled.div`
   width: 100%;
@@ -18,6 +19,10 @@ export const Container = styled.div`
     font-weight: bold;
     text-align: center;
     text-transform: uppercase;
+
+    &:hover {
+      background: ${darken(0.2, '#7d40e7')};
+    }
 
     svg {
       margin-right: 3px;

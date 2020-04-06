@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { darken } from 'polished';
 
 export const Container = styled.div`
   display: flex;
@@ -19,7 +20,7 @@ export const Container = styled.div`
     padding: 6px 20px;
 
     &:hover {
-      background: #7d40e7;
+      background: ${darken(0.2, '#7d40e7')};
       cursor: pointer;
       color: #fff;
 

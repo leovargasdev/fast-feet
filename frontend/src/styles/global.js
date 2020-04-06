@@ -16,6 +16,7 @@ export default createGlobalStyle`
   }
 
   html, body, #root{
+    background: #f5f5f5;
     height: 100%;
   }
 

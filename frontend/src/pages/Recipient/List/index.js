@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import Title from '~/components/Title';
 import BuscarCadastro from '~/components/BuscarCadastro';
+import BoxEmpty from '~/components/BoxEmpty';
 import { Item, List } from '~/components/ListItens/styles';
 import ActionsDrop from '~/components/Form/ActionsDrop';
 import Paginate from '~/components/Paginate';
@@ -34,31 +35,35 @@ export default function RecipientList() {
         onChange={e => setSearchRecipient(e.target.value)}
         linkBtn="/recipient/new"
       />
-      <List>
-        <Item>
-          <strong>ID</strong>
-          <strong>Nome</strong>
-          <strong>Endereço</strong>
-          <strong style={{ textAlign: 'right' }}>Ações</strong>
-        </Item>
-        {recipients.map(recipient => (
-          <Item key={recipient.id}>
-            <span>#{recipient.id}</span>
-            <span>{recipient.name}</span>
-            <span>{recipient.adress}</span>
-            <ActionsDrop
-              setReloadList={setReloadList}
-              actions={{
-                del: {
-                  url: `/recipient/${recipient.id}`,
-                  type: 'Destinatário',
-                },
-                edit: `/recipient/${recipient.id}/edit`,
-              }}
-            />
+      {recipients.length > 0 ? (
+        <List>
+          <Item>
+            <strong>ID</strong>
+            <strong>Nome</strong>
+            <strong>Endereço</strong>
+            <strong style={{ textAlign: 'right' }}>Ações</strong>
           </Item>
-        ))}
-      </List>
+          {recipients.map(recipient => (
+            <Item key={recipient.id}>
+              <span>#{recipient.id}</span>
+              <span>{recipient.name}</span>
+              <span>{recipient.adress}</span>
+              <ActionsDrop
+                setReloadList={setReloadList}
+                actions={{
+                  del: {
+                    url: `/recipient/${recipient.id}`,
+                    type: 'Destinatário',
+                  },
+                  edit: `/recipient/${recipient.id}/edit`,
+                }}
+              />
+            </Item>
+          ))}
+        </List>
+      ) : (
+        <BoxEmpty content="Lista de destinatários está vazia" />
+      )}
       <Paginate page={page} setPage={setPage} />
     </Container>
   );

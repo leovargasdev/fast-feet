@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import Title from '~/components/Title';
 import BuscarCadastro from '~/components/BuscarCadastro';
+import BoxEmpty from '~/components/BoxEmpty';
 import { Item, List } from '~/components/ListItens/styles';
 import ActionsDrop from '~/components/Form/ActionsDrop';
 import Paginate from '~/components/Paginate';
@@ -34,34 +35,37 @@ export default function DeliverymanList() {
         onChange={e => setSearchDeliveryman(e.target.value)}
         linkBtn="/deliveryman/new"
       />
-
-      <List>
-        <Item>
-          <strong>ID</strong>
-          <strong>Foto</strong>
-          <strong>Nome</strong>
-          <strong>Email</strong>
-          <strong style={{ textAlign: 'right' }}>Ações</strong>
-        </Item>
-        {deliverymen.map(deliveryman => (
-          <Item key={deliveryman.id}>
-            <span>#{deliveryman.id}</span>
-            <Avatar src={deliveryman.avatar.url} />
-            <span>{deliveryman.name}</span>
-            <span>{deliveryman.email}</span>
-            <ActionsDrop
-              setReloadList={setReloadList}
-              actions={{
-                del: {
-                  url: `/deliveryman/${deliveryman.id}`,
-                  type: 'Entregador',
-                },
-                edit: `/deliveryman/${deliveryman.id}/edit`,
-              }}
-            />
+      {deliverymen.length > 0 ? (
+        <List>
+          <Item>
+            <strong>ID</strong>
+            <strong>Foto</strong>
+            <strong>Nome</strong>
+            <strong>Email</strong>
+            <strong style={{ textAlign: 'right' }}>Ações</strong>
           </Item>
-        ))}
-      </List>
+          {deliverymen.map(deliveryman => (
+            <Item key={deliveryman.id}>
+              <span>#{deliveryman.id}</span>
+              <Avatar src={deliveryman.avatar.url} />
+              <span>{deliveryman.name}</span>
+              <span>{deliveryman.email}</span>
+              <ActionsDrop
+                setReloadList={setReloadList}
+                actions={{
+                  del: {
+                    url: `/deliveryman/${deliveryman.id}`,
+                    type: 'Entregador',
+                  },
+                  edit: `/deliveryman/${deliveryman.id}/edit`,
+                }}
+              />
+            </Item>
+          ))}
+        </List>
+      ) : (
+        <BoxEmpty content="Lista de entregadores vazia" />
+      )}
       <Paginate page={page} setPage={setPage} />
     </Container>
   );

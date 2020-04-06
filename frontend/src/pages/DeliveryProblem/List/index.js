@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import Title from '~/components/Title';
 import ActionsDrop from '~/components/Form/ActionsDrop';
+import BoxEmpty from '~/components/BoxEmpty';
 import { Item, List } from '~/components/ListItens/styles';
 import { Container, ProblemDescription } from './styles';
 import api from '~/services/api';
@@ -21,28 +22,33 @@ export default function DeliveryProblemList() {
   return (
     <Container>
       <Title content="Problemas na entrega" />
-      <List>
-        <Item>
-          <strong>Encomenda</strong>
-          <strong>Problema</strong>
-          <strong style={{ textAlign: 'right' }}>Ações</strong>
-        </Item>
-        {deliveryProblems.map(delProblem => (
-          <Item key={delProblem.id}>
-            <span>#{delProblem.id}</span>
-            <ProblemDescription>{delProblem.description}</ProblemDescription>
-            <ActionsDrop
-              actions={{
-                view: {
-                  url: `/problem/${delProblem.id}/view`,
-                  type: 'deliveryProblem',
-                },
-                del: `/link`,
-              }}
-            />
+
+      {deliveryProblems.length > 0 ? (
+        <List>
+          <Item>
+            <strong>Encomenda</strong>
+            <strong>Problema</strong>
+            <strong style={{ textAlign: 'right' }}>Ações</strong>
           </Item>
-        ))}
-      </List>
+          {deliveryProblems.map(delProblem => (
+            <Item key={delProblem.id}>
+              <span>#{delProblem.id}</span>
+              <ProblemDescription>{delProblem.description}</ProblemDescription>
+              <ActionsDrop
+                actions={{
+                  view: {
+                    url: `/problem/${delProblem.id}/view`,
+                    type: 'deliveryProblem',
+                  },
+                  del: `/link`,
+                }}
+              />
+            </Item>
+          ))}
+        </List>
+      ) : (
+        <BoxEmpty content="Sem problemas registrados" />
+      )}
     </Container>
   );
 }

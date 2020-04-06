@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
 import Title from '~/components/Title';
-import BuscarCadastro from '~/components/BuscarCadastro';
 import Paginate from '~/components/Paginate';
-import { Item, List } from '~/components/ListItens/styles';
-import { Container, Status, Deliveryman } from './styles';
 import ActionsDrop from '~/components/Form/ActionsDrop';
+import BuscarCadastro from '~/components/BuscarCadastro';
+import BoxEmpty from '~/components/BoxEmpty';
+import { Item, List } from '~/components/ListItens/styles';
+
+import { Container, Status, Deliveryman } from './styles';
 import api from '~/services/api';
 
 export default function DeliveryList() {
@@ -35,46 +37,50 @@ export default function DeliveryList() {
         linkBtn="/delivery/new"
       />
 
-      <List>
-        <Item>
-          <strong>ID</strong>
-          <strong>Destinatário</strong>
-          <strong>Entregador</strong>
-          <strong>Cidade</strong>
-          <strong>Estado</strong>
-          <strong>Status</strong>
-          <strong style={{ textAlign: 'right' }}>Ações</strong>
-        </Item>
-        {deliveries.map(delivery => (
-          <Item key={delivery.id}>
-            <span>#{delivery.id}</span>
-            <span>{delivery.recipient.name}</span>
-            <Deliveryman>
-              <img
-                src={delivery.deliveryman.avatar.url}
-                alt={`Avatar ${delivery.deliveryman.name}`}
-              />
-              <span>{delivery.deliveryman.name}</span>
-            </Deliveryman>
-            <span>{delivery.recipient.city}</span>
-            <span>{delivery.recipient.state}</span>
-            <Status color={delivery.status}>
-              <span>{delivery.status}</span>
-            </Status>
-            <ActionsDrop
-              setReloadList={setReloadList}
-              actions={{
-                del: { url: `/delivery/${delivery.id}`, type: 'Encomenda' },
-                edit: `/delivery/${delivery.id}/edit`,
-                view: {
-                  url: `/delivery/${delivery.id}/view`,
-                  type: 'delivery',
-                },
-              }}
-            />
+      {deliveries.length > 0 ? (
+        <List>
+          <Item>
+            <strong>ID</strong>
+            <strong>Destinatário</strong>
+            <strong>Entregador</strong>
+            <strong>Cidade</strong>
+            <strong>Estado</strong>
+            <strong>Status</strong>
+            <strong style={{ textAlign: 'right' }}>Ações</strong>
           </Item>
-        ))}
-      </List>
+          {deliveries.map(delivery => (
+            <Item key={delivery.id}>
+              <span>#{delivery.id}</span>
+              <span>{delivery.recipient.name}</span>
+              <Deliveryman>
+                <img
+                  src={delivery.deliveryman.avatar.url}
+                  alt={`Avatar ${delivery.deliveryman.name}`}
+                />
+                <span>{delivery.deliveryman.name}</span>
+              </Deliveryman>
+              <span>{delivery.recipient.city}</span>
+              <span>{delivery.recipient.state}</span>
+              <Status color={delivery.status}>
+                <span>{delivery.status}</span>
+              </Status>
+              <ActionsDrop
+                setReloadList={setReloadList}
+                actions={{
+                  del: { url: `/delivery/${delivery.id}`, type: 'Encomenda' },
+                  edit: `/delivery/${delivery.id}/edit`,
+                  view: {
+                    url: `/delivery/${delivery.id}/view`,
+                    type: 'delivery',
+                  },
+                }}
+              />
+            </Item>
+          ))}
+        </List>
+      ) : (
+        <BoxEmpty content="Lista de encomendas vazia" />
+      )}
       <Paginate page={page} setPage={setPage} />
     </Container>
   );
