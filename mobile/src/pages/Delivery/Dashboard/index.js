@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {TouchableOpacity} from 'react-native';
+import {TouchableOpacity, StatusBar} from 'react-native';
+import {useFocusEffect} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Delivery from '~/components/Delivery';
@@ -30,6 +31,13 @@ export default function Dashboard() {
 
   const [deliveries, setDeliveries] = useState([]);
   const [deliveriesPending, setDeliveriesPending] = useState(true);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      StatusBar.setBarStyle('light-content');
+      StatusBar.setBackgroundColor('#7d40e7');
+    }, []),
+  );
 
   useEffect(() => {
     async function loadDeliveries() {

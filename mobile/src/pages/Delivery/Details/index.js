@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import {Alert} from 'react-native';
+import {Alert, StatusBar} from 'react-native';
 import {format, parseISO} from 'date-fns';
-import {useIsFocused} from '@react-navigation/native';
+import {useIsFocused, useFocusEffect} from '@react-navigation/native';
 import React, {useEffect, useState, useMemo} from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -26,6 +26,13 @@ export default function Details({route, navigation}) {
   const [delivery, setDelivery] = useState('');
   const [confirmBtn, setConfirmBtn] = useState(false);
   const [newProblemBtn, setNewProblemBtn] = useState(false);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      StatusBar.setBarStyle('light-content');
+      StatusBar.setBackgroundColor('#7d40e7');
+    }, []),
+  );
 
   const startDateFormatted = useMemo(
     () =>
