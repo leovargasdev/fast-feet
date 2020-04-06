@@ -214,14 +214,11 @@ class DeliveryController {
     const end_date = delivery.end_date
       ? format(delivery.end_date, 'dd/mm/yyyy')
       : 'Não resgistrada';
-    const img_signature = delivery.signature
-      ? delivery.signature.url
-      : 'Sem Foto';
     return res.json({
       start_date,
       end_date,
       recipient: delivery.recipient,
-      img_signature,
+      signature: delivery.signature,
     });
   }
 }

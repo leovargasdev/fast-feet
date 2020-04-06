@@ -9,31 +9,37 @@ export const Container = styled.div`
 export const GroupInfo = styled.div`
   padding: 10px 0;
 
-  & + div{
-    border-top: 1px solid #EEEEEE;
+  & + div {
+    border-top: 1px solid #eeeeee;
   }
 
-  h3{
+  h3 {
     font-weight: bold;
     color: #444;
     font-size: 16px;
     margin-bottom: 5px;
   }
 
-  p{
+  p {
     color: #666666;
     font-size: 16px;
     font-weight: 400;
     margin-bottom: 4px;
   }
-`
+`;
+
 export const Signature = styled.div`
   display: flex;
-  align-content: center;
+  justify-content: center;
 
   img {
     max-width: 100%;
-    height: auto;
+    max-height: 300px;
+  }
+
+  span {
+    font-size: 20px;
+    color: #333;
   }
 `;
 
@@ -42,7 +48,8 @@ export const ContentProblem = styled.div`
   flex-direction: column;
   padding: 10px 0;
 
-  p, strong {
+  p,
+  strong {
     color: #444;
     font-size: 16px;
   }

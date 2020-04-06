@@ -3,7 +3,6 @@ import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 
 import { Container, GroupInfo, Signature, ContentProblem } from './styles';
-import Assinatura from '~/assets/assinatura.png';
 
 const customStyles = {
   content: {
@@ -53,10 +52,14 @@ export default function ModalView({ setIsOpen, isOpen, info }) {
             <GroupInfo>
               <h3>Assinatura do destinatário</h3>
               <Signature>
-                <img
-                  src={Assinatura}
-                  alt="Foto da assinatura do destinatário"
-                />
+                {info.signature ? (
+                  <img
+                    src={info.signature.url}
+                    alt="Foto da assinatura do destinatário"
+                  />
+                ) : (
+                  <span>Sem Assinatura</span>
+                )}
               </Signature>
             </GroupInfo>
           </>
