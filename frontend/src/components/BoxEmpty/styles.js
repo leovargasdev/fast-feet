@@ -10,7 +10,7 @@ export const Container = styled.div`
     font-weight: bold;
     font-size: 26px;
 
-    margin: 60px 0;
+    margin: 20px 0;
     border-radius: 4px;
     padding: 20px 110px;
     background: ${darken(0.2, '#7d40e7')};

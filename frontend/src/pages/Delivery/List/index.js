@@ -36,7 +36,6 @@ export default function DeliveryList() {
         onChange={e => setSearchProduct(e.target.value)}
         linkBtn="/delivery/new"
       />
-
       {deliveries.length > 0 ? (
         <List>
           <Item>
@@ -81,7 +80,7 @@ export default function DeliveryList() {
       ) : (
         <BoxEmpty content="Lista de encomendas vazia" />
       )}
-      <Paginate page={page} setPage={setPage} />
+      <Paginate page={page} setPage={setPage} sizeItens={deliveries.length} />
     </Container>
   );
 }

@@ -66,7 +66,7 @@ export default function DeliverymanList() {
       ) : (
         <BoxEmpty content="Lista de entregadores vazia" />
       )}
-      <Paginate page={page} setPage={setPage} />
+      <Paginate page={page} setPage={setPage} sizeItens={deliverymen.length} />
     </Container>
   );
 }

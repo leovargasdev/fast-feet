@@ -64,7 +64,7 @@ export default function RecipientList() {
       ) : (
         <BoxEmpty content="Lista de destinatários está vazia" />
       )}
-      <Paginate page={page} setPage={setPage} />
+      <Paginate page={page} setPage={setPage} sizeItens={recipients.length} />
     </Container>
   );
 }
