@@ -2,16 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: row-reverse;
-
-  position: relative;
-  font-weight: bold;
-
-  span {
-    font-size: 16px;
-    color: #666;
-    letter-spacing: 0;
-  }
+  justify-self: self-end;
 
   button {
     font-size: 24px;
@@ -26,28 +17,8 @@ export const Container = styled.div`
 `;
 
 export const Actions = styled.div`
-  position: absolute;
   width: auto;
-  background: #7d40e7;
-  border-radius: 4px;
-  padding: 15px 18px;
-  display: ${({ visible }) => (visible ? 'block' : 'none')};
-  left: 50%;
-  top: calc(100% + 18px);
-  z-index: 1;
-  box-shadow: 0px 0px 2px #00000026;
-
-  &::before {
-    content: '';
-    position: absolute;
-    left: calc(50% - 20px);
-    top: -20px;
-    width: 0;
-    height: 0;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-bottom: 20px solid #7d40e7;
-  }
+  padding: 12px 18px;
 `;
 
 export const Action = styled.div`
@@ -63,8 +34,8 @@ export const Action = styled.div`
   }
 
   & + div {
-    margin-top: 9px;
-    padding-top: 9px;
+    margin-top: 12px;
+    padding-top: 12px;
     border-top: 1px solid #00000026;
   }
 
