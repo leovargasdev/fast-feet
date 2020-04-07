@@ -17,9 +17,9 @@ class RecipientController {
     if (!(await schema.isValid(req.body)))
       return res.status(400).json({ error: 'Validation fails.' });
 
-    const { id, name, cep } = await Recipient.create(req.body);
+    const recipient = await Recipient.create(req.body);
 
-    return res.json({ id, name, cep });
+    return res.json(recipient);
   }
 
   async index(req, res) {

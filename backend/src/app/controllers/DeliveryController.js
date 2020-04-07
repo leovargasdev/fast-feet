@@ -153,7 +153,7 @@ class DeliveryController {
           [Op.iLike]: `%${product}%`,
         },
       },
-      attributes: ['id', 'status', 'start_date', 'end_date', 'canceled_at'],
+      attributes: ['id', 'status', 'start_date', 'end_date', 'canceled_at', 'product'],
       sort: ['id'],
       limit: 10,
       offset: (page - 1) * 10,

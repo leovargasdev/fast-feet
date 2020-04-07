@@ -31,15 +31,15 @@ routes.put('/recipient/:id', RecipientController.update);
 routes.delete('/recipient/:id', RecipientController.delete);
 
 // deliveryman: singular, deliverymen: plural
-routes.post('/deliveryman', DeliverymanController.store);
+routes.post('/deliveryman', DeliverymanController.store); 
 routes.put('/deliveryman/:id', DeliverymanController.update);
 routes.get('/deliverymen', DeliverymanController.index);
-routes.get('/deliveryman/:id', DeliverymanController.index);
+routes.get('/deliveryman/:id', DeliverymanController.index); 
 routes.get('/deliverymen-select', DeliverymanController.show);
 routes.delete('/deliveryman/:id', DeliverymanController.delete);
-routes.get('/deliveryman-deliveries', DeliveriesDeliveryman.index);
+routes.get('/deliveryman/:id/deliveries', DeliveriesDeliveryman.index);
 
-routes.post('/delivery', DeliveryController.store);
+routes.post('/delivery', DeliveryController.store); 
 routes.get('/deliveries', DeliveryController.index);
 routes.get('/delivery/:id', DeliveryController.index);
 routes.get('/delivery/:id/view', DeliveryController.show);
@@ -50,7 +50,7 @@ routes.post('/delivery/:id/problems', DeliveryProblemController.store);
 routes.get('/delivery/:delivery_id/problems', DeliveryProblemController.index);
 routes.get('/delivery-problems', DeliveryProblemController.index);
 routes.get('/problem/:id/view', DeliveryProblemController.show);
-routes.put('/problem/:id/cancel-delivery', DeliveryProblemController.update);
+routes.delete('/problem/:id/cancel-delivery', DeliveryProblemController.delete);
 
 routes.post('/files', upload.single('file'), FileController.store);
 routes.get('/file/:id', FileController.index);

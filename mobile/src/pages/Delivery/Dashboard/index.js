@@ -42,7 +42,7 @@ export default function Dashboard() {
   useEffect(() => {
     async function loadDeliveries() {
       const response = await api.get(
-        `deliveryman-deliveries?pending=${deliveriesPending}`,
+        `/deliveryman/${deliveryman.id}/deliveries?pending=${deliveriesPending}`,
       );
       setDeliveries(response.data);
     }

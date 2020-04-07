@@ -53,12 +53,16 @@ class DeliveryProblemController {
     return res.json(deliveriesProblems);
   }
 
-  async update(req, res) {
+  async delete(req, res) {
     const { id } = req.params;
     // Validando entregador
     const delivery = await Delivery.findByPk(id);
     if (!delivery)
-      return res.status(400).json({ error: 'Deliveryman is not available.' });
+      return res.status(400).json({ error: 'Delivery is not available.' });
+    else if (delivery.end_date)
+      return res.status(400).json({ error: 'Delivery already finish.' });
+    else if (delivery.canceled_at)
+      return res.status(400).json({ error: 'Delivery it is already cancel.' });
 
     const deliveryman = await Deliveryman.findByPk(delivery.deliveryman_id);
 
