@@ -34,13 +34,15 @@ export default function DeliverymanForm({ match }) {
         name,
         email,
       });
-      setAvatar(aux);
+      setAvatar(
+        aux || { url: 'https://api.adorable.io/avatars/100/fastfeet.png' }
+      );
     }
 
     if (id) loadDeliveryman();
     else
       setAvatar({
-        url: 'https://api.adorable.io/avatars/200/fastfeet.png',
+        url: 'https://api.adorable.io/avatars/100/fastfeet.png',
       });
   }, [id]);
 

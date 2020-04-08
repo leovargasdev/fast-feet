@@ -6,6 +6,6 @@ export const Container = styled.div`
   flex-direction: column;
 
   li {
-    grid-template-columns: 1fr 1fr 3fr 1fr;
+    grid-template-columns: 1fr 2fr 4fr 1fr;
   }
 `;

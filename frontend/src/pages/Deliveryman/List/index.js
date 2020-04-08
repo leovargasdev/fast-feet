@@ -47,7 +47,13 @@ export default function DeliverymanList() {
           {deliverymen.map(deliveryman => (
             <Item key={deliveryman.id}>
               <span>#{deliveryman.id}</span>
-              <Avatar src={deliveryman.avatar.url} />
+              <Avatar
+                src={
+                  deliveryman.avatar
+                    ? deliveryman.avatar.url
+                    : `https://api.adorable.io/avatars/50/${deliveryman.id}.png`
+                }
+              />
               <span>{deliveryman.name}</span>
               <span>{deliveryman.email}</span>
               <ActionsDrop
