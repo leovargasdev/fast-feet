@@ -61,6 +61,49 @@ $ adb reverse tcp:3333 tcp:3333
 
 ## :rocket: Instalação e execução
 
+### Backend
+
+```bash
+
+cd backend/
+
+yarn install
+
+docker run --name postgres-fastfeet -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+
+docker exec -it postgres-fastfeet psql -h localhost -U postgres -c "CREATE DATABASE fastfeet"
+
+docker run --name redis-fastfeet -p 6379:6379 -d -t redis:alpine
+
+yarn sequelize db:migrate
+
+yarn sequelize db:seed:all
+
+mkdir temp/uploads
+
+yarn dev
+```
+
+Em outra janela/aba do terminal
+
+```bash
+
+yarn queue
+
+```
+
+## Backend
+
+```bash
+
+cd frontend/
+
+yarn install
+
+yarn start
+
+```
+
 EM BREVE VOCÊ TERÁ MAIS INFORMAÇÕES.... :sunglasses:
 
 ## :wrench: Readme em Construção
