@@ -1,3 +1,3 @@
-yarn sequelize db:migrate:undo:all
-yarn sequelize db:migrate
-yarn sequelize db:seed:all
+yarn
+docker start postgres-fastfeet redis-fastfeet
+yarn dev
