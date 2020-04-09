@@ -16,7 +16,10 @@ export default function Paginate({ setPage, page, sizeItens }) {
         <MdKeyboardArrowLeft size={25} />
         Anterior
       </BtnControlPage>
-      <BtnControlPage onClick={() => handleNewPage(1)} disabled={!sizeItens}>
+      <BtnControlPage
+        onClick={() => handleNewPage(1)}
+        disabled={sizeItens !== 10}
+      >
         Próxima
         <MdKeyboardArrowRight size={25} />
       </BtnControlPage>
