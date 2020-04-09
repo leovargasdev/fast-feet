@@ -48,7 +48,7 @@ export default function DeliveryProblemList() {
           ))}
         </List>
       ) : (
-        <BoxEmpty content="Sem problemas registrados" />
+        <BoxEmpty content="Sem nenhum problema registrado" />
       )}
     </Container>
   );

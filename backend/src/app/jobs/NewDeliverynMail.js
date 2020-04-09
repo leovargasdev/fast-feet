@@ -7,7 +7,7 @@ class NewDeliverynMail {
   }
 
   async handle({ data }) {
-    const { deliveryman, delivery } = data;
+    const { deliveryman, delivery, recipient } = data;
     await Mail.sendMail({
       to: `${deliveryman.name} <${deliveryman.email}>`,
       subject: 'Nova encomenda cadastrada',
@@ -15,6 +15,8 @@ class NewDeliverynMail {
       context: {
         name: deliveryman.name,
         product: delivery.product,
+        recipient: recipient.name,
+        adress: `(${recipient.cep}) ${recipient.adress}`,
       },
     });
   }

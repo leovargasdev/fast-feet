@@ -28,7 +28,17 @@ class DeliveryController {
       return res.status(400).json({ error: 'Deliveryman is not available.' });
 
     // Validando destinatário
-    const isRecipient = await Recipient.findByPk(recipient_id);
+    const isRecipient = await Recipient.findByPk(recipient_id, {
+      attributes: [
+        'name',
+        'cep',
+        'adress',
+        'street',
+        'number',
+        'city',
+        'state',
+      ],
+    });
     if (!isRecipient)
       return res.status(400).json({ error: 'Recipient does not exists.' });
 
@@ -37,6 +47,7 @@ class DeliveryController {
     await Queue.add(NewDeliverynMail.key, {
       delivery,
       deliveryman: isDeliveryman,
+      recipient: isRecipient,
     });
 
     return res.json(delivery);
@@ -153,7 +164,14 @@ class DeliveryController {
           [Op.iLike]: `%${product}%`,
         },
       },
-      attributes: ['id', 'status', 'start_date', 'end_date', 'canceled_at', 'product'],
+      attributes: [
+        'id',
+        'status',
+        'start_date',
+        'end_date',
+        'canceled_at',
+        'product',
+      ],
       sort: ['id'],
       limit: 10,
       offset: (page - 1) * 10,
