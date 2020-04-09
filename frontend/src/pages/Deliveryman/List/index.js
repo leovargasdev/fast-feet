@@ -51,7 +51,7 @@ export default function DeliverymanList() {
                 src={
                   deliveryman.avatar
                     ? deliveryman.avatar.url
-                    : `https://api.adorable.io/avatars/50/${deliveryman.id}.png`
+                    : `https://api.adorable.io/avatars/50/${deliveryman.name}.png`
                 }
               />
               <span>{deliveryman.name}</span>

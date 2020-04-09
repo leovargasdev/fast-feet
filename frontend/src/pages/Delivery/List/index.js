@@ -53,7 +53,11 @@ export default function DeliveryList() {
               <span>{delivery.recipient.name}</span>
               <Deliveryman>
                 <img
-                  src={delivery.deliveryman.avatar.url}
+                  src={
+                    delivery.deliveryman.avatar
+                      ? delivery.deliveryman.avatar.url
+                      : `https://api.adorable.io/avatars/50/${delivery.deliveryman.name}.png`
+                  }
                   alt={`Avatar ${delivery.deliveryman.name}`}
                 />
                 <span>{delivery.deliveryman.name}</span>

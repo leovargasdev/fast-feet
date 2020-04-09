@@ -11,7 +11,7 @@ export const Item = styled.li`
   grid-gap: 10px;
   padding: 12px 20px;
   border-radius: 4px;
-  margin: 4px;
+  margin: 8px 0;
   /* alinha os itens verticalmente */
   align-items: center;
 
