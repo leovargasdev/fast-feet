@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import { parseISO, isBefore, startOfDay, endOfDay, format } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 import { Op } from 'sequelize';
 import Delivery from '../models/Delivery';
 import Deliveryman from '../models/Deliveryman';
@@ -219,10 +220,10 @@ class DeliveryController {
       ],
     });
     const start_date = delivery.start_date
-      ? format(delivery.start_date, 'dd/mm/yyyy')
+      ? format(delivery.start_date, "d 'de' MMMM 'de' yyyy", { locale: pt })
       : 'Não resgistrada';
     const end_date = delivery.end_date
-      ? format(delivery.end_date, 'dd/mm/yyyy')
+      ? format(delivery.end_date, "d 'de' MMMM 'de' yyyy", { locale: pt })
       : 'Não resgistrada';
     return res.json({
       start_date,

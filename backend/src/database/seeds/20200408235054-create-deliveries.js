@@ -75,7 +75,7 @@ module.exports = {
           signature_id: null,
           product: 'Lancha Intermarine 68',
           canceled_at: new Date(),
-          start_date: null,
+          start_date: new Date('03-01-2020'),
           end_date: null,
           created_at: new Date('03-01-2020'),
           updated_at: new Date('03-01-2020'),

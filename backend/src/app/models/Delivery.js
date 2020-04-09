@@ -11,9 +11,9 @@ class Delivery extends Model {
         status: {
           type: Sequelize.VIRTUAL,
           get() {
+            if (this.canceled_at) return 'CANCELADA';
             if (this.end_date) return 'ENTREGUE';
             if (this.start_date) return 'RETIRADA';
-            if (this.canceled_at) return 'CANCELADA';
             return 'PENDENTE';
           },
         },
