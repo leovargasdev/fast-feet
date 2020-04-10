@@ -1,5 +1,12 @@
 import * as Yup from 'yup';
-import { parseISO, isBefore, startOfDay, endOfDay, format } from 'date-fns';
+import {
+  parseISO,
+  isBefore,
+  startOfDay,
+  endOfDay,
+  subHours,
+  format,
+} from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import { Op } from 'sequelize';
 import Delivery from '../models/Delivery';
@@ -87,7 +94,11 @@ class DeliveryController {
 
       const hoursStart = start_date.getHours();
       // Testa se não é uma data do passado e se o horário está entre às 08:00 e às 18:00h
-      if (isBefore(start_date, new Date()) || hoursStart < 8 || hoursStart > 18)
+      if (
+        isBefore(start_date, subHours(new Date(), 1)) ||
+        hoursStart < 8 ||
+        hoursStart > 18
+      )
         return res
           .status(400)
           .json({ error: 'Start date for delivery is not permited!' });

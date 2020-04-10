@@ -24,6 +24,8 @@ export default function Details({route, navigation}) {
   const isFocused = useIsFocused();
   const {id} = route.params;
   const [delivery, setDelivery] = useState('');
+
+  const [startBtn, setStartBtn] = useState(false);
   const [confirmBtn, setConfirmBtn] = useState(false);
   const [newProblemBtn, setNewProblemBtn] = useState(false);
 
@@ -51,23 +53,38 @@ export default function Details({route, navigation}) {
   );
 
   useEffect(() => {
+    setConfirmBtn(!!delivery.end_date);
+    setStartBtn(!!delivery.start_date);
+
+    // Não pode relatar mais problemas após a entrega ter sido confirmada
+    setNewProblemBtn(!startBtn);
+  }, [confirmBtn, delivery, startBtn]);
+
+  useEffect(() => {
     async function loadDelivery() {
       const response = await api.get(`delivery/${id}`);
 
       setDelivery(response.data);
-      // achar uma forma de incluir o !!delivery.start_date
-      setConfirmBtn(!!delivery.end_date);
-      setNewProblemBtn(!!delivery.end_date);
     }
 
     if (isFocused) loadDelivery();
-  }, [delivery.end_date, delivery.start_date, id, isFocused]);
+  }, [id, isFocused, startBtn]);
 
-  function handleClickFooter(nameRoute) {
-    // Não pode ser rota ViewProblems e não importa qual dos dois está desativado
-    if (!nameRoute.includes('ViewProblems') && (confirmBtn || newProblemBtn))
-      Alert.alert('Operação Negada!', 'Esta entrega já foi confirmada!');
-    else navigation.navigate(nameRoute, {id});
+  function handleNewProblem() {
+    if (!newProblemBtn) navigation.navigate('NewProblem', {id});
+    else Alert.alert('Operação Negada!', 'A encomenda ainda não foi retirada!');
+  }
+
+  async function handleCancel() {
+    await api.delete(`problem/${id}/cancel-delivery`);
+    navigation.goBack();
+  }
+
+  async function handleStart() {
+    await api.put(`delivery/${id}`, {
+      start_date: new Date(),
+    });
+    setStartBtn(true);
   }
 
   return (
@@ -119,49 +136,55 @@ export default function Details({route, navigation}) {
           </GroupDatesContent>
         </GroupDates>
       </BoxInfo>
+      {/* NÃO MOSTRAR BTNS SE A ENCOMENDA JÁ FOI CONFIRMADA */}
+      {!confirmBtn && (
+        <BoxBtns>
+          {startBtn === true ? (
+            <BtnFooter
+              onPress={() => navigation.navigate('Confirm', {id})}
+              style={{borderRightWidth: 1, borderRightColor: '#0000001a'}}>
+              <Icon
+                name="check-circle"
+                size={24}
+                color="#7D40E7"
+                style={{opacity: confirmBtn ? 0.3 : 1}}
+              />
+              <BtnText disabled={confirmBtn}>Confirmar</BtnText>
+            </BtnFooter>
+          ) : (
+            <BtnFooter
+              onPress={() => handleStart()}
+              style={{borderRightWidth: 1, borderRightColor: '#0000001a'}}>
+              <Icon name="local-shipping" size={24} color="#79B791" />
+              <BtnText>Retirar</BtnText>
+            </BtnFooter>
+          )}
 
-      <BoxBtns>
-        {/* BTN: RETIRAR */}
-        <BtnFooter
-          onPress={() => {}}
-          style={{borderRightWidth: 1, borderRightColor: '#0000001a'}}>
-          <Icon name="local-shipping" size={24} color="#4BB543" />
-          <BtnText>Retirar</BtnText>
-        </BtnFooter>
-        {/* BTN: CANCELAR */}
-        <BtnFooter
-          onPress={() => {}}
-          style={{borderRightWidth: 1, borderRightColor: '#0000001a'}}>
-          <Icon name="cancel" size={24} color="#E74040" />
-          <BtnText>Cancelar</BtnText>
-        </BtnFooter>
-        {/* BTN: CONFIRMAR */}
-        <BtnFooter onPress={() => handleClickFooter('Confirm')}>
-          <Icon
-            name="check-circle"
-            size={24}
-            color="#7D40E7"
-            style={{opacity: confirmBtn ? 0.3 : 1}}
-          />
-          <BtnText>Confirmar</BtnText>
-        </BtnFooter>
-      </BoxBtns>
+          {/* BTN: CANCELAR */}
+          <BtnFooter onPress={() => handleCancel()}>
+            <Icon name="cancel" size={24} color="#E74040" />
+            <BtnText>Cancelar</BtnText>
+          </BtnFooter>
+        </BoxBtns>
+      )}
 
       <BoxBtns>
         {/* BTN: NOVO PROBLEMA */}
-        <BtnFooter
-          onPress={() => handleClickFooter('NewProblem')}
-          style={{borderRightWidth: 1, borderRightColor: '#0000001a'}}>
-          <Icon
-            name="report"
-            size={24}
-            color="#E74040"
-            style={{opacity: newProblemBtn ? 0.3 : 1}}
-          />
-          <BtnText disabled={newProblemBtn}>Informar Problema</BtnText>
-        </BtnFooter>
+        {!confirmBtn && (
+          <BtnFooter
+            onPress={() => handleNewProblem()}
+            style={{borderRightWidth: 1, borderRightColor: '#0000001a'}}>
+            <Icon
+              name="report"
+              size={24}
+              color="#86BBD8"
+              style={{opacity: newProblemBtn ? 0.3 : 1}}
+            />
+            <BtnText disabled={newProblemBtn}>Informar Problema</BtnText>
+          </BtnFooter>
+        )}
         {/* BTN: LISTAR PROBLEMAS */}
-        <BtnFooter onPress={() => handleClickFooter('ViewProblems')}>
+        <BtnFooter onPress={() => navigation.navigate('ViewProblems', {id})}>
           <Icon name="list" size={24} color="#E7BA40" />
           <BtnText>Visualizar Problemas</BtnText>
         </BtnFooter>
