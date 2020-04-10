@@ -60,6 +60,7 @@ export const BoxBtns = styled.View`
   border-width: 1px;
   border-color: #0000001a;
   border-radius: 4px;
+  margin-bottom: 10px;
 `;
 
 export const BtnFooter = styled(TouchableOpacity)`

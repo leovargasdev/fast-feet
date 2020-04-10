@@ -23,6 +23,7 @@ import {
   ItemMenu,
   ItemMenuText,
   Deliveries,
+  WarningListDeliveries,
 } from './styles';
 
 export default function Dashboard() {
@@ -48,7 +49,7 @@ export default function Dashboard() {
     }
 
     loadDeliveries();
-  }, [deliveriesPending]);
+  }, [deliveriesPending, deliveryman.id]);
 
   function handleLogout() {
     dispatch(signOut());
@@ -95,6 +96,12 @@ export default function Dashboard() {
           data={deliveries}
           keyExtractor={item => String(item.id)}
           renderItem={({item}) => <Delivery data={item} />}
+          ListEmptyComponent={
+            <WarningListDeliveries>
+              Não há nenhuma encomenda
+              {deliveriesPending ? ' pendende' : ' para ser entregue'}!
+            </WarningListDeliveries>
+          }
         />
       </Content>
     </Container>

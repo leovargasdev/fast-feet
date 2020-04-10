@@ -121,10 +121,39 @@ export default function Details({route, navigation}) {
       </BoxInfo>
 
       <BoxBtns>
-        {/* BTN: NOVO PROBLEMA */}
-        <BtnFooter onPress={() => handleClickFooter('NewProblem')}>
+        {/* BTN: RETIRAR */}
+        <BtnFooter
+          onPress={() => {}}
+          style={{borderRightWidth: 1, borderRightColor: '#0000001a'}}>
+          <Icon name="local-shipping" size={24} color="#4BB543" />
+          <BtnText>Retirar</BtnText>
+        </BtnFooter>
+        {/* BTN: CANCELAR */}
+        <BtnFooter
+          onPress={() => {}}
+          style={{borderRightWidth: 1, borderRightColor: '#0000001a'}}>
+          <Icon name="cancel" size={24} color="#E74040" />
+          <BtnText>Cancelar</BtnText>
+        </BtnFooter>
+        {/* BTN: CONFIRMAR */}
+        <BtnFooter onPress={() => handleClickFooter('Confirm')}>
           <Icon
-            name="highlight-off"
+            name="check-circle"
+            size={24}
+            color="#7D40E7"
+            style={{opacity: confirmBtn ? 0.3 : 1}}
+          />
+          <BtnText>Confirmar</BtnText>
+        </BtnFooter>
+      </BoxBtns>
+
+      <BoxBtns>
+        {/* BTN: NOVO PROBLEMA */}
+        <BtnFooter
+          onPress={() => handleClickFooter('NewProblem')}
+          style={{borderRightWidth: 1, borderRightColor: '#0000001a'}}>
+          <Icon
+            name="report"
             size={24}
             color="#E74040"
             style={{opacity: newProblemBtn ? 0.3 : 1}}
@@ -133,18 +162,8 @@ export default function Details({route, navigation}) {
         </BtnFooter>
         {/* BTN: LISTAR PROBLEMAS */}
         <BtnFooter onPress={() => handleClickFooter('ViewProblems')}>
-          <Icon name="info-outline" size={24} color="#E7BA40" />
+          <Icon name="list" size={24} color="#E7BA40" />
           <BtnText>Visualizar Problemas</BtnText>
-        </BtnFooter>
-        {/* BTN: CONFIRMAR ENTREGA */}
-        <BtnFooter onPress={() => handleClickFooter('Confirm')}>
-          <Icon
-            name="check-circle"
-            size={24}
-            color="#7D40E7"
-            style={{opacity: confirmBtn ? 0.3 : 1}}
-          />
-          <BtnText disabled={confirmBtn}>Confirmar Entrega</BtnText>
         </BtnFooter>
       </BoxBtns>
     </BoxNavigate>

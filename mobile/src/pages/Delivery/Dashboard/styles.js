@@ -83,3 +83,12 @@ export const ItemMenuText = styled.Text`
 export const Deliveries = styled.FlatList.attrs({
   showsVerticalScrollIndicator: false,
 })``;
+
+export const WarningListDeliveries = styled.Text`
+  font-size: 22px;
+  font-weight: bold;
+  color: #7d40e7;
+  margin-top: 150px;
+  text-align: center;
+  text-transform: uppercase;
+`;
