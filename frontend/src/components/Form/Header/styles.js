@@ -18,7 +18,7 @@ export const Btns = styled.div`
   button {
     display: flex;
     align-items: center;
-    padding: 8px 14px;
+    padding: 7px 25px;
     display: flex;
     margin-left: 15px;
   }

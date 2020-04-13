@@ -44,6 +44,6 @@ export default function Select({ name, label, ...rest }) {
 }
 
 Select.propTypes = {
-  name: PropTypes.number.isRequired,
-  label: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
 };

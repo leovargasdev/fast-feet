@@ -1,25 +1,12 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  height: 100%;
-  background: #7d40e7;
   display: flex;
+  flex-direction: column;
+  background: linear-gradient(0deg, #0b102d, #7d40e7);
+
   justify-content: center;
   align-items: center;
-`;
 
-export const Content = styled.div`
-  width: 100%;
-  max-width: 360px;
-  text-align: center;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  box-shadow: 0px 0px 10px #00000033;
-  border-radius: 4px;
-  opacity: 1;
-
-  img {
-    margin-top: 30px;
-    width: 181px;
-    height: 33px;
-  }
+  height: 100vh;
 `;

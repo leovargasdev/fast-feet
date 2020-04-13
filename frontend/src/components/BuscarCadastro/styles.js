@@ -10,7 +10,7 @@ export const Container = styled.div`
 
   a {
     display: flex;
-    padding: 8px 20px;
+    padding: 12px 20px;
     background: #7d40e7;
     border-radius: 4px;
 
@@ -21,7 +21,7 @@ export const Container = styled.div`
     text-transform: uppercase;
 
     &:hover {
-      background: ${darken(0.2, '#7d40e7')};
+      background: ${darken(0.1, '#7d40e7')};
     }
 
     svg {

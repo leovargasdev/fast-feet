@@ -1,13 +1,14 @@
+import * as Yup from 'yup';
+import { Form } from '@unform/web';
 import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Form } from '@unform/web';
-import * as Yup from 'yup';
 
-import { signInRequest } from '~/store/modules/auth/actions';
 import Input from '~/components/Form/Input';
+import { signInRequest } from '~/store/modules/auth/actions';
 import { ContainerForm } from '~/components/Form/Container/styles';
-import logo from '~/assets/logo.png';
-import { BtnLogin } from './styles';
+
+import logo from '~/assets/logo_white.png';
+import { Container, BtnLogin } from './styles';
 
 export default function SignIn() {
   const formRef = useRef(null);
@@ -38,8 +39,8 @@ export default function SignIn() {
   }
 
   return (
-    <>
-      <img src={logo} alt="Fast Feet" />
+    <Container>
+      <img src={logo} alt="Fast Feet" width={300} height="auto" />
       <Form ref={formRef} onSubmit={handleSubmit}>
         <ContainerForm>
           <Input
@@ -62,6 +63,6 @@ export default function SignIn() {
           </BtnLogin>
         </ContainerForm>
       </Form>
-    </>
+    </Container>
   );
 }
