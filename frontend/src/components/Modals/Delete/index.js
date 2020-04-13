@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 
-import { ContentModal, BtnYes, BtnNo } from './styles';
+import { ContentModal, ContainerBtns, BtnYes, BtnNo } from './styles';
 
 const customStyles = {
   content: {
@@ -15,7 +15,14 @@ const customStyles = {
   },
 };
 
-export default function ModalDelete({ setIsOpen, handleDelete, isOpen }) {
+const messageContent = {
+  Encomenda: 'remover esta encomenda',
+  Entregador: 'remover este entregador',
+  Destinatario: 'remover este destinatário',
+  Problema: 'cancelar esta encomenda',
+};
+
+export default function ModalDelete({ type, setIsOpen, handleDelete, isOpen }) {
   function closeModal() {
     setIsOpen({ ...isOpen, del: false });
   }
@@ -28,13 +35,15 @@ export default function ModalDelete({ setIsOpen, handleDelete, isOpen }) {
       contentLabel="Remover Encomenda"
     >
       <ContentModal>
-        <h2>Você realmente deseja remover esta Encomenda??</h2>
-        <BtnYes type="button" onClick={handleDelete}>
-          Sim
-        </BtnYes>
-        <BtnNo type="button" onClick={closeModal}>
-          Não
-        </BtnNo>
+        <h2>Você deseja {messageContent[type]}?</h2>
+        <ContainerBtns>
+          <BtnYes type="button" onClick={handleDelete}>
+            Sim
+          </BtnYes>
+          <BtnNo type="button" onClick={closeModal}>
+            Não
+          </BtnNo>
+        </ContainerBtns>
       </ContentModal>
     </Modal>
   );
@@ -44,4 +53,5 @@ ModalDelete.propTypes = {
   setIsOpen: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
   isOpen: PropTypes.object.isRequired,
+  type: PropTypes.string,
 };

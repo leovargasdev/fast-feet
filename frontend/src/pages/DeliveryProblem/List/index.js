@@ -10,6 +10,7 @@ import { Container, ProblemDescription } from './styles';
 
 export default function DeliveryProblemList() {
   const [deliveryProblems, setDeliveryProblems] = useState([]);
+  const [reloadList, setReloadList] = useState(false);
 
   useEffect(() => {
     async function loadDeliveryProblems() {
@@ -18,7 +19,7 @@ export default function DeliveryProblemList() {
     }
 
     loadDeliveryProblems();
-  }, []);
+  }, [reloadList]);
 
   return (
     <Container>
@@ -36,12 +37,16 @@ export default function DeliveryProblemList() {
               <span>#{delProblem.id}</span>
               <ProblemDescription>{delProblem.description}</ProblemDescription>
               <ActionsDrop
+                setReloadList={setReloadList}
                 actions={{
                   view: {
                     url: `/problem/${delProblem.id}/view`,
                     type: 'deliveryProblem',
                   },
-                  del: `/link`,
+                  cancel: {
+                    url: `/problem/${delProblem.id}/cancel-delivery`,
+                    type: 'Problema',
+                  },
                 }}
               />
             </Item>

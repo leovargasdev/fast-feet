@@ -17,7 +17,6 @@ export const Container = styled.div`
 `;
 
 export const Actions = styled.div`
-  width: auto;
   padding: 12px 18px;
 `;
 

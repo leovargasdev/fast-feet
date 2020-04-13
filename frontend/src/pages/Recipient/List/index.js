@@ -52,8 +52,8 @@ export default function RecipientList() {
                 setReloadList={setReloadList}
                 actions={{
                   del: {
-                    url: `/recipient/${recipient.id}`,
-                    type: 'Destinatário',
+                    url: `recipient/${recipient.id}`,
+                    type: 'Destinatario',
                   },
                   edit: `/recipient/${recipient.id}/edit`,
                 }}

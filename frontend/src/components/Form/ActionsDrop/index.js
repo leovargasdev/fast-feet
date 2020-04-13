@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import Popup from 'reactjs-popup';
-import { MdDelete, MdEdit, MdVisibility } from 'react-icons/md';
+import {
+  MdDelete,
+  MdEdit,
+  MdVisibility,
+  MdDeleteForever,
+} from 'react-icons/md';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -15,11 +20,16 @@ export default function ActionsDrop({ setReloadList, actions }) {
   const [modalIsOpen, setIsOpen] = useState({ view: false, del: false });
 
   async function handleModalDelete() {
-    const { url, type } = actions.del;
+    const { url, type } = actions.del || actions.cancel;
     await api.delete(url);
     setReloadList(true);
     setIsOpen(false);
-    toast.info(`${type} excluida!`);
+    if (type.includes('Problema')) {
+      toast.success('Encomenda cancelada com sucesso!');
+      toast.info('E-mail enviado ao entregador!');
+    } else {
+      toast.info(`${type} excluida!`);
+    }
   }
 
   async function handleModalView() {
@@ -36,6 +46,7 @@ export default function ActionsDrop({ setReloadList, actions }) {
         position="bottom center"
         on="click"
         contentStyle={{
+          width: '160px',
           borderRadius: '4px',
         }}
       >
@@ -67,12 +78,24 @@ export default function ActionsDrop({ setReloadList, actions }) {
               </button>
             </Action>
           )}
+          {actions.cancel && (
+            <Action>
+              <button
+                type="button"
+                onClick={() => setIsOpen({ ...modalIsOpen, del: true })}
+              >
+                <MdDeleteForever size={16} color="#DE3B3B" />
+                <p>Cancelar</p>
+              </button>
+            </Action>
+          )}
         </Actions>
       </Popup>
       <ModalDelete
         isOpen={modalIsOpen}
         setIsOpen={setIsOpen}
         handleDelete={handleModalDelete}
+        type={actions.del ? actions.del.type : actions.cancel.type}
       />
       <ModalView
         isOpen={modalIsOpen}
