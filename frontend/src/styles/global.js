@@ -1,8 +1,26 @@
 import { createGlobalStyle } from 'styled-components';
 import 'react-toastify/dist/ReactToastify.css';
+import { darken } from 'polished';
 
 export default createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #7d40e7;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: ${darken(0.2, '#7d40e7')};
+  }
+  /* cor secudária */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 1px #000;
+    border-radius: 10px;
+    background: #FFF;
+  }
 
   *{
     margin: 0;
