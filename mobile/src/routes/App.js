@@ -11,10 +11,16 @@ export default function App() {
   return (
     <Tab.Navigator
       initialRouteName="Delivery"
+      unmountOnBlur
       tabBarOptions={{
         keyboardHidesTabBar: true,
         activeTintColor: '#7D40E7',
         inactiveTintColor: '#999',
+        tabStyle: {
+          backgroundColor: '#fff',
+          borderTopWidth: 1,
+          borderTopColor: 'rgba(0,0,0,0.1)',
+        },
       }}>
       <Tab.Screen
         name="Delivery"

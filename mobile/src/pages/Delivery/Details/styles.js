@@ -1,6 +1,8 @@
 import styled from 'styled-components/native';
 import {TouchableOpacity} from 'react-native';
 
+import Button from '~/components/Button';
+
 export const BoxInfo = styled.View`
   align-self: stretch;
   margin-bottom: 15px;
@@ -63,17 +65,23 @@ export const BoxBtns = styled.View`
   margin-bottom: 10px;
 `;
 
+export const BtnStart = styled(Button)`
+  width: 100%;
+  background: #79b791;
+`;
+
 export const BtnFooter = styled(TouchableOpacity)`
   flex: 1;
   color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 20px;
+  padding: 8px 10px;
+  border-radius: 4px;
 `;
 
 export const BtnText = styled.Text`
   text-align: center;
-  font-size: 12px;
-  color: ${props => (props.disabled ? '#777' : '#444')};
+  font-size: ${props => (props.oneButton ? '14px' : '12px')};
+  color: ${props => (props.oneButton ? '#FFF' : '#444')};
 `;
