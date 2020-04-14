@@ -16,3 +16,13 @@ export const ProblemDescription = styled.span`
   text-overflow: ellipsis;
   max-width: 100%;
 `;
+
+export const Canceled = styled.span`
+  background: #e50000;
+  color: #fff !important;
+  font-weight: bold;
+  font-size: 12px !important;
+  padding: 2px 10px;
+  margin-left: 10px;
+  border-radius: 4px;
+`;

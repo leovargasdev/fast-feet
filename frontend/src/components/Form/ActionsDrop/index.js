@@ -78,7 +78,7 @@ export default function ActionsDrop({ setReloadList, actions }) {
               </button>
             </Action>
           )}
-          {actions.cancel && (
+          {actions.cancel && !actions.cancel.disabled && (
             <Action>
               <button
                 type="button"

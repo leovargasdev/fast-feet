@@ -6,7 +6,7 @@ import { Item, List } from '~/components/ListItens/styles';
 import ActionsDrop from '~/components/Form/ActionsDrop';
 
 import api from '~/services/api';
-import { Container, ProblemDescription } from './styles';
+import { Container, ProblemDescription, Canceled } from './styles';
 
 export default function DeliveryProblemList() {
   const [deliveryProblems, setDeliveryProblems] = useState([]);
@@ -34,7 +34,12 @@ export default function DeliveryProblemList() {
           </Item>
           {deliveryProblems.map(delProblem => (
             <Item key={delProblem.id}>
-              <span>#{delProblem.id}</span>
+              <span>
+                #{delProblem.delivery.id}
+                {delProblem.delivery.canceled_at && (
+                  <Canceled>CANCELADA</Canceled>
+                )}
+              </span>
               <ProblemDescription>{delProblem.description}</ProblemDescription>
               <ActionsDrop
                 setReloadList={setReloadList}
@@ -44,6 +49,7 @@ export default function DeliveryProblemList() {
                     type: 'deliveryProblem',
                   },
                   cancel: {
+                    disabled: !!delProblem.delivery.canceled_at,
                     url: `/problem/${delProblem.id}/cancel-delivery`,
                     type: 'Problema',
                   },
