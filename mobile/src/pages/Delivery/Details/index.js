@@ -65,7 +65,7 @@ export default function Details({route, navigation}) {
     }
 
     if (isFocused) loadDelivery();
-  }, [id, isFocused]);
+  }, [id, isFocused, startedDelivery]);
 
   async function handleStart() {
     await api.put(`delivery/${id}`, {

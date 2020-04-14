@@ -37,8 +37,8 @@ export default function Dashboard() {
 
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBarStyle('light-content');
-      StatusBar.setBackgroundColor('#7d40e7');
+      StatusBar.setBarStyle('dark-content');
+      StatusBar.setBackgroundColor('#FFF');
     }, []),
   );
 

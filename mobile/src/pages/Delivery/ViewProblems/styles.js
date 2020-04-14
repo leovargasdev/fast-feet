@@ -8,12 +8,13 @@ export const TitleHeader = styled.Text`
 
 export const Problems = styled.FlatList.attrs({
   showsVerticalScrollIndicator: false,
-})``;
+})`
+  width: 100%;
+`;
 
 export const Problem = styled.View`
   display: flex;
-  flex-direction: column-reverse;
-  justify-content: space-between;
+  flex-direction: column;
 
   margin-top: 15px;
   padding: 8px 10px;

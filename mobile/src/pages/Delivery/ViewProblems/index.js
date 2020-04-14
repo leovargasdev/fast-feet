@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, {useState, useEffect} from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {format, parseISO} from 'date-fns';
-
+import pt from 'date-fns/locale/pt';
 import BoxNavigate from '~/pages/Delivery/BoxNavigate';
 import {
   TitleHeader,
@@ -27,7 +27,11 @@ export default function ViewProblems({route}) {
       setProblems(
         response.data.map(problem => {
           return {
-            dateFormatted: format(parseISO(problem.createdAt), 'dd/MM/yyyy'),
+            dateFormatted: format(
+              parseISO(problem.createdAt),
+              "d 'de' MMMM 'de' yyyy",
+              {locale: pt},
+            ),
             ...problem,
           };
         }),
@@ -45,7 +49,6 @@ export default function ViewProblems({route}) {
         keyExtractor={item => String(item.id)}
         renderItem={({item}) => (
           <Problem>
-            <Descripiton>{item.description}</Descripiton>
             <ContentData>
               <Icon
                 name="event"
@@ -55,6 +58,7 @@ export default function ViewProblems({route}) {
               />
               <Data>{item.dateFormatted}</Data>
             </ContentData>
+            <Descripiton>{item.description}</Descripiton>
           </Problem>
         )}
         ListEmptyComponent={
