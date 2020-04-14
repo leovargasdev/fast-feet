@@ -6,11 +6,11 @@ export const Container = styled.View`
   display: flex;
   flex-direction: column;
   background: #fff;
-  padding: 12px 0 0;
+  padding-top: 10px;
 
-  margin-top: 10px;
   border-radius: 4px;
   border: 1px solid #f1f1f1;
+  margin-bottom: 15px;
 `;
 
 export const ContentTitle = styled.View`
@@ -31,8 +31,7 @@ export const Progress = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
-  margin-top: 8px;
+  padding: 10px 20px;
 `;
 
 export const GroupProgress = styled.View`
@@ -70,7 +69,7 @@ export const Footer = styled.View`
   justify-content: space-between;
 
   background: #f1f1f1;
-  padding: 4px 12px 12px;
+  padding: 10px 12px;
   margin-top: 8px;
 `;
 
@@ -81,17 +80,16 @@ export const Group = styled.View`
 
 export const Label = styled.Text`
   color: #999;
-  font-size: 8px;
+  font-size: 9px;
 `;
 
 export const Info = styled.Text`
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   color: #444;
 `;
 
 export const BtnDetails = styled(TouchableOpacity)`
   background: transparent;
-  color: #000;
   border: none;
 `;

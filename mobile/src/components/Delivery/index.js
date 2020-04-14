@@ -86,5 +86,12 @@ export default function Delivery({data}) {
 }
 
 Delivery.propTypes = {
-  data: PropTypes.objectOf.isRequired,
+  data: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    recipient: PropTypes.shape({
+      city: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
 };
