@@ -66,7 +66,11 @@ export default function ModalView({ setIsOpen, isOpen, info }) {
         )}
         {info.type === 'deliveryProblem' && (
           <ContentProblem>
-            <strong> VISUALIZAR PROBLEMA </strong>
+            <h3> VISUALIZAR PROBLEMA </h3>
+            <strong>Produto</strong>
+            <p> {info.delivery.product} </p>
+
+            <strong>Descrição</strong>
             <p> {info.description} </p>
           </ContentProblem>
         )}

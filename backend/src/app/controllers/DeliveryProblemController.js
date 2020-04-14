@@ -89,6 +89,11 @@ class DeliveryProblemController {
 
     const problemDelivey = await DeliveryProblem.findByPk(id, {
       attributes: ['id', 'description'],
+      include: {
+        model: Delivery,
+        as: 'delivery',
+        attributes: ['id', 'product'],
+      },
     });
 
     return res.json(problemDelivey);

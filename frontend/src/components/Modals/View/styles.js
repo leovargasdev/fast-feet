@@ -48,18 +48,24 @@ export const ContentProblem = styled.div`
   flex-direction: column;
   padding: 10px 0;
 
-  p,
-  strong {
-    color: #444;
-    font-size: 16px;
-  }
-
-  strong {
+  h3 {
+    font-size: 20px;
+    color: #333;
+    text-align: center;
     font-weight: bold;
     margin-bottom: 5px;
   }
 
+  strong {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #777;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
   p {
+    color: #444;
+    font-size: 16px;
     line-height: 25px;
     font-weight: 300;
   }
