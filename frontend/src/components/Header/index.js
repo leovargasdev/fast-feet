@@ -7,7 +7,6 @@ import { signOut } from '~/store/modules/auth/actions';
 import { Container, Content, Profile } from './styles';
 
 export default function Header() {
-  const cssActiveLink = { fontWeight: 'bold', color: '#444' };
   const profile = useSelector(state => state.user.profile);
   const dispatch = useDispatch();
 
@@ -16,18 +15,10 @@ export default function Header() {
       <Content>
         <nav>
           <img src={logo} alt="fastfeet" />
-          <NavLink to="/deliveries" activeStyle={cssActiveLink}>
-            Encomendas
-          </NavLink>
-          <NavLink to="/deliverymen" activeStyle={cssActiveLink}>
-            Entregadores
-          </NavLink>
-          <NavLink to="/recipients" activeStyle={cssActiveLink}>
-            Destinatários
-          </NavLink>
-          <NavLink to="/delivery-problems" activeStyle={cssActiveLink}>
-            Problemas
-          </NavLink>
+          <NavLink to="/deliveries">Encomendas</NavLink>
+          <NavLink to="/deliverymen">Entregadores</NavLink>
+          <NavLink to="/recipients">Destinatários</NavLink>
+          <NavLink to="/delivery-problems">Problemas</NavLink>
         </nav>
         <aside>
           <Profile>

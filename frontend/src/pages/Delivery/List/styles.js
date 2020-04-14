@@ -14,7 +14,7 @@ export const Container = styled.div`
   flex-direction: column;
 
   li {
-    grid-template-columns: 1fr 2fr 3fr 2fr 1fr 2fr 1fr;
+    grid-template-columns: 1fr 2fr 3fr 2fr 1fr 1fr 1fr;
   }
 `;
 
@@ -32,22 +32,24 @@ export const Deliveryman = styled.div`
 `;
 
 export const Status = styled.div`
-  width: auto;
-  margin: 0;
+  width: 100%;
+  background: ${props => darken(0.1, colorsStatus[props.color])};
+  border-radius: 6px;
+  text-align: center;
+  margin-left: 10px;
+  padding: 6px 0;
 
   span {
-    font-size: 15px;
-    padding: 7px 10px;
-    background: ${props => darken(0.1, colorsStatus[props.color])};
-    border-radius: 8px;
-    color: rgba(255, 255, 255, 0.9);
+    font-size: 12px;
+    color: #fff;
     font-weight: bold;
+    letter-spacing: 1px;
 
     &::before {
       display: inline-block;
       width: 10px;
       height: 10px;
-      background: ${props => lighten(0.3, colorsStatus[props.color])};
+      background: ${props => lighten(0.2, colorsStatus[props.color])};
       content: '';
       border-radius: 50%;
       margin-right: 5px;

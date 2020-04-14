@@ -5,15 +5,13 @@ export const Container = styled.div`
   padding: 0 30px;
 `;
 export const Content = styled.div`
-  height: 64px;
-  /* max-width: 900px; */
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 14px 0;
 
   nav {
-    /* Alinha os itens na verticalmente */
     display: flex;
     align-items: center;
 
@@ -22,7 +20,7 @@ export const Content = styled.div`
       padding-right: 20px;
       border-right: 1px solid #eee;
       width: 135px;
-      height: 26px;
+      height: auto;
     }
 
     a {
@@ -31,6 +29,11 @@ export const Content = styled.div`
       font-weight: normal;
       text-transform: uppercase;
       padding-right: 20px;
+    }
+    /* class dentro do href */
+    .active {
+      color: #444;
+      font-weight: bold;
     }
   }
   aside {
