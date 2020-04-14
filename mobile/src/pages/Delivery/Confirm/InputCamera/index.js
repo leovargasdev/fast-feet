@@ -1,5 +1,5 @@
-import {Alert} from 'react-native';
 import PropTypes from 'prop-types';
+import Snackbar from 'react-native-snackbar';
 import {RNCamera} from 'react-native-camera';
 import React, {useRef, useState} from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -33,10 +33,11 @@ export default function InputCamera({loadPreview}) {
       setLoading(false);
       loadPreview(id, url);
     } catch (error) {
-      Alert.alert(
-        'Erro ao carregar imagem',
-        'Não foi possível carrgar a imagem',
-      );
+      Snackbar.show({
+        text: 'Não foi possível carrgar a imagem!',
+        duration: Snackbar.LENGTH_SHORT,
+        backgroundColor: '#e50000',
+      });
     }
   }
 

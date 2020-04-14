@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
-import {Alert} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
+import React, {useState} from 'react';
+import Snackbar from 'react-native-snackbar';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
 import previewImage from '~/assets/preview.png';
 
 import Camera from './InputCamera';
@@ -15,7 +16,7 @@ export default function ConfirmDelivery({navigation, route}) {
   const {id} = route.params;
   const [cameraOpen, setCameraOpen] = useState(false);
   const [preview, setPreview] = useState(previewImage);
-  const [fileId, setFileId] = useState('');
+  const [fileId, setFileId] = useState(-1);
 
   function loadPreview(imageId, url) {
     setFileId(imageId);
@@ -25,10 +26,11 @@ export default function ConfirmDelivery({navigation, route}) {
 
   async function handleSubmit() {
     if (fileId === -1) {
-      Alert.alert(
-        'Campos obrigatórios não preenchidos',
-        'Por favor, inclua uma foto da assinatura do destinatário!',
-      );
+      Snackbar.show({
+        text: 'Por favor, inclua uma foto da assinatura do destinatário!',
+        duration: Snackbar.LENGTH_SHORT,
+        backgroundColor: '#E7BA40',
+      });
     } else {
       try {
         await api.put(`delivery/${id}`, {
@@ -36,15 +38,17 @@ export default function ConfirmDelivery({navigation, route}) {
           signature_id: fileId,
         });
         navigation.goBack();
-        Alert.alert(
-          'Entrega confirmada',
-          'A entrega foi confirmada com sucesso!',
-        );
+        Snackbar.show({
+          text: 'A entrega foi confirmada com sucesso!',
+          duration: Snackbar.LENGTH_SHORT,
+          backgroundColor: '#79b791',
+        });
       } catch (error) {
-        Alert.alert(
-          'Erro ao confirmar entrega',
-          'Não foi possível confirmar a entrega!',
-        );
+        Snackbar.show({
+          text: 'Não foi possível confirmar a entrega!',
+          duration: Snackbar.LENGTH_SHORT,
+          backgroundColor: '#e50000',
+        });
       }
     }
   }
