@@ -48,6 +48,12 @@ class DeliveryProblemController {
 
     const deliveriesProblems = await DeliveryProblem.findAll({
       attributes: ['id', 'description'],
+      include: {
+        model: Delivery,
+        as: 'delivery',
+        attributes: ['id', 'canceled_at'],
+      },
+      order: [[{ model: Delivery, as: 'delivery' }, 'id', 'ASC']],
     });
 
     return res.json(deliveriesProblems);
@@ -59,9 +65,9 @@ class DeliveryProblemController {
     const delivery = await Delivery.findByPk(id);
     if (!delivery)
       return res.status(400).json({ error: 'Delivery is not available.' });
-    else if (delivery.end_date)
+    if (delivery.end_date)
       return res.status(400).json({ error: 'Delivery already finish.' });
-    else if (delivery.canceled_at)
+    if (delivery.canceled_at)
       return res.status(400).json({ error: 'Delivery it is already cancel.' });
 
     const deliveryman = await Deliveryman.findByPk(delivery.deliveryman_id);
