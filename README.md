@@ -2,11 +2,9 @@
   <img alt="FastFeet" title="FastFeet" src=".github/logo.png" width="300px" />
 </h1>
 
-<p>
-  O FastFeet uma aplicação completa(Back-end, Front-end, Mobile) desenvolvida durante o Bootcamp GoStack 
-  da <a target="_blank" href="https://rocketseat.com.br/">Rocketseat</a>. Esse projeto é o desafio final do curso que será
-  avialido para a emissão do Certificado.
-</p>
+<h4 align = "center">
+  Um aplicativo de gestão e acompanhamento de encomendas
+</h4>
 
 <p align="center">
   <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/leeonardovargas/fast-feet.svg">
@@ -26,73 +24,82 @@
   <img alt="GitHub" src="https://img.shields.io/github/license/leeonardovargas/fast-feet.svg">
 </p>
 
-## 💻 Projeto e Tecnologias
+<p align="center">
+  <a href="#rocket-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-instalação-e-execução">Instalação e execução</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-licença">Licença</a>
+</p>
 
-- Descrever aplicação...
-- Tanto no Web quanto no mobile foi usado o [Redux](https://redux.js.org/) e o [Redux-Saga](https://redux-saga.js.org/).
-- Middleware para validação de entrada 
-- Criação de estilos com o [Styled-Components](https://styled-components.com/)
-- Tratamento das datas [Date-fns](https://date-fns.org/)
-- Ferramenta para debug do React e React Native [Reactotron](https://github.com/infinitered/reactotron)
+<p align="center">
+  <img alt="Screen Shot 1" src=".github/screen-shot-1.png" width="100%">
+</p>
 
-### Backend
+<p align="center">
+  <img alt="Screen Shot 2" src=".github/screen-shot-2.png" width="100%">
+</p>
+
+
+## :rocket: Tecnologias
+
 -  [Node.js](https://nodejs.org/en/)
 -  [Docker](https://docs.docker.com/)
--  [PostgreSQL](https://www.postgresql.org/)
 -  [MailTrap](https://mailtrap.io/)
--  [Redis](https://redis.io/)
-
-### Web
 -  [React](https://pt-br.reactjs.org/)
+-  [Redux](https://redux.js.org/)
+-  [Redux-Saga](https://redux-saga.js.org/)
+-  [React-Toastify](https://fkhadra.github.io/react-toastify/)
+-  [Styled-components](https://www.styled-components.com/)
 -  [Unform](https://unform.dev/)
--  [React-Toastify](https://github.com/fkhadra/react-toastify#installation)
 -  [React-Icons](https://react-icons.netlify.com/)
 -  [Yup](https://github.com/jquense/yup)
-
-### Mobile
+-  [Date-fns](https://date-fns.org/)
 -  [React Native](https://reactnative.dev/)
--  [React-Navigation V5](https://reactnavigation.org/)
+-  [React Navigation v5](https://reactnavigation.org/)
 -  [React-Native-Vector-Icons](https://oblador.github.io/react-native-vector-icons/)
+-  [ESLint](https://eslint.org/)
 
 Permitir que o mobile consiga acessar o localhost da api
 ```sh
 $ adb reverse tcp:3333 tcp:3333
 ```
 
-## :rocket: Instalação e execução
+## 💻 Projeto
 
-### Backend
+O FastFeet uma aplicação completa(Back-end, Front-end, Mobile) desenvolvida durante o Bootcamp GoStack 
+da <a target="_blank" href="https://rocketseat.com.br/">Rocketseat</a>. Esse projeto é o desafio final do curso que será
+avialido para a emissão do Certificado.
 
-```bash
-
-cd backend/
-
-yarn install
-
-docker run --name postgres-fastfeet -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
-
-docker exec -it postgres-fastfeet psql -h localhost -U postgres -c "CREATE DATABASE fastfeet"
-
-docker run --name redis-fastfeet -p 6379:6379 -d -t redis:alpine
-
-yarn sequelize db:migrate
-
-yarn sequelize db:seed:all
-
-mkdir temp/uploads
-
-yarn dev
-```
-
-Em outra janela/aba do terminal
+## :information_source: Instalação e execução
 
 ```bash
+# Clone esse repositório e acesse o diretório 
+$ git clone https://github.com/LeeonardoVargas/fast-feet.git && cd fast-feet
+```
 
-yarn queue
+#### backend
+
+```bash
+# Acessar diretório 
+$ cd backend/
+# Criando container Postgres 
+$ docker run --name postgres-fastfeet -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+# Criando database fastfeet no container postgres-fastfeet  
+$ docker exec -it postgres-fastfeet psql -h localhost -U postgres -c "CREATE DATABASE fastfeet"
+# Criando container Redis 
+$ docker run --name redis-fastfeet -p 6379:6379 -d -t redis:alpine
+# Executando o migrate e os seeds 
+$ yarn sequelize db:migrate && yarn sequelize db:seed:all
+# Executando 
+$ sh init.sh
+
+# Abra outra janela/aba do terminal 
+$ yarn queue
 
 ```
 
-## Backend
+
+#### frontend
 
 ```bash
 
