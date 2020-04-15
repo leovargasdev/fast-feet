@@ -38,8 +38,15 @@ export const Signature = styled.div`
   }
 
   span {
-    font-size: 20px;
-    color: #333;
+    display: flex;
+    align-items: center;
+    padding: 15px 70px;
+    border: 1px solid #333;
+    border-radius: 2px;
+    margin-top: 12px;
+
+    font-size: 18px;
+    color: #666;
   }
 `;
 

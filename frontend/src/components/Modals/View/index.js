@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
-
+import { MdClose } from 'react-icons/md';
 import { Container, GroupInfo, Signature, ContentProblem } from './styles';
 
 const customStyles = {
@@ -58,7 +58,10 @@ export default function ModalView({ setIsOpen, isOpen, info }) {
                     alt="Foto da assinatura do destinatário"
                   />
                 ) : (
-                  <span>Sem Assinatura</span>
+                  <span>
+                    <MdClose size={25} color="#c52121" />
+                    Sem Assinatura
+                  </span>
                 )}
               </Signature>
             </GroupInfo>

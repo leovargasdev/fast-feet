@@ -1,3 +1,6 @@
+import { format } from 'date-fns';
+import pt from 'date-fns/locale/pt';
+
 import Mail from '../../lib/Mail';
 
 class NewDeliverynMail {
@@ -17,6 +20,9 @@ class NewDeliverynMail {
         product: delivery.product,
         recipient: recipient.name,
         adress: `(${recipient.cep}) ${recipient.adress}`,
+        date: format(new Date(), "dd 'de' MMMM', às' H:mm'h'", {
+          locale: pt,
+        }),
       },
     });
   }

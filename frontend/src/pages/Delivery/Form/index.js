@@ -75,6 +75,7 @@ export default function DeliveryForm({ match }) {
       } else {
         await api.post('/delivery', { ...data });
         toast.success('Encomenda criada com sucesso!');
+        toast.info('E-mail encaminhado ao entregador!');
       }
       history.push('/deliveries');
     } catch (err) {
