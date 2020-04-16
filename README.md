@@ -59,59 +59,82 @@
 -  [React-Native-Vector-Icons](https://oblador.github.io/react-native-vector-icons/)
 -  [ESLint](https://eslint.org/)
 
-Permitir que o mobile consiga acessar o localhost da api
-```sh
-$ adb reverse tcp:3333 tcp:3333
-```
-
 ## 💻 Projeto
 
 O FastFeet uma aplicação completa(Back-end, Front-end, Mobile) desenvolvida durante o Bootcamp GoStack 
 da <a target="_blank" href="https://rocketseat.com.br/">Rocketseat</a>. Esse projeto é o desafio final do curso que será
 avialido para a emissão do Certificado.
 
-## :information_source: Instalação e execução
+## 📥 Instalação e execução
+
+Faça um clone desse repositório e acesse o diretório
 
 ```bash
-# Clone esse repositório e acesse o diretório 
 $ git clone https://github.com/LeeonardoVargas/fast-feet.git && cd fast-feet
 ```
 
-#### backend
+### Backend
 
 ```bash
 # Acessar diretório 
 $ cd backend/
+
 # Criando container Postgres 
 $ docker run --name postgres-fastfeet -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+
 # Criando database fastfeet no container postgres-fastfeet  
 $ docker exec -it postgres-fastfeet psql -h localhost -U postgres -c "CREATE DATABASE fastfeet"
+
 # Criando container Redis 
 $ docker run --name redis-fastfeet -p 6379:6379 -d -t redis:alpine
+
 # Executando o migrate e os seeds 
 $ yarn sequelize db:migrate && yarn sequelize db:seed:all
-# Executando 
+
+# Execute o shell script 
 $ sh init.sh
 
-# Abra outra janela/aba do terminal 
-$ yarn queue
-
 ```
+Abra outra janela/aba do terminal para executar a fila de emails.
 
-
-#### frontend
+> **[Bee-Queue](https://github.com/bee-queue/bee-queue):** Responsável por gerenciar as filas/jobs dentro do nodeJS, com o auxílio do [Redis](https://redis.io/). Otimizando assim o envio de email.
 
 ```bash
+$ yarn queue
+```
 
-cd frontend/
+### Frontend
 
-yarn install
+```bash
+# Acessar diretório 
+$ cd frontend/
 
-yarn start
+# Execute o shell script 
+$ sh init.sh
 
 ```
 
-EM BREVE VOCÊ TERÁ MAIS INFORMAÇÕES.... :sunglasses:
+### Mobile
+
+> **Importante:** Para o desenvolvimento da versão mobile(android) foi utilizado o emulador [Genymotion](https://www.genymotion.com/).
+
+```bash
+# Acessar diretório 
+$ cd mobile/
+
+# Instalando as depedências
+$ sh yarn install
+
+# Gerando o app no emulador
+$ react-native run-android
+```
+
+Caso as imagens dos avatares não estejam sendo carregadas
+
+```bash
+# Configurando um "proxy reverso" no servidor http, permitindo o acesso
+$ adb reverse tcp:3333 tcp:3333
+```
 
 ## :wrench: Readme em Construção
 <div align="center">
