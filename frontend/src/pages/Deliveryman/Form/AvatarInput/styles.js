@@ -29,14 +29,15 @@ export const Container = styled.div`
 `;
 
 export const InputPhoto = styled.div`
-  color: #dddddd;
   display: flex;
   flex-direction: column;
-  border-radius: 50%;
-  border: 1px #dddddd;
-  border-style: dashed;
   align-items: center;
-  padding: 50px 25px;
+  justify-content: center;
+  color: #ababab;
+  border-radius: 90px;
+  height: 180px;
+  width: 180px;
+  border: 1px dashed #ddd;
   font-weight: 600;
   font-size: 18px;
 `;

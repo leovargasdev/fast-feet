@@ -34,16 +34,11 @@ export default function DeliverymanForm({ match }) {
         name,
         email,
       });
-      setAvatar(
-        aux || { url: 'https://api.adorable.io/avatars/100/fastfeet.png' }
-      );
+      setAvatar(aux);
     }
 
     if (id) loadDeliveryman();
-    else
-      setAvatar({
-        url: 'https://api.adorable.io/avatars/100/fastfeet.png',
-      });
+    else setAvatar({ id: -1 });
   }, [id]);
 
   async function handleSubmit(data) {

@@ -39,11 +39,11 @@ export default function AvatarInput({ name, defaultValue }) {
   return (
     <Container>
       <label htmlFor="avatar">
-        {preview ? (
+        {file !== -1 ? (
           <img src={preview} alt="Foto do entregador" />
         ) : (
           <InputPhoto>
-            <MdInsertPhoto size={44} color="#DDDDDD" />
+            <MdInsertPhoto size={44} color="#ababab" />
             <strong>Adicionar Foto</strong>
           </InputPhoto>
         )}
