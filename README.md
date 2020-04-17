@@ -3,7 +3,7 @@
 </h1>
 
 <h4 align = "center">
-  Um aplicativo de gestão e acompanhamento de encomendas
+  Serviço para gestão e acompanhamento de encomendas
 </h4>
 
 <p align="center">
@@ -60,9 +60,8 @@
 
 ## 💻 Projeto
 
-O FastFeet uma aplicação completa(Back-end, Front-end, Mobile) desenvolvida durante o Bootcamp GoStack 
-da <a target="_blank" href="https://rocketseat.com.br/">Rocketseat</a>. Esse projeto é o desafio final do curso que será
-avialido para a emissão do Certificado.
+Neste projeto você vai encontrar uma aplicação completa, contendo a API REST(**Back-end**), versão WEB (**Front-end**) e versão para dispositivos móveis(**Mobile**). O FastFeet faz parte do desafio final do Bootcamp GoStack da <a target="_blank" href="https://rocketseat.com.br/">Rocketseat</a>.
+
 
 ## 📥 Instalação e execução
 
@@ -80,14 +79,14 @@ $ git clone https://github.com/LeeonardoVargas/fast-feet.git && cd fast-feet
 $ cd backend/
 ```
 
-Crie ou acesse uma conta no [MailTrap](https://mailtrap.io/), após isso insira suas credenciais no arquivo **.env.example**
+Crie ou acesse uma conta no [MailTrap](https://mailtrap.io/), após isso insira suas credenciais no arquivo `.env.example`
 
 ```
 MAIL_USER=
 MAIL_PASS=
 ```
 
-Renomei o arquivo *.env.example* para *.env*. Agora execute os seguintes comandos:
+Renomei o arquivo `.env.example` para `.env` e execute os seguintes comandos:
 
 ```bash
 # Criando container Postgres 
@@ -115,7 +114,7 @@ Abra outra janela/aba do terminal para executar o [Bee-Queue](https://github.com
 $ yarn queue
 ```
 
-> **Importando Request:** Durante o desenvolvimento da api foi utilizado o [Insomnia](https://insomnia.rest/) para testar os retornos das rotas, caso queira usar o mesmo, foi exportado o arquivo **insomnia-data.json** com todos os request já criados.
+> **Importando Request:** Durante o desenvolvimento da API REST foi utilizado o [Insomnia](https://insomnia.rest/) para testar os retornos das rotas, caso queira usar o mesmo, foi exportado o arquivo **insomnia-data.json** com todos os request já criados.
 
 ### Frontend
 
@@ -158,10 +157,33 @@ Caso as imagens dos avatares não estejam sendo carregadas rode o seguinte coman
 $ adb reverse tcp:3333 tcp:3333
 ```
 
-## :wrench: Readme em Construção
-<div align="center">
-  <img src="https://media.giphy.com/media/9zXM9n2URlcjC2Tnaq/giphy.gif"/>
-</div>
+## :muscle: Contribuir
+
+Como seres humanos todos nós somos tolerantes a falhas, então se você notar algum erro ou tenha alguma sugestão sobre o projeto, eu ficarei feliz com a sua contribuição, então faça o `fork` e clone o projeto a partir do seu usuário.
+
+```bash
+$ git clone https://github.com/SEU-NOME-DE-USUARIO/fast-feet.git
+```
+Gere uma nova ramificação do projeto, no exemplo a seguir vou chamar o branch de `minha-alteracao`, mas você pode dar o nome que quiser.
+
+```bash
+# Criando um branch
+$ git branch minha-alteracao
+# Acessando o novo branch
+$ git checkout minha-alteracao
+```
+
+Faça as alterações necessárias e o push para a branch.
+
+```bash
+# Adicionando os arquivos alterados
+$ git add .
+# Mensagem do commit
+$ git commit -m "Corrigindo...."
+# Enviando alterações para o brach
+$ git push --set-upstream origin minha-alteracao
+```
+Por último, você deve navegar até o seu repositório onde fez o fork e pressionar o botão *New pull request* no lado esquerdo da página.
 
 ## 📝 Licença
 
