@@ -44,7 +44,6 @@
 
 -  [Node.js](https://nodejs.org/en/)
 -  [Docker](https://docs.docker.com/)
--  [MailTrap](https://mailtrap.io/)
 -  [React](https://pt-br.reactjs.org/)
 -  [Redux](https://redux.js.org/)
 -  [Redux-Saga](https://redux-saga.js.org/)
@@ -75,10 +74,22 @@ $ git clone https://github.com/LeeonardoVargas/fast-feet.git && cd fast-feet
 
 ### Backend
 
+
 ```bash
 # Acessar diretório 
 $ cd backend/
+```
 
+Crie ou acesse uma conta no [MailTrap](https://mailtrap.io/), após isso insira suas credenciais no arquivo **.env.example**
+
+```
+MAIL_USER=
+MAIL_PASS=
+```
+
+Renomei o arquivo *.env.example* para *.env*. Agora execute os seguintes comandos:
+
+```bash
 # Criando container Postgres 
 $ docker run --name postgres-fastfeet -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
 
@@ -95,13 +106,16 @@ $ yarn sequelize db:migrate && yarn sequelize db:seed:all
 $ sh init.sh
 
 ```
-Abra outra janela/aba do terminal para executar a fila de emails.
 
-> **[Bee-Queue](https://github.com/bee-queue/bee-queue):** Responsável por gerenciar as filas/jobs dentro do nodeJS, com o auxílio do [Redis](https://redis.io/). Otimizando assim o envio de email.
+Abra outra janela/aba do terminal para executar o [Bee-Queue](https://github.com/bee-queue/bee-queue).
+
+> Responsável por gerenciar as filas/jobs dentro do nodeJS, com o auxílio do [Redis](https://redis.io/). Otimizando assim o envio de email.
 
 ```bash
 $ yarn queue
 ```
+
+> **Importando Request:** Durante o desenvolvimento da api foi utilizado o [Insomnia](https://insomnia.rest/) para testar os retornos das rotas, caso queira usar o mesmo, foi exportado o arquivo **insomnia-data.json** com todos os request já criados.
 
 ### Frontend
 
@@ -114,22 +128,30 @@ $ sh init.sh
 
 ```
 
+Ao acessar a url **http://localhost:3000** insira as seguintes credenciais para o login:
+
+```
+Email: admin@fastfeet.com
+Senha: abacaxi
+```
+
+
 ### Mobile
 
-> **Importante:** Para o desenvolvimento da versão mobile(android) foi utilizado o emulador [Genymotion](https://www.genymotion.com/).
+> **Importante:** Para testar a aplicação mobile foi utilizado o emulador Android [Genymotion](https://www.genymotion.com/).
 
 ```bash
 # Acessar diretório 
 $ cd mobile/
 
 # Instalando as depedências
-$ sh yarn install
+$ yarn install
 
 # Gerando o app no emulador
 $ react-native run-android
 ```
 
-Caso as imagens dos avatares não estejam sendo carregadas
+Caso as imagens dos avatares não estejam sendo carregadas rode o seguinte comando:
 
 ```bash
 # Configurando um "proxy reverso" no servidor http, permitindo o acesso
