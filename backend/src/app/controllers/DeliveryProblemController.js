@@ -60,9 +60,9 @@ class DeliveryProblemController {
   }
 
   async delete(req, res) {
-    const { id } = req.params;
+    const { delivery_id } = req.params;
     // Validando entregador
-    const delivery = await Delivery.findByPk(id);
+    const delivery = await Delivery.findByPk(delivery_id);
     if (!delivery)
       return res.status(400).json({ error: 'Delivery is not available.' });
     if (delivery.end_date)

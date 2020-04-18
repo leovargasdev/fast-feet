@@ -17,12 +17,12 @@ const customStyles = {
 
 export default function ModalView({ setIsOpen, isOpen, info }) {
   function closeModal() {
-    setIsOpen({ ...isOpen, view: false });
+    setIsOpen({ del: false, view: false });
   }
 
   return (
     <Modal
-      isOpen={isOpen.view}
+      isOpen={isOpen}
       style={customStyles}
       onRequestClose={closeModal}
       contentLabel="Informações Encomenda"
@@ -84,6 +84,6 @@ export default function ModalView({ setIsOpen, isOpen, info }) {
 
 ModalView.propTypes = {
   setIsOpen: PropTypes.func.isRequired,
-  isOpen: PropTypes.object.isRequired,
+  isOpen: PropTypes.bool.isRequired,
   info: PropTypes.object.isRequired,
 };

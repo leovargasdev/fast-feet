@@ -24,12 +24,12 @@ const messageContent = {
 
 export default function ModalDelete({ type, setIsOpen, handleDelete, isOpen }) {
   function closeModal() {
-    setIsOpen({ ...isOpen, del: false });
+    setIsOpen({ view: false, del: false });
   }
 
   return (
     <Modal
-      isOpen={isOpen.del}
+      isOpen={isOpen}
       style={customStyles}
       onRequestClose={closeModal}
       contentLabel="Remover Encomenda"
@@ -52,6 +52,6 @@ export default function ModalDelete({ type, setIsOpen, handleDelete, isOpen }) {
 ModalDelete.propTypes = {
   setIsOpen: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
-  isOpen: PropTypes.object.isRequired,
+  isOpen: PropTypes.bool.isRequired,
   type: PropTypes.string,
 };

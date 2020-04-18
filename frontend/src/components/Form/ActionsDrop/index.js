@@ -92,13 +92,13 @@ export default function ActionsDrop({ setReloadList, actions }) {
         </Actions>
       </Popup>
       <ModalDelete
-        isOpen={modalIsOpen}
+        isOpen={modalIsOpen.del}
         setIsOpen={setIsOpen}
         handleDelete={handleModalDelete}
         type={actions.del ? actions.del.type : actions.cancel.type}
       />
       <ModalView
-        isOpen={modalIsOpen}
+        isOpen={modalIsOpen.view}
         setIsOpen={setIsOpen}
         info={infoModalView}
       />

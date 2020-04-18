@@ -49,8 +49,9 @@ export default function DeliveryProblemList() {
                     type: 'deliveryProblem',
                   },
                   cancel: {
+                    id: delProblem.delivery.id,
                     disabled: !!delProblem.delivery.canceled_at,
-                    url: `/problem/${delProblem.id}/cancel-delivery`,
+                    url: `/problem/${delProblem.delivery.id}/cancel-delivery`,
                     type: 'Problema',
                   },
                 }}
