@@ -14,8 +14,8 @@ import history from '~/services/history';
 import { Container, GroupInputs } from './styles';
 
 const schema = Yup.object().shape({
-  recipient_id: Yup.number().required('O destinatário é obrigatório!'),
-  deliveryman_id: Yup.number().required('O entragador é obrigatório!'),
+  recipient_id: Yup.string().required('O destinatário é obrigatório!'),
+  deliveryman_id: Yup.string().required('O entragador é obrigatório!'),
   product: Yup.string().required('O nome do produto é obrigatório!'),
 });
 

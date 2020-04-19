@@ -31,7 +31,8 @@ export const GroupInfo = styled.div`
 export const Signature = styled.div`
   display: flex;
   justify-content: center;
-
+  border: ${props => (props.border ? 'none' : '1px solid #d6d6d6')};
+  border-radius: 4px;
   img {
     max-width: 100%;
     max-height: 300px;
@@ -39,14 +40,17 @@ export const Signature = styled.div`
 
   span {
     display: flex;
+    flex-direction: column;
     align-items: center;
     padding: 15px 70px;
-    border: 1px solid #333;
     border-radius: 2px;
-    margin-top: 12px;
 
     font-size: 18px;
     color: #666;
+
+    svg {
+      margin-bottom: 5px;
+    }
   }
 `;
 

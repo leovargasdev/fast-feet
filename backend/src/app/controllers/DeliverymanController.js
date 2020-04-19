@@ -23,12 +23,16 @@ class DeliverymanController {
       where: { email: req.body.email },
     });
     if (isEmail)
-      return res.status(400).json({ error: 'Email is not available.' });
+      return res
+        .status(400)
+        .json({ error: 'Email is not available.', type: 'email' });
 
     // Verificando o se o avatar existe
     const isAvatar = await File.findByPk(req.body.avatar_id);
     if (!isAvatar)
-      return res.status(400).json({ error: 'Avatar does not exists.' });
+      return res
+        .status(400)
+        .json({ error: 'Avatar does not exists.', type: 'avatar' });
 
     const { id, email, name } = await Deliveryman.create(req.body);
     return res.json({ id, email, name });

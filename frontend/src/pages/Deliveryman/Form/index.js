@@ -64,6 +64,13 @@ export default function DeliverymanForm({ match }) {
           validationErrors[error.path] = error.message;
         });
         formRef.current.setErrors(validationErrors);
+      } else {
+        const { type } = err.response.data;
+        const message =
+          type === 'email'
+            ? 'E-mail já cadastrado, inserir com outro!'
+            : 'É obrigatório o envio do avatar!';
+        toast.warn(message);
       }
     }
   }
